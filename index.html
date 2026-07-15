@@ -112,7 +112,7 @@
                     <p id="user-display-email" class="text-xs text-white/70 dark:text-gray-400 truncate">usuario@correo.com</p>
                     <span class="text-[10px] bg-white/20 text-white dark:bg-brand-lightBlue/20 dark:text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase">Docente</span>
                 </div>
-                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-300 dark:text-red-400 text-sm font-bold rounded hover:bg-red-500/20 dark:hover:bg-red-900/20 transition">
+                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-300 dark:text-red-400 font-bold rounded hover:bg-red-500/20 dark:hover:bg-red-500/30 transition">
                     Cerrar Sesión
                 </button>
             </div>
@@ -201,7 +201,7 @@
                             </div>
                             <span class="bg-brand-schoolGreen/20 text-brand-schoolGreen text-xs px-2 py-1 rounded font-bold">Activo</span>
                         </div>
-                        <div class="bg-brand-paleBlue dark:bg-gray-900 px-6 py-3 text-sm text-center text-brand-purple font-bold hover:bg-brand-lightBlue/20 transition">
+                        <div class="bg-brand-paleBlue dark:bg-gray-900 px-6 py-3 text-sm text-center text-brand-purple dark:text-brand-lightBlue font-bold hover:bg-brand-lightBlue/20 dark:hover:bg-gray-700 transition">
                             Simular Vista Estudiante (Fast Test)
                         </div>
                     </div>
@@ -431,8 +431,8 @@
             // Aplicar estilo resaltado al botón activo
             const activeBtn = document.getElementById(`nav-${viewId}`);
             if(activeBtn) {
-                // Modo Claro: Fondo blanco transparente / Modo Oscuro: Texto celeste y fondo oscuro
-                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-brand-purple/20 dark:text-brand-lightBlue";
+                // Modo Claro: Fondo blanco transparente / Modo Oscuro: Texto y borde celeste
+                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/50";
             }
 
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') {
@@ -640,7 +640,7 @@
             }
         }
 
-        function renderTableRows(dataArray, tbodyElement) {
+function renderTableRows(dataArray, tbodyElement) {
             tbodyElement.innerHTML = ''; 
             let count = 0;
             dataArray.forEach((data) => {
@@ -649,13 +649,13 @@
                 const row = `
                     <tr class="hover:bg-brand-lightBlue/5 dark:hover:bg-gray-800 transition">
                         <td class="p-4 font-bold">${data.name}</td>
-                        <td class="p-4 text-brand-purple">${data.nrc || '-'}</td>
+                        <td class="p-4 text-brand-purple dark:text-brand-lightBlue">${data.nrc || '-'}</td>
                         <td class="p-4">${data.modality}</td>
                         <td class="p-4">${data.campus}</td>
                         <td class="p-4">${data.capacity}</td>
                         <td class="p-4 text-center"><span class="text-xs font-bold px-2 py-1 rounded uppercase ${statusClass}">Activa</span></td>
                         <td class="p-4 text-right">
-                            <button onclick="deleteClassroom('${data.id}')" class="text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/20 px-2 py-1 rounded">Eliminar</button>
+                            <button onclick="deleteClassroom('${data.id}')" class="text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-500/20 px-2 py-1 rounded transition">Eliminar</button>
                         </td>
                     </tr>
                 `;
