@@ -46,7 +46,7 @@
         .modal-overlay { animation: fadeIn 0.2s ease-out; }
     </style>
 </head>
-<body class="bg-brand-softPurple dark:bg-gray-900 text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
+<body class="bg-brand-softPurple dark:bg-[#121824] text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
 
     <div id="toast-container" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none"></div>
 
@@ -58,7 +58,7 @@
 
     <!-- PANTALLA DE LOGIN -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
             <div class="text-center mb-8">
                 <div class="h-20 flex items-center justify-center mb-4">
                     <img id="login-logo" src="Logo_Teach6_2.png" alt="Teach Logo" class="max-h-full object-contain drop-shadow-sm">
@@ -70,11 +70,11 @@
             <form id="login-form" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold mb-1 text-brand-deepPurple dark:text-gray-300">Correo Institucional</label>
-                    <input type="email" id="auth-email" required class="w-full bg-brand-softPurple dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white" placeholder="ej. docente@institucion.edu.pe">
+                    <input type="email" id="auth-email" required class="w-full bg-brand-softPurple dark:bg-[#121824] border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white" placeholder="ej. docente@institucion.edu.pe">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-1 text-brand-deepPurple dark:text-gray-300">Contraseña</label>
-                    <input type="password" id="auth-password" required class="w-full bg-brand-softPurple dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white">
+                    <input type="password" id="auth-password" required class="w-full bg-brand-softPurple dark:bg-[#121824] border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white">
                 </div>
                 
                 <div class="pt-4">
@@ -94,17 +94,16 @@
     <!-- APLICACIÓN PRINCIPAL (Dashboard) -->
     <div id="app-layout" class="min-h-screen hidden flex-col md:flex-row transition-opacity duration-300 opacity-0">
         <!-- Sidebar Docente -->
-        <aside class="w-full md:w-64 bg-brand-purple dark:bg-gray-900 border-r border-brand-deepPurple/50 dark:border-gray-800 text-white dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
+        <aside class="w-full md:w-64 bg-brand-purple dark:bg-[#090D14] border-r border-brand-deepPurple/50 dark:border-gray-800 text-white dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
             <div class="flex items-center gap-2 mb-10 justify-center md:justify-start h-12">
                 <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
             </div>
             
             <nav class="flex-1 space-y-2">
-                <!-- Los estilos de estado activo/inactivo se manejan desde JavaScript -->
-                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Inicio</button>
-                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Aulas</button>
-                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Contenidos</button>
-                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Team</button>
+                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:hover:bg-gray-800">Inicio</button>
+                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:hover:bg-gray-800">Aulas</button>
+                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:hover:bg-gray-800">Contenidos</button>
+                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:hover:bg-gray-800">Team</button>
             </nav>
             
             <div class="mt-8 pt-4 border-t border-white/20 dark:border-gray-800">
@@ -112,13 +111,14 @@
                     <p id="user-display-email" class="text-xs text-white/70 dark:text-gray-400 truncate">usuario@correo.com</p>
                     <span class="text-[10px] bg-white/20 text-white dark:bg-brand-lightBlue/20 dark:text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase">Docente</span>
                 </div>
-                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-300 dark:text-red-400 font-bold rounded hover:bg-red-500/20 dark:hover:bg-red-500/30 transition">
+                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-200 dark:text-red-400 font-bold rounded hover:bg-white/20 dark:hover:bg-red-500/20 transition">
                     Cerrar Sesión
                 </button>
             </div>
         </aside>
 
-        <main class="flex-1 p-6 md:p-8 transition-colors duration-300">
+        <!-- Contenido principal lado derecho -->
+        <main class="flex-1 p-6 md:p-8 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
             
             <!-- VISTA: DASHBOARD -->
             <div id="view-dashboard" class="app-view hidden">
@@ -128,19 +128,19 @@
                 </header>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-brand-purple">
+                    <div class="bg-white dark:bg-[#1C2333] p-6 rounded-xl shadow-sm border-l-4 border-brand-purple">
                         <div class="text-brand-purple/70 dark:text-gray-400 text-sm font-bold">Aulas Activas</div>
                         <div id="metric-aulas" class="text-3xl font-black text-brand-deepPurple dark:text-white mt-1">-</div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-brand-lightBlue">
+                    <div class="bg-white dark:bg-[#1C2333] p-6 rounded-xl shadow-sm border-l-4 border-brand-lightBlue">
                         <div class="text-brand-purple/70 dark:text-gray-400 text-sm font-bold">Informes Pendientes</div>
                         <div class="text-3xl font-black text-brand-deepPurple dark:text-white mt-1">12</div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-brand-supportGreen">
+                    <div class="bg-white dark:bg-[#1C2333] p-6 rounded-xl shadow-sm border-l-4 border-brand-supportGreen">
                         <div class="text-brand-purple/70 dark:text-gray-400 text-sm font-bold">Teams por Aprobar</div>
                         <div class="text-3xl font-black text-brand-deepPurple dark:text-white mt-1">3</div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
+                    <div class="bg-white dark:bg-[#1C2333] p-6 rounded-xl shadow-sm border-l-4 border-yellow-500">
                         <div class="text-brand-purple/70 dark:text-gray-400 text-sm font-bold">Fast Tests Hoy</div>
                         <div class="text-3xl font-black text-brand-deepPurple dark:text-white mt-1">45</div>
                     </div>
@@ -159,10 +159,10 @@
                     </button>
                 </header>
 
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
+                <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
-                            <thead class="bg-brand-softBlue dark:bg-gray-900 border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase">
+                            <thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase">
                                 <tr>
                                     <th class="p-4">Nombre / Curso</th>
                                     <th class="p-4">NRC</th>
@@ -191,7 +191,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Tarjeta de Curso: Física 1 -->
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border-t-4 border-t-brand-purple overflow-hidden cursor-pointer hover:shadow-md transition" onclick="navigate('fasttest-demo')">
+                    <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border-t-4 border-t-brand-purple overflow-hidden cursor-pointer hover:shadow-md transition" onclick="navigate('fasttest-demo')">
                         <div class="p-6">
                             <p class="text-xs font-bold text-brand-lightBlue mb-1">FIS101</p>
                             <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white mb-4">Física 1</h3>
@@ -201,7 +201,7 @@
                             </div>
                             <span class="bg-brand-schoolGreen/20 text-brand-schoolGreen text-xs px-2 py-1 rounded font-bold">Activo</span>
                         </div>
-                        <div class="bg-brand-paleBlue dark:bg-gray-900 px-6 py-3 text-sm text-center text-brand-purple dark:text-brand-lightBlue font-bold hover:bg-brand-lightBlue/20 dark:hover:bg-gray-700 transition">
+                        <div class="bg-brand-paleBlue dark:bg-[#161D2B] px-6 py-3 text-sm text-center text-brand-purple dark:text-brand-lightBlue font-bold hover:bg-brand-lightBlue/20 dark:hover:bg-gray-800 transition">
                             Simular Vista Estudiante (Fast Test)
                         </div>
                     </div>
@@ -215,38 +215,38 @@
                     <p class="text-brand-purple/80 dark:text-gray-400">El líder del equipo debe completar este formulario.</p>
                 </header>
                 
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-brand-lightBlue/20 p-6 max-w-3xl">
+                <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 dark:border-gray-700 p-6 max-w-3xl">
                     <form id="form-team" class="space-y-6">
                         <div class="grid grid-cols-2 gap-4 border-b border-gray-100 dark:border-gray-700 pb-6">
                             <div>
                                 <label class="block text-sm font-bold mb-1">Aula (NRC)</label>
-                                <select class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white">
+                                <select class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 focus:outline-brand-purple dark:text-white">
                                     <option>41473 - Física 1</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold mb-1">Nombre del Team (Opcional)</label>
-                                <input type="text" placeholder="Ej. Los Newtonianos" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white">
+                                <input type="text" placeholder="Ej. Los Newtonianos" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 focus:outline-brand-purple dark:text-white">
                             </div>
                         </div>
 
                         <div id="team-members-container" class="space-y-4">
                             <!-- Integrante 1 (Líder) -->
-                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
-                                <h4 class="font-bold text-brand-lightBlue mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
+                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-[#161D2B] rounded border border-brand-lightBlue/30">
+                                <h4 class="font-bold text-brand-purple dark:text-brand-lightBlue mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
-                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
-                                    <input type="text" required placeholder="DNI" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
-                                    <input type="text" placeholder="Celular" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
+                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
+                                    <input type="text" required placeholder="DNI" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
+                                    <input type="text" placeholder="Celular" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
                                 </div>
                             </div>
                             <!-- Integrante 2 -->
-                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
-                                <h4 class="font-bold text-brand-lightBlue mb-3 text-sm">Integrante 2</h4>
+                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-[#161D2B] rounded border border-brand-lightBlue/30">
+                                <h4 class="font-bold text-brand-purple dark:text-brand-lightBlue mb-3 text-sm">Integrante 2</h4>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
-                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
+                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white">
                                 </div>
                             </div>
                         </div>
@@ -279,14 +279,14 @@
                     </div>
                 </header>
                 
-                <div class="max-w-3xl bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-brand-lightBlue/20 p-8">
+                <div class="max-w-3xl bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 p-8">
                     <div class="mb-6">
                         <p class="text-sm font-bold text-brand-lightBlue uppercase mb-2">Pregunta 1 de 4</p>
                         <h2 class="text-xl font-bold text-brand-deepPurple dark:text-white">¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?</h2>
                     </div>
                     
                     <div class="space-y-3">
-                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-[#121824] transition">
                             <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
                             <span class="ml-3 font-medium dark:text-white">A) Joule</span>
                         </label>
@@ -294,11 +294,11 @@
                             <input type="radio" name="q1" checked class="w-4 h-4 text-brand-purple">
                             <span class="ml-3 font-medium dark:text-white">B) Newton</span>
                         </label>
-                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-[#121824] transition">
                             <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
                             <span class="ml-3 font-medium dark:text-white">C) Watt</span>
                         </label>
-                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-[#121824] transition">
                             <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
                             <span class="ml-3 font-medium dark:text-white">D) Pascal</span>
                         </label>
@@ -316,30 +316,30 @@
 
     <!-- MODAL: CREAR AULA -->
     <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-50 hidden items-center justify-center p-4 modal-overlay">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
-            <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-brand-softPurple dark:bg-gray-900">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-2xl w-full max-w-lg border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-brand-softPurple dark:bg-[#161D2B]">
                 <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Crear Nueva Aula</h3>
             </div>
             <form id="form-classroom" class="p-6 space-y-4">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2">
                         <label class="block text-sm font-bold mb-1">Nombre del Aula</label>
-                        <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">NRC</label>
-                        <input type="text" id="cr-nrc" placeholder="Ej. 41473" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-lightBlue">
+                        <input type="text" id="cr-nrc" placeholder="Ej. 41473" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">Curso Asignado</label>
-                        <select id="cr-course" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <select id="cr-course" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                             <option value="fisica_1">Física 1</option>
                             <option value="calculo">Cálculo Diferencial</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">Modalidad</label>
-                        <select id="cr-modality" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <select id="cr-modality" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                             <option value="Presencial">Presencial</option>
                             <option value="Semipresencial">Semipresencial</option>
                             <option value="Virtual">Virtual</option>
@@ -347,11 +347,11 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">Sede</label>
-                        <input type="text" id="cr-campus" value="Huancayo" required class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <input type="text" id="cr-campus" value="Huancayo" required class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                     </div>
                     <div>
                         <label class="block text-sm font-bold mb-1">Capacidad Máxima</label>
-                        <input type="number" id="cr-capacity" value="39" required min="1" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <input type="number" id="cr-capacity" value="39" required min="1" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                     </div>
                 </div>
                 <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -367,7 +367,7 @@
 
     <!-- MODAL: CONFIRMACIÓN DE ELIMINACIÓN -->
     <div id="modal-confirm" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-[60] hidden items-center justify-center p-4 modal-overlay">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-sm p-6 text-center">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-2xl w-full max-w-sm p-6 text-center border border-gray-200 dark:border-gray-700">
             <div class="text-red-500 mb-4 flex justify-center">
                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             </div>
@@ -381,14 +381,17 @@
     </div>
 
     <script>
-        const logoLight = 'Logo_Teach7_2.png';
-        const logoDark = 'Logo_Teach6_2.png';
+        const logoColor = 'Logo_Teach6_2.png';
+        const logoWhite = 'Logo_Teach7_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
-            document.querySelectorAll('img[alt="Teach Logo"]').forEach(img => {
-                img.src = isDark ? logoDark : logoLight;
-            });
+            
+            const loginLogo = document.getElementById('login-logo');
+            if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
+
+            const sidebarLogo = document.getElementById('sidebar-logo');
+            if (sidebarLogo) sidebarLogo.src = logoWhite;
         }
 
         function toggleTheme() {
@@ -416,23 +419,17 @@
             }, 3000);
         }
 
-        /* STREAMING_CHUNK:Lógica de navegación y estilos activos */
         function navigate(viewId) {
-            // Ocultar todas las vistas
             document.querySelectorAll('.app-view').forEach(el => el.classList.add('hidden'));
-            // Mostrar la seleccionada
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             
-            // Limpiar estilos de todos los botones del menú
             document.querySelectorAll('nav button').forEach(btn => {
                 btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white";
             });
             
-            // Aplicar estilo resaltado al botón activo
             const activeBtn = document.getElementById(`nav-${viewId}`);
             if(activeBtn) {
-                // Modo Claro: Fondo blanco transparente / Modo Oscuro: Texto y borde celeste
-                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/50";
+                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30";
             }
 
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') {
@@ -440,20 +437,19 @@
             }
         }
 
-        /* STREAMING_CHUNK:Lógica de Modales y Teams */
         let memberCount = 2;
         window.addTeamMember = function() {
             memberCount++;
             const container = document.getElementById('team-members-container');
             const newMemberHtml = `
-                <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30 mt-4 transition-all duration-300">
+                <div class="p-4 bg-brand-paleBlue/30 dark:bg-[#161D2B] rounded border border-brand-lightBlue/30 mt-4 transition-all duration-300">
                     <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-brand-lightBlue text-sm">Integrante ${memberCount}</h4>
+                        <h4 class="font-bold text-brand-purple dark:text-brand-lightBlue text-sm">Integrante ${memberCount}</h4>
                         <button type="button" onclick="this.parentElement.parentElement.remove();" class="text-red-500 text-xs font-bold hover:underline">Quitar</button>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
-                        <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white focus:outline-brand-purple">
-                        <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white focus:outline-brand-purple">
+                        <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                        <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-600 dark:text-white focus:outline-brand-purple">
                     </div>
                 </div>
             `;
@@ -464,34 +460,32 @@
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
     </script>
 
-    <!-- IMPORTANTE: Usamos type="module" para importar Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         // ==========================================
-        // ⚠️⚠️⚠️ ¡PEGA AQUÍ TU firebaseConfig! ⚠️⚠️⚠️
+        // ⚠️⚠️⚠️ FIREBASE CONFIG ⚠️⚠️⚠️
         // ==========================================
         const firebaseConfig = {
-  apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
-  authDomain: "teach-edu-5a501.firebaseapp.com",
-  projectId: "teach-edu-5a501",
-  storageBucket: "teach-edu-5a501.firebasestorage.app",
-  messagingSenderId: "727356627173",
-  appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
-  measurementId: "G-6PW6GR36CR"
-};
+            apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
+            authDomain: "teach-edu-5a501.firebaseapp.com",
+            projectId: "teach-edu-5a501",
+            storageBucket: "teach-edu-5a501.firebasestorage.app",
+            messagingSenderId: "727356627173",
+            appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
+            measurementId: "G-6PW6GR36CR"
+        };
+
         let app, auth, db;
         let currentUser = null;
         let isDemoMode = false;
 
-        // Base de datos de mentira para el modo Demo
         let demoClassrooms = [
             { id: '1', name: 'Física 1 - Grupo A', nrc: '41473', modality: 'Presencial', campus: 'Huancayo', capacity: 39, status: 'active' }
         ];
 
-        // Función para cambiar pantallas visualmente
         function showDashboard() {
             const loginScreen = document.getElementById('login-screen');
             const appLayout = document.getElementById('app-layout');
@@ -524,8 +518,6 @@
             }, 300);
         }
 
-        /* STREAMING_CHUNK:Inicialización y Botones de Login */
-        // Si no cambias la API Key, el sistema no intentará conectarse a Firebase para no dar error
         if (firebaseConfig.apiKey === "TU_API_KEY_AQUI") {
             console.warn("Falta configurar Firebase. Usando Modo Demo automáticamente.");
             isDemoMode = true;
@@ -540,7 +532,6 @@
             }
         }
 
-        // Botón Demo (Entrar sin clave)
         document.getElementById('btn-demo-login').addEventListener('click', () => {
             isDemoMode = true;
             currentUser = { uid: 'demo_123', email: 'docente.demo@teach.edu' };
@@ -549,7 +540,6 @@
             showDashboard();
         });
 
-        // Formulario Real de Login
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -576,7 +566,6 @@
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 showToast("Bienvenido", "success");
-                // El onAuthStateChanged se encargará de cambiar la pantalla
             } catch (error) {
                 showToast("Correo o contraseña incorrectos", "error");
                 btnText.textContent = "Ingresar a Teach";
@@ -593,7 +582,6 @@
             }
         });
 
-        // Escuchador de sesión de Firebase
         if(auth) {
             onAuthStateChanged(auth, (user) => {
                 const btnText = document.getElementById('login-text');
@@ -613,7 +601,6 @@
             });
         }
 
-        /* STREAMING_CHUNK:CRUD Real de Aulas */
         window.loadClassrooms = async function() {
             const tbody = document.getElementById('classrooms-tbody');
             tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-brand-purple">Cargando datos...</td></tr>';
@@ -626,7 +613,6 @@
             if(!db || !currentUser) return;
             
             try {
-                // Consultar a Firestore las aulas del profesor logueado
                 const q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
                 const querySnapshot = await getDocs(q);
                 let loadedClassrooms = [];
@@ -640,16 +626,16 @@
             }
         }
 
-function renderTableRows(dataArray, tbodyElement) {
+        function renderTableRows(dataArray, tbodyElement) {
             tbodyElement.innerHTML = ''; 
             let count = 0;
             dataArray.forEach((data) => {
                 count++;
                 const statusClass = data.status === 'active' ? 'bg-brand-schoolGreen/20 text-brand-schoolGreen' : 'bg-gray-200 text-gray-600';
                 const row = `
-                    <tr class="hover:bg-brand-lightBlue/5 dark:hover:bg-gray-800 transition">
+                    <tr class="hover:bg-brand-lightBlue/5 dark:hover:bg-[#121824] transition">
                         <td class="p-4 font-bold">${data.name}</td>
-                        <td class="p-4 text-brand-purple dark:text-brand-lightBlue">${data.nrc || '-'}</td>
+                        <td class="p-4 text-brand-purple dark:text-brand-lightBlue font-bold">${data.nrc || '-'}</td>
                         <td class="p-4">${data.modality}</td>
                         <td class="p-4">${data.campus}</td>
                         <td class="p-4">${data.capacity}</td>
@@ -666,7 +652,6 @@ function renderTableRows(dataArray, tbodyElement) {
             document.getElementById('metric-aulas').textContent = count;
         }
 
-        // Crear Aula Nueva
         document.getElementById('form-classroom').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btnText = document.getElementById('txt-save-cr');
@@ -699,13 +684,12 @@ function renderTableRows(dataArray, tbodyElement) {
             }
 
             try {
-                // Guardar en Firestore Real
                 newClassroom.createdAt = serverTimestamp();
                 await addDoc(collection(db, "classrooms"), newClassroom);
                 showToast("Aula creada exitosamente", "success");
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                window.loadClassrooms(); // Recargar tabla
+                window.loadClassrooms();
             } catch (error) {
                 console.error("Error:", error);
                 showToast("Error al guardar en la nube", "error");
@@ -715,7 +699,6 @@ function renderTableRows(dataArray, tbodyElement) {
             }
         });
 
-        // Eliminar Aula
         let classroomToDelete = null;
         window.deleteClassroom = function(id) {
             classroomToDelete = id;
@@ -734,7 +717,6 @@ function renderTableRows(dataArray, tbodyElement) {
             }
             
             try {
-                // Borrar de Firestore Real
                 await deleteDoc(doc(db, "classrooms", classroomToDelete));
                 showToast("Aula eliminada", "success");
                 closeModal('modal-confirm');
@@ -744,8 +726,6 @@ function renderTableRows(dataArray, tbodyElement) {
             }
         });
 
-        /* STREAMING_CHUNK:Funciones para Forms de Team y FastTest */
-        // Envío de Team a Firebase
         const teamForm = document.getElementById('form-team');
         if(teamForm) {
             teamForm.addEventListener('submit', async (e) => {
@@ -779,7 +759,6 @@ function renderTableRows(dataArray, tbodyElement) {
             });
         }
 
-        // Envío de Fast Test a Firebase
         window.submitFastTest = async function() {
             if(isDemoMode) {
                 showToast("Test Finalizado (Demo)", "success");
