@@ -66,6 +66,7 @@
 
     <div id="toast-container" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none"></div>
 
+    <!-- PANTALLA DE LOGIN -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300 relative z-50">
         <button onclick="toggleTheme()" class="absolute top-4 right-4 bg-brand-softBlue dark:bg-gray-800 p-2 rounded-full shadow-md border border-brand-lightBlue/30 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-700 transition">
             <span id="theme-icon-light" class="hidden dark:block text-yellow-400">☀️</span>
@@ -102,11 +103,13 @@
         </div>
     </div>
 
+    <!-- APLICACIÓN PRINCIPAL -->
     <div id="app-layout" class="app-layout hidden transition-opacity duration-300 opacity-0">
         
         <!-- SIDEBAR (Menú Lateral) -->
         <aside class="bg-brand-purple dark:bg-[#321A44] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20 transition-colors duration-300">
-            <div class="flex items-center justify-center mb-10 mt-4 h-12">
+            <!-- LOGO: H-16 (Más grande) y SIEMPRE Logo_Teach7_2.png (Blanco) -->
+            <div class="flex items-center justify-center mb-10 mt-4 h-16">
                 <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
             </div>
             
@@ -144,13 +147,6 @@
             
             <div class="mt-4 pt-4 border-t border-white/10 dark:border-gray-800">
                 
-                <!-- DROPDOWN: Selector Mágico de Roles -->
-                <div id="role-switcher-container" class="px-2 mb-4 hidden">
-                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest mb-1 ml-2">Simular vista de:</p>
-                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="w-full bg-white/10 text-white text-sm rounded-xl px-3 py-2 border border-white/20 focus:outline-none focus:border-brand-lightBlue cursor-pointer">
-                    </select>
-                </div>
-
                 <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-4 py-2 mb-2 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
                     <span id="theme-icon-light" class="hidden dark:inline-block text-lg">☀️</span>
                     <span id="theme-icon-dark" class="inline-block dark:hidden text-lg">🌙</span>
@@ -158,16 +154,23 @@
                     <span class="hidden dark:inline-block text-sm">Modo Claro</span>
                 </button>
                 
-                <div class="px-2 mb-4">
+                <div class="px-4 mb-4">
                     <p id="user-display-email" class="text-xs text-white/60 dark:text-gray-400 truncate mb-1">usuario@correo.com</p>
-                    <span id="user-role-badge" class="inline-block text-[10px] bg-brand-lightBlue/20 text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase tracking-wider">Perfil</span>
+                    
+                    <!-- SELECTOR MAGICO INTEGRADO AL BADGE -->
+                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="hidden bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider focus:outline-none cursor-pointer border border-transparent hover:border-brand-lightBlue transition appearance-none">
+                    </select>
+                    <!-- BADGE ESTATICO (Para usuarios sin selector) -->
+                    <span id="user-role-badge" class="inline-block bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Perfil</span>
                 </div>
+                
                 <button id="logout-btn" class="w-full flex items-center gap-2 px-4 py-2 text-red-300 dark:text-red-400 font-bold rounded-xl hover:bg-white/10 dark:hover:bg-red-500/20 transition">
                     <span class="text-lg">🚪</span> Salir
                 </button>
             </div>
         </aside>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
             
             <!-- VISTA: DASHBOARD DOCENTE -->
@@ -272,6 +275,7 @@
         </main>
     </div>
 
+    <!-- MODAL: CREAR AULA -->
     <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]">
@@ -328,12 +332,14 @@
                     <button type="button" onclick="closeModal('modal-classroom')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">Cancelar</button>
                     <button type="submit" id="btn-save-classroom" class="px-8 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
                         <span id="txt-save-cr">Activar Aula</span>
+                        <svg id="spin-save-cr" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- UI Scripts Generales -->
     <script>
         const logoWhite = 'Logo_Teach7_2.png';
         const logoColor = 'Logo_Teach6_2.png';
@@ -342,8 +348,9 @@
             const isDark = document.documentElement.classList.contains('dark');
             const loginLogo = document.getElementById('login-logo');
             if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
-            const sidebarLogo = document.getElementById('sidebar-logo');
-            if (sidebarLogo) sidebarLogo.src = logoWhite; 
+            
+            // ELIMINADO: Ya no forzamos el cambio del logo del sidebar aquí.
+            // Se mantiene siempre Logo_Teach7_2.png directo en el HTML.
         }
 
         function toggleTheme() {
@@ -385,6 +392,7 @@
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
     </script>
 
+    <!-- MOTOR DE BASE DE DATOS Y LÓGICA DE NEGOCIO -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -401,22 +409,22 @@
         };
         
         let app, auth, db;
-        window.currentUser = null;
+        window.currentUser = null; 
 
         try {
             app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
         } catch (error) {
-            console.error("Firebase no disponible. Verifica tu conexión.");
+            console.error("Firebase no disponible.");
         }
 
-        /* LÓGICA DE ROLES Y "VIEW AS" (SIMULADOR DE VISTAS) */
         window.applyRoleUI = function(role, isManualSwitch = false) {
             window.currentUser.role = role;
             
             const badgeNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst.', teacher: 'Profesor', student: 'Estudiante' };
-            document.getElementById('user-role-badge').textContent = badgeNames[role] || 'Estudiante';
+            const badgeElement = document.getElementById('user-role-badge');
+            if(badgeElement) badgeElement.textContent = badgeNames[role] || 'Estudiante';
 
             ['superadmin', 'admin', 'teacher', 'student'].forEach(r => {
                 const el = document.getElementById(`menu-${r}`);
@@ -430,7 +438,7 @@
                 else btnAddClassroom.classList.add('hidden');
             }
 
-            let initialView = 'student-home';
+            let initialView = 'teams-student';
             if (role === 'superadmin') initialView = 'dashboard-super';
             else if (role === 'admin') initialView = 'dashboard-admin';
             else if (role === 'teacher') initialView = 'dashboard';
@@ -473,18 +481,13 @@
                         if (userSnap.exists()) {
                             const data = userSnap.data();
                             role = data.role || "student";
-                            // Si el usuario guardó su arreglo de allowedRoles en Firebase, lo usamos.
-                            if(data.allowedRoles && Array.isArray(data.allowedRoles)) {
-                                allowedRoles = data.allowedRoles;
-                            } else {
-                                allowedRoles = [role]; 
-                            }
+                            allowedRoles = data.allowedRoles || [role]; 
                         } else {
                             await setDoc(userRef, { email: user.email, role: role, allowedRoles: [role], createdAt: serverTimestamp() });
                         }
 
-                        // REGLA PARA EL FUNDADOR: Si detecta que eres superadmin, fuerza a que tengas los 4 roles
-                        // para que siempre te aparezca el botón de cambiar rol, aunque no hayas creado el array manual en Firebase.
+                        // REGLA DE FUNDADOR: Si tu base de datos dice que eres superadmin, 
+                        // automáticamente se te habilita el menú desplegable para simular los 4 roles.
                         if (role === 'superadmin') {
                             allowedRoles = ['superadmin', 'admin', 'teacher', 'student'];
                         }
@@ -492,7 +495,7 @@
                         window.currentUser = { uid: user.uid, email: user.email, role: role, allowedRoles: allowedRoles };
                         document.getElementById('user-display-email').textContent = user.email;
                         
-                        // Lógica del Dropdown Integrado
+                        // Lógica del Selector de Roles Integrado
                         const roleBadge = document.getElementById('user-role-badge');
                         const switcherSelect = document.getElementById('role-switcher');
                         
@@ -500,20 +503,22 @@
                             roleBadge.classList.add('hidden');
                             switcherSelect.classList.remove('hidden');
                             switcherSelect.innerHTML = '';
-                            const roleNames = { superadmin: 'SUPERADMIN', admin: 'ADMINISTRADOR', teacher: 'PROFESOR', student: 'ESTUDIANTE' };
+                            const roleNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst', teacher: 'Profesor', student: 'Estudiante' };
                             allowedRoles.forEach(r => {
                                 switcherSelect.innerHTML += `<option value="${r}" ${r===role ? 'selected' : ''} class="bg-[#321A44] text-white">${roleNames[r]}</option>`;
                             });
                         } else {
                             roleBadge.classList.remove('hidden');
                             switcherSelect.classList.add('hidden');
+                            const badgeNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst.', teacher: 'Profesor', student: 'Estudiante' };
+                            roleBadge.textContent = badgeNames[role] || 'Estudiante';
                         }
 
                         const initialView = applyRoleUI(role, false);
                         transitionToApp(initialView); 
 
                     } catch(e) {
-                        showToast("Error leyendo datos del usuario en Firebase", "error");
+                        showToast("Error conectando con la base de datos", "error");
                     }
                 } else {
                     window.currentUser = null;
@@ -544,66 +549,45 @@
 
         window.loadClassrooms = async function() {
             const container = document.getElementById('classrooms-container');
-            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando datos desde Firebase...</div>';
+            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando espacios académicos...</div>';
             
-            if(!db || !window.currentUser) return;
+            if(!db || !currentUser) return;
             
             try {
                 let q;
-                // Admin y SuperAdmin ven TODO el panorama
-                if (window.currentUser.role === 'superadmin' || window.currentUser.role === 'admin') {
-                    q = collection(db, "classrooms");
-                } else {
-                    // El profe solo ve sus cursos
-                    q = query(collection(db, "classrooms"), where("teacherId", "==", window.currentUser.uid));
-                }
+                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') q = collection(db, "classrooms");
+                else q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
                 
                 const querySnapshot = await getDocs(q);
                 let loadedClassrooms = [];
                 querySnapshot.forEach((doc) => loadedClassrooms.push({ id: doc.id, ...doc.data() }));
                 
-                if (window.currentUser.role === 'superadmin' || window.currentUser.role === 'admin') {
-                    renderAdminTable(loadedClassrooms, container);
-                } else {
-                    renderTeacherCards(loadedClassrooms, container);
-                }
+                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') renderAdminTable(loadedClassrooms, container);
+                else renderTeacherCards(loadedClassrooms, container);
                 
             } catch (error) {
-                console.error("Error Firebase:", error);
-                container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">Error de lectura o permisos de Firestore.</div>';
+                container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">Error de lectura de base de datos.</div>';
             }
         }
 
         function renderTeacherCards(dataArray, container) {
-            if(dataArray.length === 0) { 
-                container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes aulas asignadas en este periodo.</p></div>'; 
-                return; 
-            }
+            container.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-grid"></div>';
+            const grid = document.getElementById('cards-grid');
+            if(dataArray.length === 0) { container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes aulas asignadas en este periodo.</p></div>'; return; }
 
-            let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
             dataArray.forEach((data) => {
-                // Validación para evitar undefined si algún campo viejo no existe
-                const courseName = data.course || data.name || "Curso sin nombre";
-                const nrc = data.nrc || "S/N";
-                const period = data.period || "Actual";
-                const campus = data.campus || "Virtual";
-                const capacity = data.capacity || 0;
-                const status = data.status || "Activa";
-
-                html += `
+                grid.innerHTML += `
                     <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-md transition">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${courseName}</h3>
-                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${nrc} · ${data.modality || 'Regular'}</p>
+                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${data.course}</h3>
+                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${data.nrc} · ${data.modality}</p>
                                 </div>
-                                <span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wide">${status}</span>
                             </div>
                             <div class="space-y-2 mb-6">
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 Capacidad: ${capacity} est.</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${period}</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${campus}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${data.period}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${data.campus}</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 border-t border-gray-100 dark:border-gray-800">
@@ -613,56 +597,18 @@
                     </div>
                 `;
             });
-            html += '</div>';
-            container.innerHTML = html;
         }
 
         function renderAdminTable(dataArray, container) {
-            if(dataArray.length === 0) { 
-                container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No hay aulas registradas en el sistema general.</p></div>'; 
-                return; 
+            let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
+            
+            if(dataArray.length === 0) {
+                html += '<tr><td colspan="5" class="p-8 text-center text-gray-500">No hay aulas registradas en la institución.</td></tr>';
+            } else {
+                dataArray.forEach(data => {
+                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">0/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td></tr>`;
+                });
             }
-
-            let html = `
-            <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase text-xs">
-                            <tr>
-                                <th class="p-4">Curso / Aula</th>
-                                <th class="p-4">Periodo</th>
-                                <th class="p-4">Sede/Mod</th>
-                                <th class="p-4">Capacidad</th>
-                                <th class="p-4 text-center">Estado</th>
-                                <th class="p-4 text-right">Auditoría</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">
-            `;
-            dataArray.forEach(data => {
-                const courseName = data.course || data.name || "Sin Nombre";
-                const nrc = data.nrc || "S/N";
-                const period = data.period || "-";
-                const campus = data.campus || "-";
-                const capacity = data.capacity || 0;
-                const status = data.status || "Activa";
-
-                html += `
-                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
-                            <td class="p-4">
-                                <p class="font-bold text-brand-deepPurple dark:text-white text-base">${courseName}</p>
-                                <p class="text-xs text-brand-lightBlue font-medium">NRC: ${nrc}</p>
-                            </td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${period}</td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${campus}</span><span class="text-xs">${data.modality || 'Presencial'}</span></td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300">0/${capacity}</td>
-                            <td class="p-4 text-center"><span class="text-[10px] font-bold px-2.5 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen tracking-wider">${status}</span></td>
-                            <td class="p-4 text-right">
-                                <button class="text-xs font-bold text-gray-500 hover:text-brand-purple transition">Gestionar</button>
-                            </td>
-                        </tr>
-                `;
-            });
             html += `</tbody></table></div></div>`;
             container.innerHTML = html;
         }
@@ -682,9 +628,8 @@
             }
 
             try {
-                // Capturamos TODOS los datos del formulario visual
                 const newClassroom = {
-                    teacherId: window.currentUser.uid,
+                    teacherId: currentUser.uid,
                     course: document.getElementById('cr-course').value,
                     period: document.getElementById('cr-period').value,
                     name: document.getElementById('cr-name').value,
@@ -698,18 +643,14 @@
                     status: 'Activa', 
                     createdAt: serverTimestamp()
                 };
-
-                // Enviamos los datos reales a la colección "classrooms" de Firebase Firestore
-                await addDoc(collection(db, "classrooms"), newClassroom);
-                showToast("El aula se ha guardado en Firebase correctamente", "success");
                 
+                await addDoc(collection(db, "classrooms"), newClassroom);
+                showToast("El aula se ha creado correctamente", "success");
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                window.loadClassrooms(); // Recargamos para que aparezca en la UI
-
+                window.loadClassrooms();
             } catch (error) {
-                console.error("Firebase Error en Guardado: ", error);
-                showToast("Error guardando en Base de Datos. Revisa la consola.", "error");
+                showToast("Error de permisos en Base de Datos", "error");
             } finally {
                 btnText.textContent = "Activar Aula";
                 spinner.classList.add('hidden');
