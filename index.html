@@ -60,6 +60,14 @@
         @media (max-width: 820px) { .app-layout { grid-template-columns: 1fr; } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Estilizar el select transparente del rol */
+        select.role-badge-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-brand-softPurple dark:bg-[#121824] text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
@@ -107,10 +115,10 @@
     <div id="app-layout" class="app-layout hidden transition-opacity duration-300 opacity-0">
         
         <!-- SIDEBAR (Menú Lateral) -->
-        <aside class="bg-brand-purple dark:bg-[#321A44] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20 transition-colors duration-300">
-            <!-- LOGO: H-16 (Más grande) y SIEMPRE Logo_Teach7_2.png (Blanco) -->
-            <div class="flex items-center justify-center mb-10 mt-4 h-16">
-                <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
+        <aside class="bg-brand-purple dark:bg-[#151b2b] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20 transition-colors duration-300">
+            <!-- LOGO: Siempre blanco, más grande (w-40) y fijo -->
+            <div class="flex items-center justify-center mb-8 mt-2 h-16">
+                <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="w-40 max-h-full object-contain drop-shadow-md">
             </div>
             
             <nav class="flex-1 space-y-1.5 no-scrollbar overflow-y-auto">
@@ -158,7 +166,7 @@
                     <p id="user-display-email" class="text-xs text-white/60 dark:text-gray-400 truncate mb-1">usuario@correo.com</p>
                     
                     <!-- SELECTOR MAGICO INTEGRADO AL BADGE -->
-                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="hidden bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider focus:outline-none cursor-pointer border border-transparent hover:border-brand-lightBlue transition appearance-none">
+                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="hidden bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider focus:outline-none cursor-pointer border border-transparent hover:border-brand-lightBlue transition role-badge-select w-auto">
                     </select>
                     <!-- BADGE ESTATICO (Para usuarios sin selector) -->
                     <span id="user-role-badge" class="inline-block bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Perfil</span>
@@ -171,9 +179,9 @@
         </aside>
 
         <!-- CONTENIDO PRINCIPAL -->
-        <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
+        <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#090D14] transition-colors duration-300">
             
-            <!-- VISTA: DASHBOARD DOCENTE -->
+            <!-- VISTA: DASHBOARD DOCENTE (OPERATIVO Y COMPLETO) -->
             <div id="view-dashboard" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                     <div>
@@ -199,6 +207,7 @@
                         <p class="text-white/80 text-sm leading-relaxed max-w-xl">Tienes 6 informes por revisar, 2 Teams pendientes de aprobación y 8 estudiantes que aún no completan el Fast Test de la Semana 6.</p>
                         <button class="mt-6 bg-white text-brand-deepPurple px-6 py-2.5 rounded-xl font-bold hover:bg-gray-100 transition shadow-md">Ver pendientes urgentes</button>
                     </div>
+                    
                     <div class="relative z-10 w-full md:w-80 grid grid-cols-2 gap-3">
                         <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                             <span class="block text-3xl font-black mb-1">18</span>
@@ -219,9 +228,82 @@
                     </div>
                     <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-lightBlue/20 rounded-full blur-3xl"></div>
                 </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-red-300 dark:hover:border-red-500/50 transition group">
+                        <span class="absolute top-4 right-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Atender</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Informes Pendientes</p>
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">6</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-amber-300 dark:hover:border-amber-500/50 transition group">
+                        <span class="absolute top-4 right-4 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Hoy</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Fast Tests Enviados</p>
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">31<span class="text-xl text-gray-400 dark:text-gray-600">/39</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-brand-lightBlue transition group">
+                        <span class="absolute top-4 right-4 bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue px-2 py-1 rounded text-[10px] font-bold uppercase">Lecturas</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Alumnos que leyeron</p>
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">27<span class="text-xl text-gray-400 dark:text-gray-600">/39</span></p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-brand-schoolGreen transition group">
+                        <span class="absolute top-4 right-4 bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen px-2 py-1 rounded text-[10px] font-bold uppercase">Equipos</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Teams Completos</p>
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">5<span class="text-xl text-gray-400 dark:text-gray-600">/7</span></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 mb-8">
+                    <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                            <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Pendientes por atender</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Acciones prioritarias de tus aulas.</p>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead>
+                                    <tr class="bg-gray-50/50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 font-bold uppercase text-xs">
+                                        <th class="py-3 px-6">Tipo</th>
+                                        <th class="py-3 px-6">Detalle</th>
+                                        <th class="py-3 px-6">Aula</th>
+                                        <th class="py-3 px-6 text-center">Prioridad</th>
+                                        <th class="py-3 px-6 text-right">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                        <td class="py-4 px-6 font-bold text-brand-deepPurple dark:text-white">Informe</td>
+                                        <td class="py-4 px-6 text-gray-600 dark:text-gray-300">6 entregas sin validar</td>
+                                        <td class="py-4 px-6 dark:text-brand-lightBlue">NRC 41473</td>
+                                        <td class="py-4 px-6 text-center"><span class="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-xs font-bold">Alta</span></td>
+                                        <td class="py-4 px-6 text-right"><button class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-brand-purple/40 transition">Revisar</button></td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                        <td class="py-4 px-6 font-bold text-brand-deepPurple dark:text-white">Team</td>
+                                        <td class="py-4 px-6 text-gray-600 dark:text-gray-300">2 equipos esperan aprobación</td>
+                                        <td class="py-4 px-6 dark:text-brand-lightBlue">NRC 41473</td>
+                                        <td class="py-4 px-6 text-center"><span class="bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2 py-1 rounded text-xs font-bold">Media</span></td>
+                                        <td class="py-4 px-6 text-right"><button class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-brand-purple/40 transition">Abrir</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
+                        <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white mb-6">Actividad reciente</h3>
+                        <div class="space-y-5">
+                            <div class="flex gap-4">
+                                <div class="w-2 h-2 mt-2 rounded-full bg-brand-lightBlue shrink-0"></div>
+                                <div class="flex-1 pb-4 border-b border-gray-50 dark:border-gray-800">
+                                    <p class="text-sm dark:text-gray-300"><strong class="font-bold text-brand-deepPurple dark:text-white">Andrea</strong> envió el Informe 5</p>
+                                    <p class="text-xs text-gray-500 mt-1">10:42 a.m.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- VISTA: MÓDULO AULAS -->
+            <!-- VISTA: MÓDULO AULAS (GENERAL) -->
             <div id="view-classrooms" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
                     <div>
@@ -232,6 +314,7 @@
                         <span>+ Nueva Aula</span>
                     </button>
                 </header>
+                <!-- CONTENEDOR DINÁMICO: Tarjetas (Profes/Alumnos) o Tabla (Admins) -->
                 <div id="classrooms-container"><div class="p-10 text-center text-gray-500">Cargando módulo...</div></div>
             </div>
 
@@ -242,35 +325,180 @@
                         <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Gestión de Teams</h1>
                         <p class="text-brand-purple/80 dark:text-gray-400 font-medium">Aprobación, responsables de rotación y seguimiento.</p>
                     </div>
+                    <div class="flex gap-2">
+                        <button class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">Alumnos sin Team (4)</button>
+                        <button class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2 text-sm">Crear Team Manual</button>
+                    </div>
                 </header>
-                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-10 text-center">
-                    <p class="text-gray-500 dark:text-gray-400">Las solicitudes y Teams de tu aula aparecerán aquí.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider">Aprobados</p>
+                        <p class="text-3xl font-black text-brand-deepPurple dark:text-white mt-2">5</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-red-100 dark:border-red-900/30 rounded-2xl p-5 shadow-sm relative cursor-pointer group">
+                        <span class="absolute top-4 right-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Atender</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-red-500 transition">Pendientes Revisión</p>
+                        <p class="text-3xl font-black text-brand-deepPurple dark:text-white mt-2">2</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-amber-100 dark:border-amber-900/30 rounded-2xl p-5 shadow-sm relative cursor-pointer group">
+                        <span class="absolute top-4 right-4 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Faltan alumnos</span>
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-amber-500 transition">Incompletos</p>
+                        <p class="text-3xl font-black text-brand-deepPurple dark:text-white mt-2">1</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm">
+                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider">Solicitudes Cambio</p>
+                        <p class="text-3xl font-black text-brand-deepPurple dark:text-white mt-2">1</p>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead>
+                                <tr class="bg-gray-50/50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 font-bold uppercase text-[11px] tracking-wider">
+                                    <th class="py-4 px-6">Team / Líder</th>
+                                    <th class="py-4 px-6">Miembros</th>
+                                    <th class="py-4 px-6">Responsable Actual</th>
+                                    <th class="py-4 px-6 text-center">Estado</th>
+                                    <th class="py-4 px-6 text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-brand-deepPurple dark:text-white text-base">Team01</p>
+                                        <p class="text-xs text-gray-500 dark:text-brand-lightBlue mt-0.5">Lider: Carlos Ruiz</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-600 dark:text-gray-300 font-medium">5 Integrantes</td>
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-brand-deepPurple dark:text-white">Aguilar Torres, M.</p>
+                                        <p class="text-xs text-gray-500 mt-0.5">Informe 6</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-center"><span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen px-2.5 py-1 rounded font-bold uppercase text-[10px] tracking-wider">Aprobado</span></td>
+                                    <td class="py-4 px-6 text-right"><button class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition text-xs">Administrar</button></td>
+                                </tr>
+                                <tr class="hover:bg-red-50/30 dark:hover:bg-red-900/10 transition bg-red-50/10 dark:bg-transparent">
+                                    <td class="py-4 px-6">
+                                        <p class="font-bold text-brand-deepPurple dark:text-white text-base">Team03 (Nuevo)</p>
+                                        <p class="text-xs text-gray-500 dark:text-brand-lightBlue mt-0.5">Lider: Andrea Mendoza</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-600 dark:text-gray-300 font-medium">6 Integrantes</td>
+                                    <td class="py-4 px-6"><span class="text-xs text-gray-400 italic">Pendiente validación</span></td>
+                                    <td class="py-4 px-6 text-center"><span class="bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded font-bold uppercase text-[10px] tracking-wider">Revisar</span></td>
+                                    <td class="py-4 px-6 text-right"><button class="bg-brand-purple text-white px-4 py-1.5 rounded-lg font-bold hover:bg-brand-deepPurple transition shadow-sm text-xs">Validar / Aprobar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
             <!-- VISTA: MÓDULO TEAM (ESTUDIANTE) -->
             <div id="view-teams-student" class="app-view hidden fade-in max-w-6xl mx-auto">
-                <header class="mb-8">
-                    <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Mi Team</h1>
-                    <p class="text-brand-purple/80 dark:text-gray-400">Comprueba el avance de tus compañeros.</p>
+                <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                    <div>
+                        <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Mi Team: <span class="text-brand-purple dark:text-brand-lightBlue">Team01</span></h1>
+                        <p class="text-brand-purple/80 dark:text-gray-400 font-medium">Aula: Física 1 - NRC 41473</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen px-4 py-2 rounded-xl font-bold uppercase text-sm tracking-wider flex items-center gap-2 border border-green-100 dark:border-green-800">
+                        <span class="w-2 h-2 rounded-full bg-brand-schoolGreen block"></span> Team Oficial Activo
+                    </div>
                 </header>
-                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8">
-                    <p class="text-center text-gray-500">Aún no estás asignado a un Team aprobado en esta aula.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
+                    <div class="space-y-6">
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8">
+                            <h3 class="text-lg font-bold text-brand-deepPurple dark:text-white mb-6 flex items-center gap-2">👥 Integrantes y Conformación</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-[#121824] border border-gray-100 dark:border-gray-800">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-brand-purple text-white flex items-center justify-center font-bold text-xs">CR</div>
+                                        <div><p class="font-bold text-sm dark:text-white">Carlos Ruiz <span class="text-[10px] bg-brand-lightBlue/20 text-brand-lightBlue px-2 py-0.5 rounded ml-2 uppercase">Líder</span></p></div>
+                                    </div>
+                                    <span class="text-xs text-brand-schoolGreen font-bold flex items-center gap-1">✓ Confirmado</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 rounded-xl border border-brand-lightBlue border-l-4 bg-brand-softBlue dark:bg-[#161D2B] dark:border-brand-lightBlue/30">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded bg-brand-lightBlue text-white flex items-center justify-center font-bold text-xs">AM</div>
+                                        <div>
+                                            <p class="font-bold text-sm text-brand-deepPurple dark:text-brand-lightBlue">Andrea Mendoza <span class="text-[10px] bg-brand-purple/10 text-brand-purple dark:bg-brand-purple/30 dark:text-white px-2 py-0.5 rounded ml-2 uppercase">Tú</span></p>
+                                            <p class="text-xs text-brand-purple mt-0.5 font-medium">Turno actual de entrega</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-brand-schoolGreen font-bold flex items-center gap-1">✓ Confirmada</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-gradient-to-b from-brand-purple to-brand-deepPurple rounded-2xl p-6 shadow-lg text-white relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-lightBlue/20 rounded-bl-full blur-2xl"></div>
+                            <h3 class="font-bold mb-1 text-brand-lightBlue uppercase tracking-wider text-xs">Tu responsabilidad actual</h3>
+                            <h2 class="text-2xl font-black mb-4">Informe 6: Dinámica</h2>
+                            
+                            <!-- Candado de Fast Test -->
+                            <div class="bg-black/20 rounded-xl p-4 mb-6 border border-white/10">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-bold flex items-center gap-2">🔓 Requisito Grupal</span>
+                                    <span class="text-xs bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">Pendiente</span>
+                                </div>
+                                <p class="text-xs text-white/70 mb-3">Faltan 2 de 5 integrantes en aprobar el Fast Test de la Semana 6 para desbloquear el formato de informe.</p>
+                                <div class="w-full bg-white/10 rounded-full h-1.5">
+                                    <div class="bg-amber-400 h-1.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <button class="w-full bg-white/10 text-white/50 border border-white/20 py-3 rounded-xl font-bold cursor-not-allowed flex justify-center items-center gap-2 transition">
+                                🔒 Subir Archivo PDF
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- VISTAS GLOBALES -->
-            <div id="view-dashboard-super" class="app-view hidden fade-in text-center py-20">
-                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Panel Maestro (SuperAdmin)</h1>
-                <p class="text-gray-500">Métricas globales y configuración del sistema multi-tenant.</p>
+            <!-- VISTA: FAST TEST DEMO -->
+            <div id="view-fasttest-demo" class="app-view hidden fade-in max-w-3xl mx-auto">
+                <header class="mb-8 flex justify-between items-center bg-white dark:bg-[#1C2333] p-6 rounded-2xl shadow-sm border border-brand-lightBlue/20">
+                    <div>
+                        <h1 class="text-2xl font-black dark:text-white mb-1 text-brand-deepPurple">Fast Test: Física 1</h1>
+                        <p class="text-brand-purple/80 dark:text-gray-400 text-sm">Semana 2: Teoría de errores. (Máx 20pts)</p>
+                    </div>
+                    <div class="bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 px-4 py-2 rounded-full font-bold flex items-center gap-2 text-sm">⏱️ 14:59</div>
+                </header>
+                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8">
+                    <div class="mb-6"><h2 class="text-xl font-bold text-brand-deepPurple dark:text-white">¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?</h2></div>
+                    <div class="flex justify-between mt-10 pt-6 border-t border-gray-100 dark:border-gray-800">
+                        <button class="px-6 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md" onclick="showToast('Test Finalizado Correctamente', 'success')">Finalizar Test</button>
+                    </div>
+                </div>
             </div>
+
+            <!-- VISTA: DASHBOARD SUPERADMIN -->
+            <div id="view-dashboard-super" class="app-view hidden fade-in py-10 max-w-6xl mx-auto">
+                <div class="text-center mb-10">
+                    <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Panel Maestro (SuperAdmin)</h1>
+                    <p class="text-gray-500">Monitorización global y configuración de base de datos multi-tenant.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm text-center">
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white">12</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-bold uppercase tracking-wider mt-2">Instituciones Activas</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm text-center">
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white">1,402</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-bold uppercase tracking-wider mt-2">Docentes Totales</p>
+                    </div>
+                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-6 shadow-sm text-center">
+                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white">45k</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-bold uppercase tracking-wider mt-2">Alumnos Registrados</p>
+                    </div>
+                </div>
+            </div>
+            
             <div id="view-dashboard-admin" class="app-view hidden fade-in text-center py-20">
                 <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Administración Institucional</h1>
                 <p class="text-gray-500">Gestión de profesores, matriculas masivas y periodos de la sede.</p>
-            </div>
-            <div id="view-student-home" class="app-view hidden fade-in text-center py-20">
-                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Hola Estudiante</h1>
-                <p class="text-gray-500">Tu ruta de aprendizaje comienza aquí.</p>
             </div>
         </main>
     </div>
@@ -295,10 +523,12 @@
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Periodo Académico</label>
                         <input type="text" id="cr-period" required placeholder="Ej. 2026-20" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
+                    
                     <div class="col-span-2">
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Nombre de la Sección o Aula</label>
                         <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
+
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">NRC / Código</label>
                         <input type="text" id="cr-nrc" placeholder="Ej. 41473" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
@@ -311,6 +541,7 @@
                             <option value="Virtual">Virtual</option>
                         </select>
                     </div>
+                    
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Fecha de Inicio</label>
                         <input type="date" id="cr-start" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
@@ -319,15 +550,17 @@
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Fecha de Término</label>
                         <input type="date" id="cr-end" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
+
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Sede</label>
                         <input type="text" id="cr-campus" value="Huancayo" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Capacidad Max.</label>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Capacidad Max. Estudiantes</label>
                         <input type="number" id="cr-capacity" value="40" required min="1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
                 </div>
+                
                 <div class="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
                     <button type="button" onclick="closeModal('modal-classroom')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">Cancelar</button>
                     <button type="submit" id="btn-save-classroom" class="px-8 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
@@ -341,6 +574,7 @@
 
     <!-- UI Scripts Generales -->
     <script>
+        // Logo fijo, grande y siempre claro para el panel lateral
         const logoWhite = 'Logo_Teach7_2.png';
         const logoColor = 'Logo_Teach6_2.png';
 
@@ -349,8 +583,9 @@
             const loginLogo = document.getElementById('login-logo');
             if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
             
-            // ELIMINADO: Ya no forzamos el cambio del logo del sidebar aquí.
-            // Se mantiene siempre Logo_Teach7_2.png directo en el HTML.
+            // Sidebar logo is ALWAYS white and large.
+            const sidebarLogo = document.getElementById('sidebar-logo');
+            if (sidebarLogo) sidebarLogo.src = logoWhite; 
         }
 
         function toggleTheme() {
@@ -398,6 +633,7 @@
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
+        // KEY DE FIREBASE (FIJA)
         const firebaseConfig = {
             apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
             authDomain: "teach-edu-5a501.firebaseapp.com",
@@ -486,8 +722,7 @@
                             await setDoc(userRef, { email: user.email, role: role, allowedRoles: [role], createdAt: serverTimestamp() });
                         }
 
-                        // REGLA DE FUNDADOR: Si tu base de datos dice que eres superadmin, 
-                        // automáticamente se te habilita el menú desplegable para simular los 4 roles.
+                        // REGLA DE FUNDADOR: Forzamos el array si eres superadmin
                         if (role === 'superadmin') {
                             allowedRoles = ['superadmin', 'admin', 'teacher', 'student'];
                         }
@@ -495,7 +730,7 @@
                         window.currentUser = { uid: user.uid, email: user.email, role: role, allowedRoles: allowedRoles };
                         document.getElementById('user-display-email').textContent = user.email;
                         
-                        // Lógica del Selector de Roles Integrado
+                        // INTEGRACIÓN DEL SELECTOR CAMUFLADO
                         const roleBadge = document.getElementById('user-role-badge');
                         const switcherSelect = document.getElementById('role-switcher');
                         
@@ -588,6 +823,7 @@
                             <div class="space-y-2 mb-6">
                                 <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${data.period}</p>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${data.campus}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 ${data.enrolled || 0} de ${data.capacity} Estudiantes</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 border-t border-gray-100 dark:border-gray-800">
@@ -603,10 +839,10 @@
             let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
             
             if(dataArray.length === 0) {
-                html += '<tr><td colspan="5" class="p-8 text-center text-gray-500">No hay aulas registradas en la institución.</td></tr>';
+                html += '<tr><td colspan="5" class="p-8 text-center text-gray-500">No hay aulas registradas en la base de datos.</td></tr>';
             } else {
                 dataArray.forEach(data => {
-                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">0/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td></tr>`;
+                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td></tr>`;
                 });
             }
             html += `</tbody></table></div></div>`;
@@ -648,9 +884,9 @@
                 showToast("El aula se ha creado correctamente", "success");
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                window.loadClassrooms();
+                window.loadClassrooms(); // Recarga la tabla o tarjetas
             } catch (error) {
-                showToast("Error de permisos en Base de Datos", "error");
+                showToast("Error al guardar en el servidor", "error");
             } finally {
                 btnText.textContent = "Activar Aula";
                 spinner.classList.add('hidden');
