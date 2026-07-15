@@ -492,19 +492,21 @@
                         window.currentUser = { uid: user.uid, email: user.email, role: role, allowedRoles: allowedRoles };
                         document.getElementById('user-display-email').textContent = user.email;
                         
-                        // Lógica del Dropdown de Simulación (View As)
-                        const switcherContainer = document.getElementById('role-switcher-container');
+                        // Lógica del Dropdown Integrado
+                        const roleBadge = document.getElementById('user-role-badge');
                         const switcherSelect = document.getElementById('role-switcher');
                         
                         if(allowedRoles.length > 1) {
-                            switcherContainer.classList.remove('hidden');
+                            roleBadge.classList.add('hidden');
+                            switcherSelect.classList.remove('hidden');
                             switcherSelect.innerHTML = '';
-                            const roleNames = { superadmin: 'SuperAdmin', admin: 'Administrador', teacher: 'Profesor', student: 'Estudiante' };
+                            const roleNames = { superadmin: 'SUPERADMIN', admin: 'ADMINISTRADOR', teacher: 'PROFESOR', student: 'ESTUDIANTE' };
                             allowedRoles.forEach(r => {
-                                switcherSelect.innerHTML += `<option value="${r}" ${r===role ? 'selected' : ''} class="text-black">${roleNames[r]}</option>`;
+                                switcherSelect.innerHTML += `<option value="${r}" ${r===role ? 'selected' : ''} class="bg-[#321A44] text-white">${roleNames[r]}</option>`;
                             });
                         } else {
-                            switcherContainer.classList.add('hidden');
+                            roleBadge.classList.remove('hidden');
+                            switcherSelect.classList.add('hidden');
                         }
 
                         const initialView = applyRoleUI(role, false);
