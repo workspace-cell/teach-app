@@ -41,9 +41,6 @@
     </script>
 
     <style>
-        /* ==============================
-           COLORES GENERALES Y ANIMACIONES
-        ============================== */
         :root {
             --morado-principal: #593079;
             --morado-oscuro: #321A44;
@@ -59,23 +56,21 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .modal-overlay { animation: fadeIn 0.2s ease-out; }
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-
-        /* Estilos base responsivos */
         .app-layout { display: grid; grid-template-columns: 245px 1fr; min-height: 100vh; }
         @media (max-width: 820px) { .app-layout { grid-template-columns: 1fr; } }
-        
-        /* Ocultar barra de scroll para un look más limpio en el menú */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-brand-softPurple dark:bg-[#121824] text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
 
-    <!-- Notificaciones flotantes -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none"></div>
 
-    <!-- PANTALLA DE LOGIN -->
-    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300">
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300 relative z-50">
+        <button onclick="toggleTheme()" class="absolute top-4 right-4 bg-brand-softBlue dark:bg-gray-800 p-2 rounded-full shadow-md border border-brand-lightBlue/30 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-700 transition">
+            <span id="theme-icon-light" class="hidden dark:block text-yellow-400">☀️</span>
+            <span id="theme-icon-dark" class="block dark:hidden text-brand-purple">🌙</span>
+        </button>
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-xl p-10 w-full max-w-md border border-brand-lightBlue/20 dark:border-gray-800 relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-lightBlue to-brand-purple"></div>
             
@@ -102,84 +97,81 @@
                         <span id="login-text">Ingresar a Teach</span>
                         <svg id="login-spinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
-                    <button type="button" id="btn-demo-login" class="w-full bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-700 text-brand-deepPurple dark:text-white rounded-lg py-3 font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition flex justify-center items-center">
-                        Ingresar en Modo Demo
-                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- APLICACIÓN PRINCIPAL -->
     <div id="app-layout" class="app-layout hidden transition-opacity duration-300 opacity-0">
         
         <!-- SIDEBAR (Menú Lateral) -->
-        <aside class="bg-brand-purple dark:bg-[#090D14] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20">
-            <!-- LOGO MÁS GRANDE (h-16) -->
-            <div class="flex items-center justify-center mb-8 mt-4 h-16">
+        <aside class="bg-brand-purple dark:bg-[#321A44] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20 transition-colors duration-300">
+            <div class="flex items-center justify-center mb-10 mt-4 h-12">
                 <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
             </div>
             
             <nav class="flex-1 space-y-1.5 no-scrollbar overflow-y-auto">
-                <!-- MENÚ SUPERADMIN -->
                 <div id="menu-superadmin" class="space-y-1.5 hidden">
                     <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Global</p>
                     <button onclick="navigate('dashboard-super')" id="nav-dashboard-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🌍</span> Panel Maestro</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Aulas Globales</button>
-                    <button onclick="navigate('users')" id="nav-users" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Usuarios</button>
+                    <button onclick="navigate('teams-admin')" id="nav-teams-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Supervisión Teams</button>
                 </div>
 
-                <!-- MENÚ ADMIN INSTITUCIONAL -->
                 <div id="menu-admin" class="space-y-1.5 hidden">
                     <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Institución</p>
                     <button onclick="navigate('dashboard-admin')" id="nav-dashboard-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🏢</span> Sede Central</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Gestión Aulas</button>
+                    <button onclick="navigate('teams-admin')" id="nav-teams-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Auditar Teams</button>
                 </div>
 
-                <!-- MENÚ DOCENTE -->
                 <div id="menu-teacher" class="space-y-1.5 hidden">
                     <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Académico</p>
                     <button onclick="navigate('dashboard')" id="nav-dashboard" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Aulas</button>
-                    <button onclick="navigate('teams')" id="nav-teams" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Aprobar Teams</button>
+                    <button onclick="navigate('teams-teacher')" id="nav-teams-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Team</button>
                     <button onclick="navigate('courses')" id="nav-courses" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
                 </div>
 
-                <!-- MENÚ ESTUDIANTE -->
                 <div id="menu-student" class="space-y-1.5 hidden">
                     <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Mi Ruta</p>
                     <button onclick="navigate('student-home')" id="nav-student-home" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Cursos</button>
                     <button onclick="navigate('fasttest-demo')" id="nav-fasttest-demo" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">✓</span> Fast Tests</button>
-                    <button onclick="navigate('teams')" id="nav-teams-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Mi Team</button>
+                    <button onclick="navigate('teams-student')" id="nav-teams-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Mi Team</button>
                 </div>
             </nav>
             
             <div class="mt-4 pt-4 border-t border-white/10 dark:border-gray-800">
-                <!-- BOTÓN MODO OSCURO/CLARO EN LA PARTE INFERIOR IZQUIERDA -->
-                <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-4 py-2.5 mb-2 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                
+                <!-- DROPDOWN: Selector Mágico de Roles -->
+                <div id="role-switcher-container" class="px-2 mb-4 hidden">
+                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest mb-1 ml-2">Simular vista de:</p>
+                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="w-full bg-white/10 text-white text-sm rounded-xl px-3 py-2 border border-white/20 focus:outline-none focus:border-brand-lightBlue cursor-pointer">
+                    </select>
+                </div>
+
+                <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-4 py-2 mb-2 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
                     <span id="theme-icon-light" class="hidden dark:inline-block text-lg">☀️</span>
                     <span id="theme-icon-dark" class="inline-block dark:hidden text-lg">🌙</span>
-                    <span class="dark:hidden">Modo Oscuro</span>
-                    <span class="hidden dark:inline-block">Modo Claro</span>
+                    <span class="dark:hidden text-sm">Modo Oscuro</span>
+                    <span class="hidden dark:inline-block text-sm">Modo Claro</span>
                 </button>
-
+                
                 <div class="px-2 mb-4">
-                    <p id="user-display-email" class="text-xs text-white/60 dark:text-gray-500 truncate mb-1">usuario@correo.com</p>
+                    <p id="user-display-email" class="text-xs text-white/60 dark:text-gray-400 truncate mb-1">usuario@correo.com</p>
                     <span id="user-role-badge" class="inline-block text-[10px] bg-brand-lightBlue/20 text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase tracking-wider">Perfil</span>
                 </div>
-                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-2.5 text-red-300 dark:text-red-400 font-bold rounded-xl hover:bg-white/10 dark:hover:bg-red-500/20 transition">
+                <button id="logout-btn" class="w-full flex items-center gap-2 px-4 py-2 text-red-300 dark:text-red-400 font-bold rounded-xl hover:bg-white/10 dark:hover:bg-red-500/20 transition">
                     <span class="text-lg">🚪</span> Salir
                 </button>
             </div>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#121824]">
+        <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
             
             <!-- VISTA: DASHBOARD DOCENTE -->
             <div id="view-dashboard" class="app-view hidden fade-in max-w-6xl mx-auto">
-                <!-- TOPBAR DOCENTE -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                     <div>
                         <h1 class="text-2xl font-black text-brand-deepPurple dark:text-white flex items-center gap-2">
@@ -197,7 +189,6 @@
                     </div>
                 </div>
 
-                <!-- HERO RESUMEN -->
                 <div class="bg-gradient-to-br from-brand-purple to-brand-deepPurple rounded-2xl p-8 text-white shadow-lg mb-6 flex flex-col md:flex-row gap-8 relative overflow-hidden">
                     <div class="relative z-10 flex-1">
                         <span class="inline-block bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">Resumen docente</span>
@@ -205,7 +196,6 @@
                         <p class="text-white/80 text-sm leading-relaxed max-w-xl">Tienes 6 informes por revisar, 2 Teams pendientes de aprobación y 8 estudiantes que aún no completan el Fast Test de la Semana 6.</p>
                         <button class="mt-6 bg-white text-brand-deepPurple px-6 py-2.5 rounded-xl font-bold hover:bg-gray-100 transition shadow-md">Ver pendientes urgentes</button>
                     </div>
-                    
                     <div class="relative z-10 w-full md:w-80 grid grid-cols-2 gap-3">
                         <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                             <span class="block text-3xl font-black mb-1">18</span>
@@ -226,231 +216,62 @@
                     </div>
                     <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-lightBlue/20 rounded-full blur-3xl"></div>
                 </div>
-                
-                <!-- MÉTRICAS ACCIONABLES -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-red-300 dark:hover:border-red-500/50 transition group">
-                        <span class="absolute top-4 right-4 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Atender</span>
-                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Informes Pendientes</p>
-                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">6</p>
-                    </div>
-                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-amber-300 dark:hover:border-amber-500/50 transition group">
-                        <span class="absolute top-4 right-4 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2 py-1 rounded text-[10px] font-bold uppercase">Hoy</span>
-                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Fast Tests Enviados</p>
-                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">31<span class="text-xl text-gray-400 dark:text-gray-600">/39</span></p>
-                    </div>
-                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-brand-lightBlue transition group">
-                        <span class="absolute top-4 right-4 bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue px-2 py-1 rounded text-[10px] font-bold uppercase">Lecturas</span>
-                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Alumnos que leyeron</p>
-                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">27<span class="text-xl text-gray-400 dark:text-gray-600">/39</span></p>
-                    </div>
-                    <div class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm relative cursor-pointer hover:border-brand-schoolGreen transition group">
-                        <span class="absolute top-4 right-4 bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen px-2 py-1 rounded text-[10px] font-bold uppercase">Equipos</span>
-                        <p class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider group-hover:text-brand-deepPurple dark:group-hover:text-brand-lightBlue transition">Teams Completos</p>
-                        <p class="text-4xl font-black text-brand-deepPurple dark:text-white mt-2">5<span class="text-xl text-gray-400 dark:text-gray-600">/7</span></p>
-                    </div>
-                </div>
-
-                <!-- TABLA PENDIENTES & ACTIVIDAD -->
-                <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 mb-8">
-                    <!-- Centro Operativo -->
-                    <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
-                        <div class="p-6 border-b border-gray-100 dark:border-gray-800">
-                            <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Pendientes por atender</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Acciones prioritarias de tus aulas.</p>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm">
-                                <thead>
-                                    <tr class="bg-gray-50/50 dark:bg-gray-800/30 text-gray-500 dark:text-gray-400 font-bold uppercase text-xs">
-                                        <th class="py-3 px-6">Tipo</th>
-                                        <th class="py-3 px-6">Detalle</th>
-                                        <th class="py-3 px-6">Aula</th>
-                                        <th class="py-3 px-6 text-center">Prioridad</th>
-                                        <th class="py-3 px-6 text-right">Acción</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
-                                        <td class="py-4 px-6 font-bold text-brand-deepPurple dark:text-white">Informe</td>
-                                        <td class="py-4 px-6 text-gray-600 dark:text-gray-300">6 entregas sin validar</td>
-                                        <td class="py-4 px-6 dark:text-brand-lightBlue">NRC 41473</td>
-                                        <td class="py-4 px-6 text-center"><span class="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-xs font-bold">Alta</span></td>
-                                        <td class="py-4 px-6 text-right"><button class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-brand-purple/40 transition">Revisar</button></td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
-                                        <td class="py-4 px-6 font-bold text-brand-deepPurple dark:text-white">Team</td>
-                                        <td class="py-4 px-6 text-gray-600 dark:text-gray-300">2 equipos esperan aprobación</td>
-                                        <td class="py-4 px-6 dark:text-brand-lightBlue">NRC 41473</td>
-                                        <td class="py-4 px-6 text-center"><span class="bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 px-2 py-1 rounded text-xs font-bold">Media</span></td>
-                                        <td class="py-4 px-6 text-right"><button class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-brand-purple/40 transition">Abrir</button></td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
-                                        <td class="py-4 px-6 font-bold text-brand-deepPurple dark:text-white">Fast Test</td>
-                                        <td class="py-4 px-6 text-gray-600 dark:text-gray-300">8 estudiantes no responden</td>
-                                        <td class="py-4 px-6 dark:text-brand-lightBlue">Semana 6</td>
-                                        <td class="py-4 px-6 text-center"><span class="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-2 py-1 rounded text-xs font-bold">Alta</span></td>
-                                        <td class="py-4 px-6 text-right"><button class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue px-4 py-1.5 rounded-lg font-bold hover:bg-gray-200 dark:hover:bg-brand-purple/40 transition">Ver</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Actividad -->
-                    <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6">
-                        <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white mb-6">Actividad reciente</h3>
-                        <div class="space-y-5">
-                            <div class="flex gap-4">
-                                <div class="w-2 h-2 mt-2 rounded-full bg-brand-lightBlue shrink-0"></div>
-                                <div class="flex-1 pb-4 border-b border-gray-50 dark:border-gray-800">
-                                    <p class="text-sm dark:text-gray-300"><strong class="font-bold text-brand-deepPurple dark:text-white">Andrea</strong> envió el Informe 5</p>
-                                    <p class="text-xs text-gray-500 mt-1">10:42 a.m.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="w-2 h-2 mt-2 rounded-full bg-brand-schoolGreen shrink-0"></div>
-                                <div class="flex-1 pb-4 border-b border-gray-50 dark:border-gray-800">
-                                    <p class="text-sm dark:text-gray-300"><strong class="font-bold text-brand-deepPurple dark:text-white">Team02</strong> completó su registro</p>
-                                    <p class="text-xs text-gray-500 mt-1">09:18 a.m.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="w-2 h-2 mt-2 rounded-full bg-brand-purple shrink-0"></div>
-                                <div class="flex-1">
-                                    <p class="text-sm dark:text-gray-300"><strong class="font-bold text-brand-deepPurple dark:text-white">12 alumnos</strong> aprobaron Fast Test</p>
-                                    <p class="text-xs text-gray-500 mt-1">Ayer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- ==========================================
-                 VISTA: MÓDULO AULAS (Inteligente por Rol)
-                 ========================================== -->
+            <!-- VISTA: MÓDULO AULAS -->
             <div id="view-classrooms" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
                     <div>
                         <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Aulas</h1>
                         <p class="text-brand-purple/80 dark:text-gray-400 font-medium" id="classrooms-subtitle">Administra los espacios académicos del periodo.</p>
                     </div>
-                    <!-- Botón exclusivo para Admin/Profesor -->
                     <button id="btn-add-classroom" onclick="openModal('modal-classroom')" class="hidden bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2">
                         <span>+ Nueva Aula</span>
                     </button>
                 </header>
-
-                <!-- CONTENEDOR DINÁMICO: Tarjetas o Tabla -->
-                <div id="classrooms-container">
-                    <div class="p-10 text-center text-gray-500">Cargando módulo...</div>
-                </div>
+                <div id="classrooms-container"><div class="p-10 text-center text-gray-500">Cargando módulo...</div></div>
             </div>
 
-            <!-- VISTA: TEAM (Formulario Base) -->
-            <div id="view-teams" class="app-view hidden fade-in">
-                <header class="mb-8">
-                    <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Registro de Team</h1>
-                    <p class="text-brand-purple/80 dark:text-gray-400">El líder del equipo debe completar este formulario.</p>
-                </header>
-                
-                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8 max-w-3xl">
-                    <form id="form-team" class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4 border-b border-gray-100 dark:border-gray-800 pb-6">
-                            <div>
-                                <label class="block text-sm font-bold mb-1">Aula (NRC)</label>
-                                <select class="w-full border rounded-lg px-3 py-2 bg-gray-50 dark:bg-[#121824] focus:outline-brand-purple dark:border-gray-700 dark:text-white">
-                                    <option>41473 - Física 1</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold mb-1">Nombre del Team (Opcional)</label>
-                                <input type="text" placeholder="Ej. Los Newtonianos" class="w-full border rounded-lg px-3 py-2 bg-gray-50 dark:bg-[#121824] focus:outline-brand-purple dark:border-gray-700 dark:text-white">
-                            </div>
-                        </div>
-
-                        <div id="team-members-container" class="space-y-4">
-                            <!-- Integrante 1 (Líder) -->
-                            <div class="p-5 bg-brand-softBlue dark:bg-[#161D2B] rounded-xl border border-brand-lightBlue/30">
-                                <h4 class="font-bold text-brand-deepPurple dark:text-brand-lightBlue mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
-                                    <input type="email" required placeholder="Correo Institucional" class="border rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" onclick="addTeamMember()" class="text-brand-lightBlue font-bold text-sm hover:underline flex items-center gap-1">
-                            + Añadir otro integrante
-                        </button>
-
-                        <div class="flex justify-end pt-4">
-                            <button type="submit" class="bg-brand-purple text-white px-6 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md">Registrar Team</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- VISTA: FAST TEST DEMO -->
-            <div id="view-fasttest-demo" class="app-view hidden fade-in max-w-3xl mx-auto">
-                <header class="mb-8 flex justify-between items-center bg-white dark:bg-[#1C2333] p-6 rounded-2xl shadow-sm border border-brand-lightBlue/20">
+            <!-- VISTA: MÓDULO TEAM (PROFESOR) -->
+            <div id="view-teams-teacher" class="app-view hidden fade-in max-w-6xl mx-auto">
+                <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
                     <div>
-                        <h1 class="text-2xl font-black dark:text-white mb-1 text-brand-deepPurple">Fast Test: Física 1</h1>
-                        <p class="text-brand-purple/80 dark:text-gray-400 text-sm">Semana 2: Teoría de errores. (Máx 20pts)</p>
-                    </div>
-                    <div class="bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 px-4 py-2 rounded-full font-bold flex items-center gap-2 text-sm">
-                        ⏱️ 14:59
+                        <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Gestión de Teams</h1>
+                        <p class="text-brand-purple/80 dark:text-gray-400 font-medium">Aprobación, responsables de rotación y seguimiento.</p>
                     </div>
                 </header>
-                
-                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8">
-                    <div class="mb-6">
-                        <p class="text-xs font-bold text-brand-lightBlue uppercase mb-2 tracking-wider">Pregunta 1 de 4</p>
-                        <h2 class="text-xl font-bold text-brand-deepPurple dark:text-white">¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?</h2>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer hover:bg-brand-softPurple dark:hover:bg-[#161D2B] transition group">
-                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
-                            <span class="ml-3 font-medium dark:text-gray-300 group-hover:text-brand-deepPurple dark:group-hover:text-white">A) Joule</span>
-                        </label>
-                        <label class="flex items-center p-4 border border-brand-purple bg-brand-purple/5 dark:bg-brand-purple/20 rounded-xl cursor-pointer">
-                            <input type="radio" name="q1" checked class="w-4 h-4 text-brand-purple">
-                            <span class="ml-3 font-bold text-brand-purple dark:text-brand-lightBlue">B) Newton</span>
-                        </label>
-                        <label class="flex items-center p-4 border border-gray-200 dark:border-gray-700 rounded-xl cursor-pointer hover:bg-brand-softPurple dark:hover:bg-[#161D2B] transition group">
-                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
-                            <span class="ml-3 font-medium dark:text-gray-300 group-hover:text-brand-deepPurple dark:group-hover:text-white">C) Watt</span>
-                        </label>
-                    </div>
-                    
-                    <div class="flex justify-between mt-10 pt-6 border-t border-gray-100 dark:border-gray-800">
-                        <button class="px-6 py-2.5 border border-gray-300 dark:border-gray-700 rounded-xl font-bold text-gray-500 opacity-50 cursor-not-allowed">Anterior</button>
-                        <button class="px-6 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md" onclick="submitFastTest()">Finalizar Test</button>
-                    </div>
+                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-10 text-center">
+                    <p class="text-gray-500 dark:text-gray-400">Las solicitudes y Teams de tu aula aparecerán aquí.</p>
                 </div>
             </div>
 
-            <!-- VISTAS PLACEHOLDER ROLES -->
+            <!-- VISTA: MÓDULO TEAM (ESTUDIANTE) -->
+            <div id="view-teams-student" class="app-view hidden fade-in max-w-6xl mx-auto">
+                <header class="mb-8">
+                    <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Mi Team</h1>
+                    <p class="text-brand-purple/80 dark:text-gray-400">Comprueba el avance de tus compañeros.</p>
+                </header>
+                <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 p-8">
+                    <p class="text-center text-gray-500">Aún no estás asignado a un Team aprobado en esta aula.</p>
+                </div>
+            </div>
+
+            <!-- VISTAS GLOBALES -->
             <div id="view-dashboard-super" class="app-view hidden fade-in text-center py-20">
-                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">SuperAdmin Global</h1>
-                <p class="text-gray-500">Monitorización de todas las instituciones de Teach SaaS.</p>
+                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Panel Maestro (SuperAdmin)</h1>
+                <p class="text-gray-500">Métricas globales y configuración del sistema multi-tenant.</p>
             </div>
             <div id="view-dashboard-admin" class="app-view hidden fade-in text-center py-20">
-                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Admin Institucional</h1>
-                <p class="text-gray-500">Gestión de docentes y periodos para tu Universidad.</p>
+                <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Administración Institucional</h1>
+                <p class="text-gray-500">Gestión de profesores, matriculas masivas y periodos de la sede.</p>
             </div>
             <div id="view-student-home" class="app-view hidden fade-in text-center py-20">
                 <h1 class="text-4xl font-black text-brand-deepPurple dark:text-white mb-4">Hola Estudiante</h1>
                 <p class="text-gray-500">Tu ruta de aprendizaje comienza aquí.</p>
-                <button onclick="navigate('classrooms')" class="mt-6 bg-brand-lightBlue text-white px-6 py-2 rounded-xl font-bold">Ver mis cursos</button>
             </div>
-
         </main>
     </div>
 
-    <!-- MODAL: CREAR AULA MEJORADO -->
     <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]">
@@ -470,12 +291,10 @@
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Periodo Académico</label>
                         <input type="text" id="cr-period" required placeholder="Ej. 2026-20" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
-                    
                     <div class="col-span-2">
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Nombre de la Sección o Aula</label>
                         <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
-
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">NRC / Código</label>
                         <input type="text" id="cr-nrc" placeholder="Ej. 41473" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
@@ -488,7 +307,6 @@
                             <option value="Virtual">Virtual</option>
                         </select>
                     </div>
-                    
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Fecha de Inicio</label>
                         <input type="date" id="cr-start" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
@@ -497,40 +315,35 @@
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Fecha de Término</label>
                         <input type="date" id="cr-end" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
-
                     <div>
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Sede</label>
                         <input type="text" id="cr-campus" value="Huancayo" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
                     <div>
-                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Capacidad Max. Estudiantes</label>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Capacidad Max.</label>
                         <input type="number" id="cr-capacity" value="40" required min="1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
                 </div>
-                
                 <div class="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
                     <button type="button" onclick="closeModal('modal-classroom')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">Cancelar</button>
                     <button type="submit" id="btn-save-classroom" class="px-8 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
                         <span id="txt-save-cr">Activar Aula</span>
-                        <svg id="spin-save-cr" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- UI Scripts -->
     <script>
-        const logoLight = 'Logo_Teach7_2.png';
-        const logoDark = 'Logo_Teach6_2.png';
+        const logoWhite = 'Logo_Teach7_2.png';
+        const logoColor = 'Logo_Teach6_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
             const loginLogo = document.getElementById('login-logo');
-            if (loginLogo) loginLogo.src = isDark ? logoLight : logoDark;
+            if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
             const sidebarLogo = document.getElementById('sidebar-logo');
-            // SIEMPRE logo de letras blancas en el panel lateral (sea morado o azul nocturno)
-            if (sidebarLogo) sidebarLogo.src = logoLight; 
+            if (sidebarLogo) sidebarLogo.src = logoWhite; 
         }
 
         function toggleTheme() {
@@ -543,13 +356,9 @@
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            let bgClass = 'bg-brand-lightBlue text-white';
-            if(type === 'success') bgClass = 'bg-brand-schoolGreen text-white';
-            if(type === 'error') bgClass = 'bg-red-500 text-white';
-            
-            toast.className = `${bgClass} px-4 py-3 rounded-xl shadow-xl font-semibold text-sm transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-2 pointer-events-auto`;
+            let bgClass = type === 'success' ? 'bg-brand-schoolGreen text-white' : type === 'error' ? 'bg-red-500 text-white' : 'bg-brand-lightBlue text-white';
+            toast.className = `${bgClass} px-4 py-3 rounded-xl shadow-xl font-bold text-sm transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-2 pointer-events-auto`;
             toast.innerHTML = `<span>${message}</span>`;
-            
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
             setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
@@ -560,13 +369,11 @@
             const view = document.getElementById(`view-${viewId}`);
             if(view) view.classList.remove('hidden');
             
-            // Limpiar estilos de botones
             document.querySelectorAll('.menu-btn').forEach(btn => {
                 btn.className = "menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white";
             });
             
-            // Botón activo (Celeste en modo oscuro)
-            const activeBtn = document.getElementById(`nav-${viewId}`) || document.getElementById(`nav-${viewId}-teacher`) || document.getElementById(`nav-${viewId}-super`);
+            const activeBtn = document.getElementById(`nav-${viewId}`) || document.getElementById(`nav-${viewId}-teacher`) || document.getElementById(`nav-${viewId}-super`) || document.getElementById(`nav-${viewId}-student`);
             if(activeBtn) {
                 activeBtn.className = "menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30 shadow-inner";
             }
@@ -574,38 +381,15 @@
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') window.loadClassrooms();
         }
 
-        let memberCount = 1;
-        window.addTeamMember = function() {
-            memberCount++;
-            const container = document.getElementById('team-members-container');
-            const html = `
-                <div class="p-5 bg-brand-softBlue dark:bg-[#161D2B] rounded-xl border border-brand-lightBlue/30 mt-4 fade-in">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-brand-deepPurple dark:text-brand-lightBlue text-sm">Integrante ${memberCount}</h4>
-                        <button type="button" onclick="this.parentElement.parentElement.remove();" class="text-red-500 text-xs font-bold hover:underline">Quitar</button>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <input type="text" required placeholder="Nombres y Apellidos" class="border rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
-                        <input type="email" required placeholder="Correo Institucional" class="border rounded-lg px-3 py-2 text-sm bg-white dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', html);
-        }
-
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
     </script>
 
-    <!-- MOTOR DE BASE DE DATOS Y ROLES -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // ==========================================
-        // KEY DE FIREBASE (MANTENIDA)
-        // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
             authDomain: "teach-edu-5a501.firebaseapp.com",
@@ -617,13 +401,50 @@
         };
         
         let app, auth, db;
-        let currentUser = null;
-        let isDemoMode = false;
+        window.currentUser = null;
 
-        // Mock Data Inicial para Pruebas Rápidas
-        let demoClassrooms = [
-            { id: '1', course: 'Física 1', name: 'Grupo A', nrc: '41473', period: '2026-20', modality: 'Presencial', campus: 'Huancayo', capacity: 39, enrolled: 37, status: 'Activa' }
-        ];
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch (error) {
+            console.error("Firebase no disponible. Verifica tu conexión.");
+        }
+
+        /* LÓGICA DE ROLES Y "VIEW AS" (SIMULADOR DE VISTAS) */
+        window.applyRoleUI = function(role, isManualSwitch = false) {
+            window.currentUser.role = role;
+            
+            const badgeNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst.', teacher: 'Profesor', student: 'Estudiante' };
+            document.getElementById('user-role-badge').textContent = badgeNames[role] || 'Estudiante';
+
+            ['superadmin', 'admin', 'teacher', 'student'].forEach(r => {
+                const el = document.getElementById(`menu-${r}`);
+                if(el) el.classList.add('hidden');
+            });
+            document.getElementById(`menu-${role}`).classList.remove('hidden');
+
+            const btnAddClassroom = document.getElementById('btn-add-classroom');
+            if(btnAddClassroom) {
+                if(role === 'admin' || role === 'teacher') btnAddClassroom.classList.remove('hidden');
+                else btnAddClassroom.classList.add('hidden');
+            }
+
+            let initialView = 'student-home';
+            if (role === 'superadmin') initialView = 'dashboard-super';
+            else if (role === 'admin') initialView = 'dashboard-admin';
+            else if (role === 'teacher') initialView = 'dashboard';
+
+            if (isManualSwitch) {
+                navigate(initialView);
+                showToast(`Simulando vista como: ${badgeNames[role]}`, "info");
+            }
+            return initialView;
+        };
+
+        window.switchRoleManually = function(newRole) {
+            applyRoleUI(newRole, true);
+        };
 
         function transitionToApp(initialView) {
             document.getElementById('login-screen').classList.add('opacity-0');
@@ -636,15 +457,6 @@
             }, 300);
         }
 
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-        } catch (error) {
-            console.error("Firebase no disponible. Usando Demo.");
-            isDemoMode = true;
-        }
-
         if(auth) {
             onAuthStateChanged(auth, async (user) => {
                 const btnText = document.getElementById('login-text');
@@ -652,58 +464,60 @@
                 
                 if (user) {
                     try {
-                        // 1. Arquitectura de Perfiles Separados
                         const userRef = doc(db, "users", user.uid);
                         const userSnap = await getDoc(userRef);
                         
                         let role = "student"; 
-                        if (userSnap.exists()) role = userSnap.data().role;
-                        else await setDoc(userRef, { email: user.email, role: role, createdAt: serverTimestamp() });
+                        let allowedRoles = ["student"];
 
-                        currentUser = { uid: user.uid, email: user.email, role: role };
+                        if (userSnap.exists()) {
+                            const data = userSnap.data();
+                            role = data.role || "student";
+                            // Si el usuario guardó su arreglo de allowedRoles en Firebase, lo usamos.
+                            if(data.allowedRoles && Array.isArray(data.allowedRoles)) {
+                                allowedRoles = data.allowedRoles;
+                            } else {
+                                allowedRoles = [role]; 
+                            }
+                        } else {
+                            await setDoc(userRef, { email: user.email, role: role, allowedRoles: [role], createdAt: serverTimestamp() });
+                        }
+
+                        // REGLA PARA EL FUNDADOR: Si detecta que eres superadmin, fuerza a que tengas los 4 roles
+                        // para que siempre te aparezca el botón de cambiar rol, aunque no hayas creado el array manual en Firebase.
+                        if (role === 'superadmin') {
+                            allowedRoles = ['superadmin', 'admin', 'teacher', 'student'];
+                        }
+
+                        window.currentUser = { uid: user.uid, email: user.email, role: role, allowedRoles: allowedRoles };
                         document.getElementById('user-display-email').textContent = user.email;
                         
-                        // Ocultar todos los menús por seguridad
-                        ['superadmin', 'admin', 'teacher', 'student'].forEach(r => {
-                            const el = document.getElementById(`menu-${r}`);
-                            if(el) el.classList.add('hidden');
-                        });
-
-                        const roleBadge = document.getElementById('user-role-badge');
-                        const btnAddClassroom = document.getElementById('btn-add-classroom');
+                        // Lógica del Dropdown de Simulación (View As)
+                        const switcherContainer = document.getElementById('role-switcher-container');
+                        const switcherSelect = document.getElementById('role-switcher');
                         
-                        // 2. Ruteo y Permisos Estrictos
-                        if (role === 'superadmin') {
-                            roleBadge.textContent = 'SuperAdmin';
-                            document.getElementById('menu-superadmin').classList.remove('hidden');
-                            btnAddClassroom.classList.add('hidden'); // SuperAdmin no crea aulas sueltas, supervisa
-                            transitionToApp('dashboard-super'); 
-                        } 
-                        else if (role === 'admin') {
-                            roleBadge.textContent = 'Admin. Inst.';
-                            document.getElementById('menu-admin').classList.remove('hidden');
-                            btnAddClassroom.classList.remove('hidden'); // Admin crea aulas institucionales
-                            transitionToApp('dashboard-admin'); 
-                        } 
-                        else if (role === 'teacher') {
-                            roleBadge.textContent = 'Profesor';
-                            document.getElementById('menu-teacher').classList.remove('hidden');
-                            btnAddClassroom.classList.remove('hidden'); // Profe independiente puede crear
-                            transitionToApp('dashboard');
-                        } 
-                        else {
-                            roleBadge.textContent = 'Estudiante';
-                            document.getElementById('menu-student').classList.remove('hidden');
-                            btnAddClassroom.classList.add('hidden'); // Estudiante nunca crea
-                            transitionToApp('student-home');
+                        if(allowedRoles.length > 1) {
+                            switcherContainer.classList.remove('hidden');
+                            switcherSelect.innerHTML = '';
+                            const roleNames = { superadmin: 'SuperAdmin', admin: 'Administrador', teacher: 'Profesor', student: 'Estudiante' };
+                            allowedRoles.forEach(r => {
+                                switcherSelect.innerHTML += `<option value="${r}" ${r===role ? 'selected' : ''} class="text-black">${roleNames[r]}</option>`;
+                            });
+                        } else {
+                            switcherContainer.classList.add('hidden');
                         }
+
+                        const initialView = applyRoleUI(role, false);
+                        transitionToApp(initialView); 
+
                     } catch(e) {
-                        showToast("Error de conexión", "error");
+                        showToast("Error leyendo datos del usuario en Firebase", "error");
                     }
                 } else {
-                    currentUser = null;
+                    window.currentUser = null;
                     document.getElementById('app-layout').classList.add('hidden', 'opacity-0');
                     document.getElementById('login-screen').classList.remove('hidden', 'opacity-0');
+                    document.getElementById('login-screen').classList.add('flex');
                 }
                 
                 if(btnText) btnText.textContent = "Ingresar a Teach";
@@ -711,117 +525,107 @@
             });
         }
 
-        document.getElementById('btn-demo-login').addEventListener('click', () => {
-            isDemoMode = true;
-            currentUser = { uid: 'demo_123', email: 'docente@teach.edu', role: 'teacher' };
-            document.getElementById('user-display-email').textContent = currentUser.email;
-            document.getElementById('menu-teacher').classList.remove('hidden');
-            document.getElementById('btn-add-classroom').classList.remove('hidden');
-            transitionToApp('dashboard');
-            showToast("Modo Demo: Profesor", "info");
-        });
-
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             document.getElementById('login-text').textContent = "Validando...";
             document.getElementById('login-spinner').classList.remove('hidden');
-            if (isDemoMode) return;
             try {
                 await signInWithEmailAndPassword(auth, document.getElementById('auth-email').value, document.getElementById('auth-password').value);
             } catch (error) {
-                showToast("Acceso denegado", "error");
+                showToast("Acceso denegado. Verifica tus credenciales.", "error");
                 document.getElementById('login-text').textContent = "Ingresar a Teach";
                 document.getElementById('login-spinner').classList.add('hidden');
             }
         });
 
-        document.getElementById('logout-btn').addEventListener('click', () => {
-            if(auth) signOut(auth);
-            if(isDemoMode) window.location.reload();
-        });
+        document.getElementById('logout-btn').addEventListener('click', () => { if(auth) signOut(auth); });
 
         window.loadClassrooms = async function() {
             const container = document.getElementById('classrooms-container');
-            const subtitle = document.getElementById('classrooms-subtitle');
-            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando espacios académicos...</div>';
+            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando datos desde Firebase...</div>';
             
-            if (isDemoMode) {
-                setTimeout(() => renderTeacherCards(demoClassrooms, container), 500);
-                return;
-            }
-            if(!db || !currentUser) return;
+            if(!db || !window.currentUser) return;
             
             try {
                 let q;
-                // Query Inteligente: El SuperAdmin descarga todo, el Profe solo lo suyo.
-                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') {
+                // Admin y SuperAdmin ven TODO el panorama
+                if (window.currentUser.role === 'superadmin' || window.currentUser.role === 'admin') {
                     q = collection(db, "classrooms");
-                    subtitle.textContent = "Vista global de aulas en el sistema.";
                 } else {
-                    q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
-                    subtitle.textContent = "Aulas donde tienes asignación docente.";
+                    // El profe solo ve sus cursos
+                    q = query(collection(db, "classrooms"), where("teacherId", "==", window.currentUser.uid));
                 }
                 
                 const querySnapshot = await getDocs(q);
                 let loadedClassrooms = [];
                 querySnapshot.forEach((doc) => loadedClassrooms.push({ id: doc.id, ...doc.data() }));
                 
-                // Renderizado Inteligente: Tabla masiva para Admin, Tarjetas enfocadas para Profe/Estudiante
-                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') {
+                if (window.currentUser.role === 'superadmin' || window.currentUser.role === 'admin') {
                     renderAdminTable(loadedClassrooms, container);
                 } else {
                     renderTeacherCards(loadedClassrooms, container);
                 }
                 
             } catch (error) {
-                container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">Error de lectura de base de datos.</div>';
+                console.error("Error Firebase:", error);
+                container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">Error de lectura o permisos de Firestore.</div>';
             }
         }
 
-        // VISTA AULAS: Tarjetas (Profesores y Estudiantes)
         function renderTeacherCards(dataArray, container) {
-            container.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-grid"></div>';
-            const grid = document.getElementById('cards-grid');
-            
-            if(dataArray.length === 0) {
-                container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes aulas asignadas en este periodo.</p></div>';
-                return;
+            if(dataArray.length === 0) { 
+                container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes aulas asignadas en este periodo.</p></div>'; 
+                return; 
             }
 
+            let html = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">';
             dataArray.forEach((data) => {
-                grid.innerHTML += `
+                // Validación para evitar undefined si algún campo viejo no existe
+                const courseName = data.course || data.name || "Curso sin nombre";
+                const nrc = data.nrc || "S/N";
+                const period = data.period || "Actual";
+                const campus = data.campus || "Virtual";
+                const capacity = data.capacity || 0;
+                const status = data.status || "Activa";
+
+                html += `
                     <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden hover:shadow-md transition">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${data.course}</h3>
-                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${data.nrc} · ${data.modality}</p>
+                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${courseName}</h3>
+                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${nrc} · ${data.modality || 'Regular'}</p>
                                 </div>
-                                <span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen text-xs px-2.5 py-1 rounded font-bold uppercase tracking-wide">${data.status || 'Activa'}</span>
+                                <span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen text-[10px] px-2.5 py-1 rounded font-bold uppercase tracking-wide">${status}</span>
                             </div>
-                            
                             <div class="space-y-2 mb-6">
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 ${data.enrolled || 0} de ${data.capacity} estudiantes</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${data.period}</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${data.campus}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 Capacidad: ${capacity} est.</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${period}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${campus}</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 border-t border-gray-100 dark:border-gray-800">
-                            <button class="py-3 text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition border-r border-gray-100 dark:border-gray-800">Ver Alumnos</button>
+                            <button class="py-3 text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition border-r border-gray-100 dark:border-gray-800">Configurar</button>
                             <button class="py-3 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">Entrar al Aula</button>
                         </div>
                     </div>
                 `;
             });
+            html += '</div>';
+            container.innerHTML = html;
         }
 
-        // VISTA AULAS: Tabla (Administradores)
         function renderAdminTable(dataArray, container) {
+            if(dataArray.length === 0) { 
+                container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No hay aulas registradas en el sistema general.</p></div>'; 
+                return; 
+            }
+
             let html = `
             <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm">
-                        <thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase">
+                        <thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase text-xs">
                             <tr>
                                 <th class="p-4">Curso / Aula</th>
                                 <th class="p-4">Periodo</th>
@@ -833,104 +637,82 @@
                         </thead>
                         <tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">
             `;
-            
-            if(dataArray.length === 0) {
-                html += '<tr><td colspan="6" class="p-8 text-center text-gray-500">No hay aulas registradas en la institución.</td></tr>';
-            } else {
-                dataArray.forEach(data => {
-                    html += `
+            dataArray.forEach(data => {
+                const courseName = data.course || data.name || "Sin Nombre";
+                const nrc = data.nrc || "S/N";
+                const period = data.period || "-";
+                const campus = data.campus || "-";
+                const capacity = data.capacity || 0;
+                const status = data.status || "Activa";
+
+                html += `
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
                             <td class="p-4">
-                                <p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p>
-                                <p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p>
+                                <p class="font-bold text-brand-deepPurple dark:text-white text-base">${courseName}</p>
+                                <p class="text-xs text-brand-lightBlue font-medium">NRC: ${nrc}</p>
                             </td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td>
-                            <td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity}</td>
-                            <td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td>
+                            <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${period}</td>
+                            <td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${campus}</span><span class="text-xs">${data.modality || 'Presencial'}</span></td>
+                            <td class="p-4 text-gray-600 dark:text-gray-300">0/${capacity}</td>
+                            <td class="p-4 text-center"><span class="text-[10px] font-bold px-2.5 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen tracking-wider">${status}</span></td>
                             <td class="p-4 text-right">
-                                <button class="text-xs font-bold text-gray-400 hover:text-brand-purple transition">Gestionar</button>
+                                <button class="text-xs font-bold text-gray-500 hover:text-brand-purple transition">Gestionar</button>
                             </td>
                         </tr>
-                    `;
-                });
-            }
+                `;
+            });
             html += `</tbody></table></div></div>`;
             container.innerHTML = html;
         }
 
-        const formClassroom = document.getElementById('form-classroom');
-        if (formClassroom) {
-            formClassroom.addEventListener('submit', async (e) => {
-                e.preventDefault(); // Detener recarga de página SIEMPRE primero
+        document.getElementById('form-classroom').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btnText = document.getElementById('txt-save-cr');
+            const spinner = document.getElementById('spin-save-cr');
+            btnText.textContent = "Activando...";
+            spinner.classList.remove('hidden');
+
+            if (!window.currentUser || window.currentUser.role === 'student') {
+                showToast("No tienes permisos suficientes para crear aulas.", "error");
+                btnText.textContent = "Activar Aula";
+                spinner.classList.add('hidden');
+                return;
+            }
+
+            try {
+                // Capturamos TODOS los datos del formulario visual
+                const newClassroom = {
+                    teacherId: window.currentUser.uid,
+                    course: document.getElementById('cr-course').value,
+                    period: document.getElementById('cr-period').value,
+                    name: document.getElementById('cr-name').value,
+                    nrc: document.getElementById('cr-nrc').value,
+                    modality: document.getElementById('cr-modality').value,
+                    startDate: document.getElementById('cr-start').value,
+                    endDate: document.getElementById('cr-end').value,
+                    campus: document.getElementById('cr-campus').value,
+                    capacity: parseInt(document.getElementById('cr-capacity').value),
+                    enrolled: 0, 
+                    status: 'Activa', 
+                    createdAt: serverTimestamp()
+                };
+
+                // Enviamos los datos reales a la colección "classrooms" de Firebase Firestore
+                await addDoc(collection(db, "classrooms"), newClassroom);
+                showToast("El aula se ha guardado en Firebase correctamente", "success");
                 
-                const btnText = document.getElementById('txt-save-cr');
-                const spinner = document.getElementById('spin-save-cr');
-                
-                try {
-                    btnText.textContent = "Activando...";
-                    spinner.classList.remove('hidden');
+                closeModal('modal-classroom');
+                document.getElementById('form-classroom').reset();
+                window.loadClassrooms(); // Recargamos para que aparezca en la UI
 
-                    // 1. Verificación de sesión de seguridad
-                    if (!currentUser && !isDemoMode) {
-                        showToast("Sesión expirada. Por favor, inicia sesión nuevamente.", "error");
-                        return;
-                    }
-
-                    // 2. Verificación de permisos por ROL (El estudiante NUNCA crea aulas)
-                    if (currentUser && currentUser.role === 'student') {
-                        showToast("No tienes permisos suficientes para realizar esta acción.", "error");
-                        return;
-                    }
-
-                    const newClassroom = {
-                        teacherId: currentUser ? currentUser.uid : "demo_docente",
-                        course: document.getElementById('cr-course').value,
-                        name: document.getElementById('cr-name').value,
-                        nrc: document.getElementById('cr-nrc').value,
-                        period: document.getElementById('cr-period').value,
-                        startDate: document.getElementById('cr-start').value,
-                        endDate: document.getElementById('cr-end').value,
-                        modality: document.getElementById('cr-modality').value,
-                        campus: document.getElementById('cr-campus').value,
-                        capacity: parseInt(document.getElementById('cr-capacity').value),
-                        enrolled: 0,
-                        status: 'Activa'
-                    };
-
-                    if (isDemoMode) {
-                        setTimeout(() => {
-                            newClassroom.id = 'demo_' + Date.now();
-                            demoClassrooms.push(newClassroom);
-                            showToast("Aula creada en entorno de pruebas", "success");
-                            closeModal('modal-classroom');
-                            formClassroom.reset();
-                            if(typeof window.loadClassrooms === 'function') window.loadClassrooms();
-                            btnText.textContent = "Activar Aula";
-                            spinner.classList.add('hidden');
-                        }, 800);
-                        return;
-                    }
-
-                    // Guardado Real en la Base de Datos
-                    newClassroom.createdAt = serverTimestamp();
-                    await addDoc(collection(db, "classrooms"), newClassroom);
-                    
-                    showToast("El aula se ha activado correctamente", "success");
-                    closeModal('modal-classroom');
-                    formClassroom.reset();
-                    if(typeof window.loadClassrooms === 'function') window.loadClassrooms();
-
-                } catch (error) {
-                    console.error(error);
-                    showToast("Ocurrió un error al guardar o no tienes permisos.", "error");
-                } finally {
-                    // Siempre restaurar el botón, haya error o no
-                    btnText.textContent = "Activar Aula";
-                    spinner.classList.add('hidden');
-                }
-            });
-        }
+            } catch (error) {
+                console.error("Firebase Error en Guardado: ", error);
+                showToast("Error guardando en Base de Datos. Revisa la consola.", "error");
+            } finally {
+                btnText.textContent = "Activar Aula";
+                spinner.classList.add('hidden');
+            }
+        });
 
     </script>
 </body>
