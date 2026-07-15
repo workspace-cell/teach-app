@@ -8,7 +8,7 @@
     <!-- Tipografía Oficial: Overlock -->
     <link href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- FIX: Explicitly loading Tailwind v3 to support the tailwind.config script block -->
+    <!-- Cargamos Tailwind v3 para soportar la configuración personalizada -->
     <script src="https://cdn.tailwindcss.com/3.4.5"></script>
     <script>
         tailwind.config = {
@@ -83,7 +83,6 @@
                         <span id="login-text">Ingresar a Teach</span>
                         <svg id="login-spinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
-                    <!-- Botón de emergencia para entrar sin DB (Solo pruebas) -->
                     <button type="button" id="btn-demo-login" class="w-full mt-3 bg-brand-lightBlue text-white rounded py-2 font-bold hover:bg-[#3b8dbd] transition flex justify-center items-center shadow-md">
                         Ingresar en Modo Demo
                     </button>
@@ -94,30 +93,31 @@
 
     <!-- APLICACIÓN PRINCIPAL (Dashboard) -->
     <div id="app-layout" class="min-h-screen hidden flex-col md:flex-row transition-opacity duration-300 opacity-0">
-        <!-- Sidebar Docente -->
-        <aside class="w-full md:w-64 bg-brand-purple dark:bg-[#090D14] border-r border-brand-deepPurple/50 dark:border-gray-800 text-white dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
+        <!-- Sidebar Docente: Morado (#593079) en Claro, Morado Profundo (#321A44) en Oscuro -->
+        <aside class="w-full md:w-64 bg-brand-purple dark:bg-brand-deepPurple border-r border-brand-deepPurple/50 dark:border-gray-800 text-white dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
             <div class="flex items-center gap-2 mb-10 justify-center md:justify-start h-12">
                 <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
             </div>
             
             <nav class="flex-1 space-y-2">
-                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Inicio</button>
-                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Aulas</button>
-                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Contenidos</button>
-                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Team</button>
+                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Inicio</button>
+                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Aulas</button>
+                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Contenidos</button>
+                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white">Team</button>
             </nav>
             
-            <div class="mt-8 pt-4 border-t border-white/20 dark:border-gray-800">
+            <div class="mt-8 pt-4 border-t border-white/20 dark:border-white/10">
                 <div class="mb-4">
                     <p id="user-display-email" class="text-xs text-white/70 dark:text-gray-400 truncate">usuario@correo.com</p>
                     <span class="text-[10px] bg-white/20 text-white dark:bg-brand-lightBlue/20 dark:text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase">Docente</span>
                 </div>
-                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-200 dark:text-red-400 font-bold rounded hover:bg-white/20 dark:hover:bg-red-500/30 transition">
+                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-200 dark:text-red-400 font-bold rounded hover:bg-white/20 dark:hover:bg-red-500/20 transition">
                     Cerrar Sesión
                 </button>
             </div>
         </aside>
 
+        <!-- Área de Contenido Principal -->
         <main class="flex-1 p-6 md:p-8 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
             
             <!-- VISTA: DASHBOARD -->
@@ -190,7 +190,6 @@
                 </header>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Tarjeta de Curso: Física 1 -->
                     <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border-t-4 border-t-brand-purple overflow-hidden cursor-pointer hover:shadow-md transition" onclick="navigate('fasttest-demo')">
                         <div class="p-6">
                             <p class="text-xs font-bold text-brand-lightBlue mb-1">FIS101</p>
@@ -381,17 +380,19 @@
     </div>
 
     <script>
-        const logoLight = 'Logo_Teach7_2.png';
-        const logoDark = 'Logo_Teach6_2.png';
+        const logoColor = 'Logo_Teach6_2.png';
+        const logoWhite = 'Logo_Teach7_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
             
+            // Login alterna
             const loginLogo = document.getElementById('login-logo');
-            if (loginLogo) loginLogo.src = isDark ? logoLight : logoDark;
+            if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
 
+            // Sidebar SIEMPRE usa logo blanco
             const sidebarLogo = document.getElementById('sidebar-logo');
-            if (sidebarLogo) sidebarLogo.src = logoLight; // Always light in the sidebar
+            if (sidebarLogo) sidebarLogo.src = logoWhite;
         }
 
         function toggleTheme() {
@@ -420,21 +421,17 @@
         }
 
         function navigate(viewId) {
-            // Ocultar todas las vistas
             document.querySelectorAll('.app-view').forEach(el => el.classList.add('hidden'));
-            // Mostrar la seleccionada
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             
-            // Limpiar estilos de todos los botones del menú
             document.querySelectorAll('nav button').forEach(btn => {
-                btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white";
+                btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-white";
             });
             
-            // Aplicar estilo resaltado al botón activo
             const activeBtn = document.getElementById(`nav-${viewId}`);
             if(activeBtn) {
-                // Modo Claro: Fondo blanco transparente / Modo Oscuro: Texto y borde celeste
-                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/50";
+                // Estilo botón activo en menú lateral
+                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-brand-lightBlue/20 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/50";
             }
 
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') {
@@ -475,14 +472,14 @@
         // ⚠️⚠️⚠️ ¡PEGA AQUÍ TU firebaseConfig! ⚠️⚠️⚠️
         // ==========================================
         const firebaseConfig = {
-            apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
-            authDomain: "teach-edu-5a501.firebaseapp.com",
-            projectId: "teach-edu-5a501",
-            storageBucket: "teach-edu-5a501.firebasestorage.app",
-            messagingSenderId: "727356627173",
-            appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
-            measurementId: "G-6PW6GR36CR"
-        };
+  apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
+  authDomain: "teach-edu-5a501.firebaseapp.com",
+  projectId: "teach-edu-5a501",
+  storageBucket: "teach-edu-5a501.firebasestorage.app",
+  messagingSenderId: "727356627173",
+  appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
+  measurementId: "G-6PW6GR36CR"
+};
         let app, auth, db;
         let currentUser = null;
         let isDemoMode = false;
@@ -492,7 +489,6 @@
             { id: '1', name: 'Física 1 - Grupo A', nrc: '41473', modality: 'Presencial', campus: 'Huancayo', capacity: 39, status: 'active' }
         ];
 
-        // Función para cambiar pantallas visualmente
         function showDashboard() {
             const loginScreen = document.getElementById('login-screen');
             const appLayout = document.getElementById('app-layout');
@@ -525,7 +521,6 @@
             }, 300);
         }
 
-        // Si no cambias la API Key, el sistema no intentará conectarse a Firebase para no dar error
         if (firebaseConfig.apiKey === "TU_API_KEY_AQUI") {
             console.warn("Falta configurar Firebase. Usando Modo Demo automáticamente.");
             isDemoMode = true;
@@ -540,7 +535,6 @@
             }
         }
 
-        // Botón Demo (Entrar sin clave)
         document.getElementById('btn-demo-login').addEventListener('click', () => {
             isDemoMode = true;
             currentUser = { uid: 'demo_123', email: 'docente.demo@teach.edu' };
@@ -549,7 +543,6 @@
             showDashboard();
         });
 
-        // Formulario Real de Login
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -576,7 +569,6 @@
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 showToast("Bienvenido", "success");
-                // El onAuthStateChanged se encargará de cambiar la pantalla
             } catch (error) {
                 showToast("Correo o contraseña incorrectos", "error");
                 btnText.textContent = "Ingresar a Teach";
@@ -593,7 +585,6 @@
             }
         });
 
-        // Escuchador de sesión de Firebase
         if(auth) {
             onAuthStateChanged(auth, (user) => {
                 const btnText = document.getElementById('login-text');
@@ -625,7 +616,6 @@
             if(!db || !currentUser) return;
             
             try {
-                // Consultar a Firestore las aulas del profesor logueado
                 const q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
                 const querySnapshot = await getDocs(q);
                 let loadedClassrooms = [];
@@ -665,7 +655,6 @@
             document.getElementById('metric-aulas').textContent = count;
         }
 
-        // Crear Aula Nueva
         document.getElementById('form-classroom').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btnText = document.getElementById('txt-save-cr');
@@ -698,13 +687,12 @@
             }
 
             try {
-                // Guardar en Firestore Real
                 newClassroom.createdAt = serverTimestamp();
                 await addDoc(collection(db, "classrooms"), newClassroom);
                 showToast("Aula creada exitosamente", "success");
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                window.loadClassrooms(); // Recargar tabla
+                window.loadClassrooms(); 
             } catch (error) {
                 console.error("Error:", error);
                 showToast("Error al guardar en la nube", "error");
@@ -714,7 +702,6 @@
             }
         });
 
-        // Eliminar Aula
         let classroomToDelete = null;
         window.deleteClassroom = function(id) {
             classroomToDelete = id;
@@ -733,7 +720,6 @@
             }
             
             try {
-                // Borrar de Firestore Real
                 await deleteDoc(doc(db, "classrooms", classroomToDelete));
                 showToast("Aula eliminada", "success");
                 closeModal('modal-confirm');
@@ -743,7 +729,6 @@
             }
         });
 
-        // Envío de Team a Firebase
         const teamForm = document.getElementById('form-team');
         if(teamForm) {
             teamForm.addEventListener('submit', async (e) => {
@@ -777,7 +762,6 @@
             });
         }
 
-        // Envío de Fast Test a Firebase
         window.submitFastTest = async function() {
             if(isDemoMode) {
                 showToast("Test Finalizado (Demo)", "success");
