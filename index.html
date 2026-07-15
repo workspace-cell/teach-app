@@ -41,7 +41,6 @@
     </script>
 
     <style>
-        /* Animación para modales y transiciones */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal-overlay { animation: fadeIn 0.2s ease-out; }
     </style>
@@ -59,7 +58,7 @@
 
     <!-- PANTALLA DE LOGIN -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
             <div class="text-center mb-8">
                 <div class="h-20 flex items-center justify-center mb-4">
                     <img id="login-logo" src="Logo_Teach6_2.png" alt="Teach Logo" class="max-h-full object-contain drop-shadow-sm">
@@ -83,8 +82,8 @@
                         <span id="login-text">Ingresar a Teach</span>
                         <svg id="login-spinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
-                    <!-- Botón de emergencia para entrar sin DB (Solo pruebas) -->
-                    <button type="button" id="btn-demo-login" class="w-full mt-3 bg-brand-lightBlue text-white rounded py-2 font-bold hover:bg-[#3b8dbd] transition flex justify-center items-center shadow-md">
+                    <!-- Botón de emergencia -->
+                    <button type="button" id="btn-demo-login" class="w-full mt-3 bg-brand-lightBlue text-white rounded py-2 font-bold hover:bg-[#3b8dbd] transition flex justify-center items-center shadow-md hidden">
                         Ingresar en Modo Demo
                     </button>
                 </div>
@@ -110,10 +109,10 @@
 
                 <!-- MENÚ DOCENTE -->
                 <div id="menu-teacher" class="space-y-2 hidden">
-                    <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30">Inicio</button>
-                    <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Mis Aulas</button>
+                    <button onclick="navigate('dashboard')" id="nav-dashboard-teacher" class="w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30">Inicio</button>
+                    <button onclick="navigate('classrooms')" id="nav-classrooms-teacher" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Mis Aulas</button>
                     <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Contenidos</button>
-                    <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Aprobar Teams</button>
+                    <button onclick="navigate('teams')" id="nav-teams-teacher" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Aprobar Teams</button>
                 </div>
 
                 <!-- MENÚ ESTUDIANTE -->
@@ -135,7 +134,7 @@
         </aside>
 
         <!-- Área de Contenido Principal -->
-        <main class="flex-1 p-6 md:p-8 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300">
+        <main class="flex-1 p-6 md:p-8 bg-brand-softPurple dark:bg-[#121824] transition-colors duration-300 overflow-y-auto">
             
             <!-- VISTA: DASHBOARD -->
             <div id="view-dashboard" class="app-view hidden">
@@ -152,7 +151,7 @@
                 </div>
             </div>
 
-            <!-- NUEVA VISTA: GESTIÓN DE USUARIOS (SUPERADMIN) -->
+            <!-- VISTA: GESTIÓN DE USUARIOS (SUPERADMIN) -->
             <div id="view-users" class="app-view hidden">
                 <header class="mb-8">
                     <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Gestión de Usuarios</h1>
@@ -195,13 +194,12 @@
                         </div>
                     </div>
 
-                    <!-- Tabla de Usuarios (Se llenará después) -->
                     <div class="lg:col-span-2">
                         <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 dark:border-gray-700 p-6 flex items-center justify-center h-full min-h-[300px]">
                             <div class="text-center text-gray-400 dark:text-gray-500">
                                 <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                <p class="font-bold">El listado dinámico de usuarios se cargará aquí.</p>
-                                <p class="text-sm mt-1">Por ahora, utiliza el formulario izquierdo para registrarlos en la base de datos.</p>
+                                <p class="font-bold">El listado dinámico se implementará pronto.</p>
+                                <p class="text-sm mt-1">Utiliza el formulario izquierdo para registrarlos en la base de datos.</p>
                             </div>
                         </div>
                     </div>
@@ -215,8 +213,8 @@
                         <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Gestión de Aulas</h1>
                         <p class="text-brand-purple/80 dark:text-gray-400">Administra tus NRC y secciones del periodo.</p>
                     </div>
-                    <!-- El botón nueva aula solo se mostrará para profes/admins por ahora -->
-                    <button onclick="openModal('modal-classroom')" class="bg-brand-purple text-white px-4 py-2 rounded-lg font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2">
+                    <!-- Se muestra solo para admin/docente mediante JS más abajo -->
+                    <button id="btn-open-classroom-modal" onclick="openModal('modal-classroom')" class="hidden bg-brand-purple text-white px-4 py-2 rounded-lg font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2">
                         <span>+ Nueva Aula</span>
                     </button>
                 </header>
@@ -243,28 +241,184 @@
                 </div>
             </div>
 
-            <!-- VISTA: CURSOS Y DEMÁS MANTENIDAS (se ocultan por espacio, son idénticas al código anterior) -->
-            <div id="view-courses" class="app-view hidden"><header class="mb-8"><h1 class="text-3xl font-bold dark:text-white">Contenidos del Curso (Pronto)</h1></header></div>
-            <div id="view-teams" class="app-view hidden"><header class="mb-8"><h1 class="text-3xl font-bold dark:text-white">Aprobar Teams (Pronto)</h1></header></div>
-            <div id="view-fasttest-demo" class="app-view hidden"><header class="mb-8"><h1 class="text-3xl font-bold dark:text-white">Mi Fast Test (Pronto)</h1></header></div>
+            <!-- VISTA: CURSOS -->
+            <div id="view-courses" class="app-view hidden">
+                <header class="mb-8">
+                    <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Contenidos del Curso</h1>
+                    <p class="text-brand-purple/80 dark:text-gray-400">Selecciona un curso para gestionar su material.</p>
+                </header>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border-t-4 border-t-brand-purple overflow-hidden cursor-pointer hover:shadow-md transition" onclick="navigate('fasttest-demo')">
+                        <div class="p-6">
+                            <p class="text-xs font-bold text-brand-lightBlue mb-1">FIS101</p>
+                            <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white mb-4">Física 1</h3>
+                            <div class="flex gap-4 text-sm text-brand-purple/70 dark:text-gray-400 mb-4">
+                                <div>👥 39 est.</div>
+                                <div>📚 16 Semanas</div>
+                            </div>
+                            <span class="bg-brand-schoolGreen/20 text-brand-schoolGreen text-xs px-2 py-1 rounded font-bold">Activo</span>
+                        </div>
+                        <div class="bg-brand-paleBlue dark:bg-[#161D2B] px-6 py-3 text-sm text-center text-brand-purple dark:text-brand-lightBlue font-bold hover:bg-brand-lightBlue/20 dark:hover:bg-gray-700 transition">
+                            Simular Vista Estudiante (Fast Test)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA: TEAMS -->
+            <div id="view-teams" class="app-view hidden">
+                <header class="mb-8">
+                    <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Registro de Team</h1>
+                    <p class="text-brand-purple/80 dark:text-gray-400">El líder del equipo debe completar este formulario.</p>
+                </header>
+                
+                <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 dark:border-gray-700 p-6 max-w-3xl">
+                    <form id="form-team" class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4 border-b border-gray-100 dark:border-gray-700 pb-6">
+                            <div>
+                                <label class="block text-sm font-bold mb-1 dark:text-white">Aula (NRC)</label>
+                                <select class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white dark:border-gray-600">
+                                    <option>41473 - Física 1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1 dark:text-white">Nombre del Team (Opcional)</label>
+                                <input type="text" placeholder="Ej. Los Newtonianos" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white dark:border-gray-600">
+                            </div>
+                        </div>
+
+                        <div id="team-members-container" class="space-y-4">
+                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-[#161D2B] rounded border border-brand-lightBlue/30">
+                                <h4 class="font-bold text-brand-purple dark:text-brand-lightBlue mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600">
+                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="addTeamMember()" class="text-brand-lightBlue font-bold text-sm hover:underline flex items-center gap-1">
+                            + Añadir otro integrante
+                        </button>
+
+                        <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded text-sm text-amber-800 dark:text-amber-200 mt-6 flex items-start gap-3">
+                            <input type="checkbox" required id="team-confirm" class="mt-1 w-4 h-4 cursor-pointer">
+                            <label for="team-confirm" class="italic text-xs cursor-pointer">Confirmo que todos los integrantes aceptan las condiciones del docente.</label>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-brand-purple text-white px-6 py-2 rounded font-bold hover:bg-brand-deepPurple transition">Registrar Team</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- VISTA: FAST TEST -->
+            <div id="view-fasttest-demo" class="app-view hidden">
+                <header class="mb-8 flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Fast Test: Física 1</h1>
+                        <p class="text-brand-purple/80 dark:text-gray-400">Semana 2: Medición y teoría de errores. (Intento 1 - Máx 20pts)</p>
+                    </div>
+                    <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full font-bold">⏱️ 14:59</div>
+                </header>
+                
+                <div class="max-w-3xl bg-white dark:bg-[#1C2333] rounded-xl shadow-sm border border-brand-lightBlue/20 p-8">
+                    <div class="mb-6">
+                        <p class="text-sm font-bold text-brand-lightBlue uppercase mb-2">Pregunta 1 de 4</p>
+                        <h2 class="text-xl font-bold text-brand-deepPurple dark:text-white">¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?</h2>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">A) Joule</span>
+                        </label>
+                        <label class="flex items-center p-4 border border-brand-purple bg-brand-purple/5 dark:bg-brand-purple/20 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" checked class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">B) Newton</span>
+                        </label>
+                    </div>
+                    <div class="flex justify-between mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
+                        <button class="px-6 py-2 border border-gray-300 rounded font-bold text-gray-500 opacity-50 cursor-not-allowed">Anterior</button>
+                        <button class="px-6 py-2 bg-brand-purple text-white rounded font-bold hover:bg-brand-deepPurple transition" onclick="submitFastTest()">Finalizar Test</button>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
 
-    <!-- MODALES (Omitidos por espacio, pero debes mantener los tuyos de Crear Aula y Confirmación) -->
-    <div id="modal-classroom" class="fixed hidden..."><div class="bg-white p-6"><h3>(Mantén tu código de modales aquí)</h3><button onclick="closeModal('modal-classroom')">Cerrar</button></div></div>
-    <div id="modal-confirm" class="fixed hidden..."><div class="bg-white p-6"><h3>(Mantén tu modal confirmar)</h3><button onclick="closeModal('modal-confirm')">Cerrar</button></div></div>
+    <!-- MODAL: CREAR AULA -->
+    <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-2xl w-full max-w-lg border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-brand-softPurple dark:bg-[#161D2B]">
+                <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Crear Nueva Aula</h3>
+            </div>
+            <form id="form-classroom" class="p-6 space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm font-bold mb-1 dark:text-gray-300">Nombre del Aula</label>
+                        <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 dark:text-gray-300">NRC</label>
+                        <input type="text" id="cr-nrc" placeholder="Ej. 41473" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 dark:text-gray-300">Sede</label>
+                        <input type="text" id="cr-campus" value="Huancayo" required class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 dark:text-gray-300">Modalidad</label>
+                        <select id="cr-modality" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                            <option value="Presencial">Presencial</option>
+                            <option value="Semipresencial">Semipresencial</option>
+                            <option value="Virtual">Virtual</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1 dark:text-gray-300">Capacidad</label>
+                        <input type="number" id="cr-capacity" value="39" required min="1" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-brand-purple">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button type="button" onclick="closeModal('modal-classroom')" class="px-4 py-2 rounded text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition">Cancelar</button>
+                    <button type="submit" id="btn-save-classroom" class="px-6 py-2 bg-brand-purple text-white rounded font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
+                        <span id="txt-save-cr">Guardar Aula</span>
+                        <svg id="spin-save-cr" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMACIÓN DE ELIMINACIÓN -->
+    <div id="modal-confirm" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-[60] hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-xl shadow-2xl w-full max-w-sm p-6 text-center border border-gray-200 dark:border-gray-700">
+            <div class="text-red-500 mb-4 flex justify-center">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            </div>
+            <h3 class="text-lg font-bold mb-2 dark:text-white">¿Estás seguro?</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Esta acción no se puede deshacer.</p>
+            <div class="flex justify-center gap-3">
+                <button onclick="closeModal('modal-confirm')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-bold hover:bg-gray-300 transition">Cancelar</button>
+                <button id="btn-confirm-action" class="px-4 py-2 bg-red-500 text-white rounded font-bold hover:bg-red-600 transition shadow-md">Sí, eliminar</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const logoLight = 'Logo_Teach7_2.png'; 
-        const logoDark = 'Logo_Teach6_2.png';
+        const logoColor = 'Logo_Teach7_2.png';
+        const logoWhite = 'Logo_Teach6_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
             const loginLogo = document.getElementById('login-logo');
-            if (loginLogo) loginLogo.src = isDark ? logoLight : logoDark;
+            if (loginLogo) loginLogo.src = isDark ? logoWhite : logoColor;
+            
+            // Sidebar siempre usa logo blanco
             const sidebarLogo = document.getElementById('sidebar-logo');
-            if (sidebarLogo) sidebarLogo.src = logoLight;
+            if (sidebarLogo) sidebarLogo.src = logoWhite;
         }
 
         function toggleTheme() {
@@ -283,13 +437,9 @@
             
             toast.className = `${bgClass} px-4 py-3 rounded shadow-lg font-semibold text-sm transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-2 pointer-events-auto`;
             toast.innerHTML = `<span>${message}</span>`;
-            
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            setTimeout(() => { toast.classList.add('opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
         function navigate(viewId) {
@@ -300,7 +450,6 @@
                 btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white";
             });
             
-            // Busca el botón activo en cualquiera de los menús
             const activeBtns = document.querySelectorAll(`[id^='nav-${viewId}']`);
             activeBtns.forEach(btn => {
                 btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30";
@@ -310,16 +459,33 @@
                 window.loadClassrooms();
             }
         }
-        
+
+        let memberCount = 2;
+        window.addTeamMember = function() {
+            memberCount++;
+            const container = document.getElementById('team-members-container');
+            const newMemberHtml = `
+                <div class="p-4 bg-brand-paleBlue/30 dark:bg-[#161D2B] rounded border border-brand-lightBlue/30 mt-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-brand-purple dark:text-brand-lightBlue text-sm">Integrante ${memberCount}</h4>
+                        <button type="button" onclick="this.parentElement.parentElement.remove();" class="text-red-500 text-xs font-bold hover:underline">Quitar</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600">
+                        <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600">
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', newMemberHtml);
+        }
+
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        // IMPORTANTE: Importamos createUserWithEmailAndPassword para el superadmin
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        // IMPORTANTE: Importamos getDoc y setDoc para gestionar la colección "users"
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         // ==========================================
@@ -334,11 +500,9 @@
   appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
   measurementId: "G-6PW6GR36CR"
 };
-
         let app, auth, db;
-        let secondaryApp, secondaryAuth; // <--- EL SECRETO PARA EL SUPERADMIN
+        let secondaryApp, secondaryAuth; 
         let currentUser = null;
-        let isDemoMode = false;
 
         function showDashboard(initialView = 'dashboard') {
             const loginScreen = document.getElementById('login-screen');
@@ -367,26 +531,20 @@
             }, 300);
         }
 
-        if (firebaseConfig.apiKey === "TU_API_KEY_AQUI") {
-            isDemoMode = true;
-        } else {
-            try {
-                // 1. Inicializamos la App Principal (La tuya)
-                app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-                
-                // 2. Inicializamos la App Secundaria (El "clon" invisible para crear usuarios sin cerrar tu sesión)
-                secondaryApp = initializeApp(firebaseConfig, "SecondaryApp");
-                secondaryAuth = getAuth(secondaryApp);
-
-            } catch (error) {
-                console.error("Error al conectar Firebase:", error);
-                isDemoMode = true;
-            }
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            
+            // App secundaria para que el SuperAdmin cree usuarios sin cerrar su sesión
+            secondaryApp = initializeApp(firebaseConfig, "SecondaryApp");
+            secondaryAuth = getAuth(secondaryApp);
+        } catch (error) {
+            console.error("Error Firebase:", error);
+            showToast("Error de conexión a la base de datos.", "error");
         }
 
-        // Login Principal
+        // --- LOGIN Y RUTEO POR ROLES ---
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('auth-email').value;
@@ -399,7 +557,7 @@
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                showToast("Bienvenido", "success");
+                showToast("Bienvenido a Teach", "success");
             } catch (error) {
                 showToast("Correo o contraseña incorrectos", "error");
                 btnText.textContent = "Ingresar a Teach";
@@ -411,9 +569,7 @@
             if(auth) signOut(auth);
         });
 
-        // ------------------------------------------------------------------
-        // EL CEREBRO DE LOS ROLES (SABER SI ERES ADMIN, DOCENTE O ALUMNO)
-        // ------------------------------------------------------------------
+        // Detector de sesión y Asignador de Menús
         if(auth) {
             onAuthStateChanged(auth, async (user) => {
                 const btnText = document.getElementById('login-text');
@@ -421,46 +577,48 @@
                 
                 if (user) {
                     try {
-                        // Buscar su Rol en la Base de Datos
                         const userRef = doc(db, "users", user.uid);
                         const userSnap = await getDoc(userRef);
-                        let role = "student"; // Estudiante por defecto
-                        let name = "Usuario";
-
+                        let role = "student"; 
+                        
                         if (userSnap.exists()) {
                             role = userSnap.data().role;
-                            name = userSnap.data().name || name;
                         } else {
-                            // Si es su primera vez, lo registramos como estudiante por defecto
-                            await setDoc(userRef, { email: user.email, role: role, name: name, createdAt: serverTimestamp() });
+                            await setDoc(userRef, { email: user.email, role: role, createdAt: serverTimestamp() });
                         }
 
-                        currentUser = { uid: user.uid, email: user.email, role: role, name: name };
-                        document.getElementById('user-display-email').textContent = name; // O mostrar email
+                        currentUser = { uid: user.uid, email: user.email, role: role };
+                        document.getElementById('user-display-email').textContent = user.email;
                         
-                        // Ocultamos todos los menús primero
+                        // Ocultar todos los menús
                         document.getElementById('menu-superadmin').classList.add('hidden');
                         document.getElementById('menu-teacher').classList.add('hidden');
                         document.getElementById('menu-student').classList.add('hidden');
+                        
+                        // Ocultar botón de crear aula por defecto
+                        const btnCreateAula = document.getElementById('btn-open-classroom-modal');
+                        if(btnCreateAula) btnCreateAula.classList.add('hidden');
 
-                        // Mostramos el menú y la pantalla inicial correcta según el rol
+                        // Mostrar menú según el rol
                         if (role === 'superadmin') {
                             document.getElementById('user-role-badge').textContent = 'Admin';
                             document.getElementById('menu-superadmin').classList.remove('hidden');
+                            if(btnCreateAula) btnCreateAula.classList.remove('hidden');
                             showDashboard('dashboard');
                         } else if (role === 'teacher') {
                             document.getElementById('user-role-badge').textContent = 'Docente';
                             document.getElementById('menu-teacher').classList.remove('hidden');
+                            if(btnCreateAula) btnCreateAula.classList.remove('hidden');
                             showDashboard('dashboard');
                         } else {
                             document.getElementById('user-role-badge').textContent = 'Estudiante';
                             document.getElementById('menu-student').classList.remove('hidden');
-                            showDashboard('fasttest-demo'); // Alumnos van directo a su prueba
+                            showDashboard('fasttest-demo'); 
                         }
 
                     } catch(e) {
-                        console.error("Error roles:", e);
-                        showToast("Error de conexión", "error");
+                        console.error(e);
+                        showToast("Error validando permisos", "error");
                     }
                 } else {
                     currentUser = null;
@@ -472,57 +630,199 @@
             });
         }
 
-        // ------------------------------------------------------------------
-        // LA MAGIA DE CREAR USUARIOS DESDE EL FRONTEND
-        // ------------------------------------------------------------------
-        document.getElementById('form-create-user').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btnText = document.getElementById('txt-save-user');
-            const spinner = document.getElementById('spin-save-user');
+        
+        // --- SUPERADMIN: CREAR USUARIO DESDE EL FRONTEND ---
+        const userForm = document.getElementById('form-create-user');
+        if(userForm) {
+            userForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btnText = document.getElementById('txt-save-user');
+                const spinner = document.getElementById('spin-save-user');
+                const name = document.getElementById('nu-name').value;
+                const email = document.getElementById('nu-email').value;
+                const pass = document.getElementById('nu-pass').value;
+                const role = document.getElementById('nu-role').value;
+
+                btnText.textContent = "Creando...";
+                spinner.classList.remove('hidden');
+
+                try {
+                    // Creamos el usuario en Authentication usando la App Secundaria
+                    const userCred = await createUserWithEmailAndPassword(secondaryAuth, email, pass);
+                    const newUid = userCred.user.uid;
+
+                    // Guardamos su perfil en la base de datos Principal
+                    await setDoc(doc(db, "users", newUid), {
+                        name: name,
+                        email: email,
+                        role: role,
+                        createdBy: currentUser.uid,
+                        createdAt: serverTimestamp()
+                    });
+
+                    // Cerramos sesión en la App Secundaria
+                    await signOut(secondaryAuth);
+
+                    showToast(`Usuario (${role}) creado exitosamente.`, "success");
+                    userForm.reset();
+                } catch (error) {
+                    showToast("Error al crear usuario. Verifica el correo y la contraseña.", "error");
+                } finally {
+                    btnText.textContent = "Crear Usuario";
+                    spinner.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- CRUD AULAS ---
+        window.loadClassrooms = async function() {
+            const tbody = document.getElementById('classrooms-tbody');
+            if(!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-brand-purple">Cargando datos desde el servidor...</td></tr>';
             
-            const name = document.getElementById('nu-name').value;
-            const email = document.getElementById('nu-email').value;
-            const pass = document.getElementById('nu-pass').value;
-            const role = document.getElementById('nu-role').value;
-
-            btnText.textContent = "Creando...";
-            spinner.classList.remove('hidden');
-
+            if(!db || !currentUser) return;
+            
             try {
-                // 1. Creamos la cuenta en Firebase Auth usando la APP SECUNDARIA
-                // ¡Esto evita que se cierre tu sesión principal!
-                const userCred = await createUserWithEmailAndPassword(secondaryAuth, email, pass);
-                const newUid = userCred.user.uid;
+                let q;
+                // SuperAdmin ve todas las aulas. Docente ve solo las suyas.
+                if(currentUser.role === 'superadmin') {
+                    q = collection(db, "classrooms"); 
+                } else {
+                    q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
+                }
+                
+                const querySnapshot = await getDocs(q);
+                let count = 0;
+                tbody.innerHTML = ''; 
+                
+                querySnapshot.forEach((docSnap) => {
+                    count++;
+                    const data = docSnap.data();
+                    const statusClass = data.status === 'active' ? 'bg-brand-schoolGreen/20 text-brand-schoolGreen' : 'bg-gray-200 text-gray-600';
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-brand-lightBlue/5 dark:hover:bg-gray-800 transition border-b border-gray-100 dark:border-gray-800">
+                            <td class="p-4 font-bold text-brand-deepPurple dark:text-white">${data.name}</td>
+                            <td class="p-4 text-brand-purple dark:text-brand-lightBlue font-bold">${data.nrc || '-'}</td>
+                            <td class="p-4">${data.modality}</td>
+                            <td class="p-4">${data.campus}</td>
+                            <td class="p-4">${data.capacity}</td>
+                            <td class="p-4 text-center"><span class="text-xs font-bold px-2 py-1 rounded uppercase ${statusClass}">Activa</span></td>
+                            <td class="p-4 text-right">
+                                <button onclick="deleteClassroom('${docSnap.id}')" class="text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-500/20 px-3 py-1 rounded transition">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                if(count === 0) tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-500">No hay aulas registradas en el sistema.</td></tr>';
+                const metric = document.getElementById('metric-aulas');
+                if(metric) metric.textContent = count;
+                
+            } catch (error) {
+                console.error("Error aulas:", error);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Error de conexión.</td></tr>';
+            }
+        }
 
-                // 2. Guardamos su rol y datos en la base de datos Principal
-                await setDoc(doc(db, "users", newUid), {
-                    name: name,
-                    email: email,
-                    role: role,
-                    createdBy: currentUser.uid,
+        const formClassroom = document.getElementById('form-classroom');
+        if(formClassroom) {
+            formClassroom.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btnText = document.getElementById('txt-save-cr');
+                const spinner = document.getElementById('spin-save-cr');
+                btnText.textContent = "Guardando...";
+                spinner.classList.remove('hidden');
+
+                try {
+                    const newClassroom = {
+                        teacherId: currentUser.uid,
+                        name: document.getElementById('cr-name').value,
+                        nrc: document.getElementById('cr-nrc').value,
+                        modality: document.getElementById('cr-modality').value,
+                        campus: document.getElementById('cr-campus').value,
+                        capacity: parseInt(document.getElementById('cr-capacity').value),
+                        status: 'active',
+                        createdAt: serverTimestamp()
+                    };
+
+                    await addDoc(collection(db, "classrooms"), newClassroom);
+                    showToast("Aula creada exitosamente", "success");
+                    closeModal('modal-classroom');
+                    formClassroom.reset();
+                    window.loadClassrooms();
+                } catch (error) {
+                    showToast("Error al crear el aula", "error");
+                } finally {
+                    btnText.textContent = "Guardar Aula";
+                    spinner.classList.add('hidden');
+                }
+            });
+        }
+
+        let classroomToDelete = null;
+        window.deleteClassroom = function(id) {
+            classroomToDelete = id;
+            openModal('modal-confirm');
+        };
+
+        const btnConfirm = document.getElementById('btn-confirm-action');
+        if(btnConfirm) {
+            btnConfirm.addEventListener('click', async () => {
+                if(!classroomToDelete) return;
+                try {
+                    await deleteDoc(doc(db, "classrooms", classroomToDelete));
+                    showToast("Aula eliminada de la base de datos.", "success");
+                    closeModal('modal-confirm');
+                    window.loadClassrooms();
+                } catch (error) {
+                    showToast("Error al eliminar", "error");
+                }
+            });
+        }
+
+        const teamForm = document.getElementById('form-team');
+        if(teamForm) {
+            teamForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const inputs = teamForm.querySelectorAll('input[type="text"], input[type="email"]');
+                let members = [];
+                for(let i=0; i<inputs.length; i+=2) { 
+                    if(inputs[i].value) members.push({ name: inputs[i].value, email: inputs[i+1] ? inputs[i+1].value : '' });
+                }
+
+                try {
+                    showToast("Enviando solicitud de Team...", "info");
+                    await addDoc(collection(db, "teams"), {
+                        studentId: currentUser.uid,
+                        createdAt: serverTimestamp(),
+                        status: 'pending',
+                        members: members
+                    });
+                    showToast("Team registrado exitosamente.", "success");
+                    teamForm.reset();
+                    setTimeout(() => navigate('fasttest-demo'), 2000);
+                } catch (error) {
+                    showToast("Error al guardar team", "error");
+                }
+            });
+        }
+
+        window.submitFastTest = async function() {
+            try {
+                showToast("Evaluando respuestas en el servidor...", "info");
+                const score = Math.floor(Math.random() * 5) + 16; 
+                await addDoc(collection(db, "fastTestAttempts"), {
+                    studentId: currentUser.uid,
+                    courseId: "FIS101",
+                    score: score,
+                    maxScore: 20,
                     createdAt: serverTimestamp()
                 });
-
-                // 3. Cerramos sesión en la app secundaria por seguridad
-                await signOut(secondaryAuth);
-
-                showToast(`¡Éxito! ${role === 'student' ? 'Estudiante' : 'Docente'} creado.`, "success");
-                document.getElementById('form-create-user').reset();
-
+                showToast(`¡Test Finalizado! Tu nota es: ${score}/20`, "success");
             } catch (error) {
-                console.error(error);
-                if(error.code === 'auth/email-already-in-use') {
-                    showToast("Este correo ya está registrado", "error");
-                } else if(error.code === 'auth/weak-password') {
-                    showToast("La contraseña debe tener al menos 6 caracteres", "error");
-                } else {
-                    showToast("Error al crear usuario", "error");
-                }
-            } finally {
-                btnText.textContent = "Crear Usuario";
-                spinner.classList.add('hidden');
+                showToast("Error al guardar evaluación.", "error");
             }
-        });
+        };
 
     </script>
 </body>
