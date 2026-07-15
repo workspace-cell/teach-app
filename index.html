@@ -517,6 +517,32 @@
                     </div>
                     <div id="weeks-container" class="space-y-4"></div>
                 </div>
+
+                <div id="week-detail-panel" class="hidden">
+                    <button onclick="backToWeeks()" class="mb-5 text-brand-purple dark:text-brand-lightBlue font-bold hover:underline">← Volver a semanas</button>
+                    <div class="bg-gradient-to-br from-brand-purple to-brand-deepPurple rounded-2xl p-7 text-white shadow-lg mb-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                            <div>
+                                <p id="week-detail-kicker" class="text-brand-lightBlue text-xs font-black uppercase tracking-[0.18em]">Semana 06 · Unidad 2</p>
+                                <h1 id="week-detail-title" class="text-3xl font-black mt-2">Fuerzas en equilibrio</h1>
+                                <p id="week-detail-outcome" class="text-white/75 mt-2 max-w-2xl">Ruta de aprendizaje organizada por recursos, Fast Test y entregable.</p>
+                            </div>
+                            <div id="week-detail-actions" class="hidden flex flex-wrap gap-2">
+                                <button onclick="openResourceModal()" class="bg-white text-brand-deepPurple px-5 py-2.5 rounded-xl font-bold hover:bg-gray-100 transition">+ Añadir contenido</button>
+                                <button onclick="showToast('Vista previa del estudiante activada en modo demostración.','info')" class="bg-white/10 border border-white/20 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-white/20 transition">Vista estudiante</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Recursos</p><p id="week-resource-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Obligatorios</p><p id="week-required-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Publicados</p><p id="week-published-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Ruta</p><p class="text-3xl font-black dark:text-white mt-2">7</p></div>
+                    </div>
+
+                    <div id="week-route-container" class="space-y-4"></div>
+                </div>
             </div>
 
             <!-- VISTA: FAST TEST DEMO -->
@@ -655,6 +681,32 @@
                     <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Progreso estimado</label><input id="week-progress" type="number" min="0" max="100" value="0" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
                 </div>
                 <div class="flex justify-end gap-3 pt-5 border-t border-gray-100 dark:border-gray-800"><button type="button" onclick="closeModal('modal-week')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800">Cancelar</button><button type="submit" class="px-7 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple">Guardar semana</button></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: AÑADIR / EDITAR RECURSO -->
+    <div id="modal-resource" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden max-h-[92vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]">
+                <h3 id="resource-modal-title" class="text-xl font-black text-brand-deepPurple dark:text-white">Añadir contenido</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Ubica el recurso dentro de la ruta de aprendizaje de la semana.</p>
+            </div>
+            <form id="form-resource" class="p-6 space-y-5">
+                <input type="hidden" id="resource-doc-id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Título del recurso</label><input id="resource-title" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Ej. Guía de laboratorio: Fuerzas en equilibrio"></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Bloque de la ruta</label><select id="resource-block" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="learn">Aprende</option><option value="explore">Explora</option><option value="demonstrate">Demuestra</option><option value="unlock">Desbloquea</option><option value="apply">Aplica</option><option value="deliver">Entrega</option><option value="improve">Mejora</option></select></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Tipo</label><select id="resource-type" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="pdf">PDF</option><option value="presentation">Presentación</option><option value="video">Video</option><option value="audio">Podcast / audio</option><option value="image">Imagen / infografía</option><option value="link">Enlace</option><option value="fasttest">Fast Test</option><option value="activity">Actividad / laboratorio</option><option value="submission">Entregable</option><option value="feedback">Retroalimentación</option></select></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Descripción breve</label><textarea id="resource-description" rows="2" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Indica para qué sirve este recurso."></textarea></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Enlace de Drive o URL</label><input id="resource-url" type="url" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="https://drive.google.com/..."></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Tiempo estimado (min)</label><input id="resource-duration" type="number" min="0" value="10" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Orden</label><input id="resource-order" type="number" min="1" value="1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Clasificación</label><select id="resource-required" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="true">Obligatorio</option><option value="false">Complementario</option></select></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Estado</label><select id="resource-status" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="draft">Borrador</option><option value="published">Publicado</option><option value="hidden">Oculto</option></select></div>
+                    <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Regla de desbloqueo</label><select id="resource-unlock" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="none">Sin bloqueo</option><option value="fasttest">Aprobar Fast Test con 12/20</option><option value="team-fasttest">Todos los integrantes del Team aprueban</option><option value="manual">Habilitación manual del profesor</option><option value="date">Llegar a la fecha programada</option></select></div>
+                </div>
+                <div class="flex justify-end gap-3 pt-5 border-t border-gray-100 dark:border-gray-800"><button type="button" onclick="closeModal('modal-resource')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800">Cancelar</button><button type="submit" class="px-7 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple">Guardar recurso</button></div>
             </form>
         </div>
     </div>
@@ -951,6 +1003,9 @@
         window.selectedCourseId = null;
         window.selectedCourseData = null;
         window.loadedWeeks = [];
+        window.selectedWeekId = null;
+        window.selectedWeekData = null;
+        window.loadedResources = [];
 
         function roleCanEditContent() {
             return currentUser && ['teacher','admin','superadmin'].includes(currentUser.role);
@@ -1033,7 +1088,7 @@
             await loadWeeks(courseId);
         };
 
-        window.backToCourses = function() { document.getElementById('course-detail-panel').classList.add('hidden'); document.getElementById('courses-list-panel').classList.remove('hidden'); };
+        window.backToCourses = function() { document.getElementById('week-detail-panel').classList.add('hidden'); document.getElementById('course-detail-panel').classList.add('hidden'); document.getElementById('courses-list-panel').classList.remove('hidden'); };
 
         async function loadWeeks(courseId) {
             const container = document.getElementById('weeks-container');
@@ -1077,10 +1132,122 @@
                 const [label,cls]=statusBadge(w.status);
                 const route = currentUser.role==='student' ? `
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4 text-xs font-bold"><span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen rounded-lg px-3 py-2">✓ Aprende</span><span class="bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue rounded-lg px-3 py-2">○ Explora</span><span class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue rounded-lg px-3 py-2">🔒 Demuestra</span><span class="bg-gray-100 dark:bg-gray-800 text-gray-500 rounded-lg px-3 py-2">🔒 Entrega</span></div>` : '';
-                const actions = roleCanEditContent() ? `<div class="flex gap-2"><button onclick="openWeekModal('${w.id}')" class="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 font-bold text-xs dark:text-white">Editar</button>${w.status!=='published'?`<button onclick="setWeekStatus('${w.id}','published')" class="px-3 py-2 rounded-lg bg-brand-purple text-white font-bold text-xs">Publicar</button>`:`<button onclick="setWeekStatus('${w.id}','closed')" class="px-3 py-2 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs">Cerrar</button>`}</div>` : `<button onclick="showToast('Abriremos la ruta completa de esta semana en la siguiente implementación.','info')" class="px-4 py-2 rounded-xl bg-brand-purple text-white font-bold text-sm">${w.status==='published'?'Continuar':'Ver estado'}</button>`;
+                const actions = roleCanEditContent() ? `<div class="flex flex-wrap gap-2"><button onclick="openWeekDetail('${w.id}')" class="px-4 py-2 rounded-lg bg-brand-purple text-white font-bold text-xs">Abrir semana</button><button onclick="openWeekModal('${w.id}')" class="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 font-bold text-xs dark:text-white">Editar</button>${w.status!=='published'?`<button onclick="setWeekStatus('${w.id}','published')" class="px-3 py-2 rounded-lg bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen font-bold text-xs">Publicar</button>`:`<button onclick="setWeekStatus('${w.id}','closed')" class="px-3 py-2 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs">Cerrar</button>`}</div>` : `<button onclick="openWeekDetail('${w.id}')" class="px-4 py-2 rounded-xl bg-brand-purple text-white font-bold text-sm">${w.status==='published'?'Continuar':'Ver estado'}</button>`;
                 return `<article class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm ${currentUser.role==='student'&&w.status!=='published'?'opacity-70':''}"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4"><div class="flex items-start gap-4"><div class="w-12 h-12 shrink-0 rounded-xl bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue flex items-center justify-center font-black">${String(w.number).padStart(2,'0')}</div><div><div class="flex flex-wrap items-center gap-2"><p class="text-xs font-bold uppercase tracking-wider text-brand-lightBlue">${w.unit===0?'Inducción':'Unidad '+w.unit}</p><span class="${cls} px-2 py-0.5 rounded text-[10px] font-bold uppercase">${label}</span></div><h3 class="text-xl font-black text-brand-deepPurple dark:text-white mt-1">${w.title}</h3><p class="text-sm text-gray-500 mt-1">${w.outcome || 'Ruta de aprendizaje organizada por recursos, Fast Test y entregable.'}</p>${route}</div></div>${actions}</div></article>`;
             }).join('');
         }
+
+        const routeBlocks = [
+            {key:'learn',label:'Aprende',icon:'📘',description:'Recursos obligatorios para comprender el tema.',accent:'border-brand-lightBlue'},
+            {key:'explore',label:'Explora',icon:'🎥',description:'Videos, podcast, infografías y material complementario.',accent:'border-cyan-400'},
+            {key:'demonstrate',label:'Demuestra',icon:'✅',description:'Fast Test individual para comprobar el aprendizaje.',accent:'border-brand-purple'},
+            {key:'unlock',label:'Desbloquea',icon:'🔓',description:'Referencias y plantillas habilitadas al cumplir requisitos.',accent:'border-amber-400'},
+            {key:'apply',label:'Aplica',icon:'🧪',description:'Actividad práctica, laboratorio o simulación.',accent:'border-brand-supportGreen'},
+            {key:'deliver',label:'Entrega',icon:'📤',description:'Informe o producto presentado por el responsable del Team.',accent:'border-red-300'},
+            {key:'improve',label:'Mejora',icon:'💬',description:'Retroalimentación, rúbrica y reentrega.',accent:'border-brand-schoolGreen'}
+        ];
+
+        window.openWeekDetail = async function(weekId) {
+            selectedWeekId = weekId;
+            selectedWeekData = loadedWeeks.find(w=>w.id===weekId) || null;
+            if(!selectedWeekData) return;
+            document.getElementById('course-detail-panel').classList.add('hidden');
+            document.getElementById('week-detail-panel').classList.remove('hidden');
+            document.getElementById('week-detail-kicker').textContent = `Semana ${String(selectedWeekData.number).padStart(2,'0')} · ${selectedWeekData.unit===0?'Inducción':'Unidad '+selectedWeekData.unit}`;
+            document.getElementById('week-detail-title').textContent = selectedWeekData.title;
+            document.getElementById('week-detail-outcome').textContent = selectedWeekData.outcome || 'Ruta de aprendizaje organizada por recursos, Fast Test y entregable.';
+            const actions=document.getElementById('week-detail-actions');
+            if(roleCanEditContent()) actions.classList.remove('hidden'); else actions.classList.add('hidden');
+            await loadWeekResources();
+        };
+
+        window.backToWeeks = function() {
+            document.getElementById('week-detail-panel').classList.add('hidden');
+            document.getElementById('course-detail-panel').classList.remove('hidden');
+            selectedWeekId=null; selectedWeekData=null; loadedResources=[];
+        };
+
+        async function loadWeekResources() {
+            const container=document.getElementById('week-route-container');
+            container.innerHTML='<div class="p-8 text-center text-brand-lightBlue font-bold animate-pulse">Cargando ruta de aprendizaje...</div>';
+            try {
+                const snap=await getDocs(query(collection(db,'resources'),where('weekId','==',selectedWeekId)));
+                loadedResources=[];
+                snap.forEach(d=>loadedResources.push({id:d.id,...d.data()}));
+                loadedResources.sort((a,b)=>(a.order||0)-(b.order||0));
+                updateResourceMetrics();
+                renderWeekRoute();
+            } catch(e) { console.error(e); container.innerHTML='<div class="p-8 text-center text-red-500 font-bold">No se pudieron cargar los recursos de la semana.</div>'; }
+        }
+
+        function updateResourceMetrics(){
+            document.getElementById('week-resource-count').textContent=loadedResources.length;
+            document.getElementById('week-required-count').textContent=loadedResources.filter(r=>r.required).length;
+            document.getElementById('week-published-count').textContent=loadedResources.filter(r=>r.status==='published').length;
+        }
+
+        function resourceIcon(type){
+            return ({pdf:'📄',presentation:'📘',video:'🎥',audio:'🎧',image:'🖼️',link:'🔗',fasttest:'✅',activity:'🧪',submission:'📤',feedback:'💬'})[type]||'📎';
+        }
+
+        function unlockText(rule){
+            return ({none:'Disponible sin bloqueo',fasttest:'Aprobar el Fast Test con 12/20', 'team-fasttest':'Todos los integrantes del Team deben aprobar',manual:'Habilitación manual del profesor',date:'Disponible en la fecha programada'})[rule]||'Disponible sin bloqueo';
+        }
+
+        function renderWeekRoute(){
+            const container=document.getElementById('week-route-container');
+            container.innerHTML=routeBlocks.map(block=>{
+                const items=loadedResources.filter(r=>(r.block||'learn')===block.key && (currentUser.role!=='student'||r.status==='published'));
+                const rows=items.length?items.map(r=>{
+                    const locked=currentUser.role==='student' && r.unlockRule && r.unlockRule!=='none';
+                    const state=r.status==='published'?'Publicado':r.status==='hidden'?'Oculto':'Borrador';
+                    const classification=r.required?'Obligatorio':'Complementario';
+                    const teacherMenu=roleCanEditContent()?`<div class="flex items-center gap-2"><button onclick="openResourceModal('${r.id}')" class="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-xs font-bold dark:text-white">Editar</button><button onclick="deleteResource('${r.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs font-bold">Eliminar</button></div>`:`<button onclick="openStudentResource('${r.id}')" class="px-4 py-2 rounded-xl ${locked?'bg-gray-100 text-gray-400 cursor-not-allowed':'bg-brand-purple text-white'} font-bold text-sm">${locked?'🔒 Bloqueado':'Abrir recurso'}</button>`;
+                    return `<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 px-5 py-4 border-t border-gray-100 dark:border-gray-800 first:border-t-0"><div class="flex items-start gap-4 min-w-0"><div class="w-11 h-11 shrink-0 rounded-xl bg-brand-softPurple dark:bg-brand-purple/20 flex items-center justify-center text-xl">${resourceIcon(r.type)}</div><div class="min-w-0"><h4 class="font-black text-brand-deepPurple dark:text-white truncate">${r.title}</h4><p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${r.description||'Recurso de la semana.'}</p><div class="flex flex-wrap gap-2 mt-2 text-[11px] font-bold"><span class="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">${classification}</span><span class="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue">${r.duration||0} min</span><span class="px-2 py-1 rounded ${r.status==='published'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400'}">${state}</span>${r.unlockRule&&r.unlockRule!=='none'?`<span class="px-2 py-1 rounded bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue">🔒 ${unlockText(r.unlockRule)}</span>`:''}</div></div></div>${teacherMenu}</div>`;
+                }).join(''):`<div class="px-5 py-6 text-sm text-gray-500 dark:text-gray-400">Todavía no hay contenido en este bloque.</div>`;
+                const add=roleCanEditContent()?`<button onclick="openResourceModal('', '${block.key}')" class="m-4 mt-0 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:underline">+ Añadir a ${block.label}</button>`:'';
+                return `<section class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border-l-4 ${block.accent} border-y border-r border-gray-100 dark:border-gray-800 overflow-hidden"><button onclick="toggleRouteBlock('route-${block.key}')" class="w-full px-5 py-4 flex items-center justify-between text-left"><div class="flex items-center gap-3"><span class="text-2xl">${block.icon}</span><div><h3 class="text-lg font-black text-brand-deepPurple dark:text-white uppercase tracking-wide">${block.label}</h3><p class="text-sm text-gray-500 dark:text-gray-400">${block.description}</p></div></div><div class="flex items-center gap-3"><span class="text-xs font-bold px-2 py-1 rounded bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue">${items.length} recurso${items.length===1?'':'s'}</span><span id="route-${block.key}-arrow" class="text-gray-400">⌃</span></div></button><div id="route-${block.key}" class="border-t border-gray-100 dark:border-gray-800">${rows}${add}</div></section>`;
+            }).join('');
+        }
+
+        window.toggleRouteBlock=function(id){ const el=document.getElementById(id); if(el) el.classList.toggle('hidden'); };
+
+        window.openResourceModal=function(resourceId='',forcedBlock=''){
+            if(!roleCanEditContent()||!selectedWeekId) return;
+            const r=loadedResources.find(x=>x.id===resourceId);
+            document.getElementById('form-resource').reset();
+            document.getElementById('resource-doc-id').value=r?.id||'';
+            document.getElementById('resource-modal-title').textContent=r?'Editar recurso':'Añadir contenido';
+            document.getElementById('resource-title').value=r?.title||'';
+            document.getElementById('resource-block').value=r?.block||forcedBlock||'learn';
+            document.getElementById('resource-type').value=r?.type||'pdf';
+            document.getElementById('resource-description').value=r?.description||'';
+            document.getElementById('resource-url').value=r?.url||'';
+            document.getElementById('resource-duration').value=r?.duration??10;
+            document.getElementById('resource-order').value=r?.order??(loadedResources.length+1);
+            document.getElementById('resource-required').value=String(r?.required??true);
+            document.getElementById('resource-status').value=r?.status||'draft';
+            document.getElementById('resource-unlock').value=r?.unlockRule||'none';
+            openModal('modal-resource');
+        };
+
+        window.deleteResource=async function(id){
+            if(!confirm('¿Eliminar este recurso? Esta acción no se puede deshacer.')) return;
+            try{await deleteDoc(doc(db,'resources',id));showToast('Recurso eliminado.','success');loadWeekResources();}catch(e){showToast('No se pudo eliminar el recurso.','error');}
+        };
+
+        window.openStudentResource=function(id){
+            const r=loadedResources.find(x=>x.id===id); if(!r) return;
+            if(r.unlockRule&&r.unlockRule!=='none'){showToast('Este recurso está bloqueado: '+unlockText(r.unlockRule),'info');return;}
+            if(r.url) window.open(r.url,'_blank','noopener'); else showToast('Este recurso aún no tiene un enlace configurado.','info');
+        };
+
+        document.getElementById('form-resource').addEventListener('submit',async(e)=>{
+            e.preventDefault(); if(!selectedWeekId||!selectedCourseId) return;
+            const id=document.getElementById('resource-doc-id').value;
+            const payload={courseId:selectedCourseId,weekId:selectedWeekId,title:document.getElementById('resource-title').value.trim(),block:document.getElementById('resource-block').value,type:document.getElementById('resource-type').value,description:document.getElementById('resource-description').value.trim(),url:document.getElementById('resource-url').value.trim(),duration:Number(document.getElementById('resource-duration').value)||0,order:Number(document.getElementById('resource-order').value)||1,required:document.getElementById('resource-required').value==='true',status:document.getElementById('resource-status').value,unlockRule:document.getElementById('resource-unlock').value,updatedAt:serverTimestamp()};
+            try{if(id) await setDoc(doc(db,'resources',id),payload,{merge:true}); else await addDoc(collection(db,'resources'),{...payload,createdBy:currentUser.uid,createdAt:serverTimestamp()});closeModal('modal-resource');showToast('Recurso guardado correctamente.','success');loadWeekResources();}catch(err){console.error(err);showToast('No se pudo guardar el recurso.','error');}
+        });
 
         window.openWeekModal = function(weekId='') {
             if(!roleCanEditContent()) return;
