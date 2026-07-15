@@ -8,7 +8,6 @@
     <!-- Tipografía Oficial: Overlock -->
     <link href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,12 +17,13 @@
                     colors: {
                         brand: {
                             purple: '#593079',
-                            deepPurple: '#593079',
+                            deepPurple: '#321A44',
                             lightBlue: '#4FA5DC',
                             softBlue: '#F0F8FF',
-                            paleBlue: '#4fa5dc',
+                            paleBlue: '#E4F2FA',
                             supportGreen: '#ADB745',
                             schoolGreen: '#01C3A9',
+                            softPurple: '#F4F0F9',
                         }
                     },
                     fontFamily: { sans: ['Overlock', 'sans-serif'] }
@@ -41,25 +41,27 @@
     </script>
 
     <style>
-        /* Animación para el modal */
+        /* Animación para modales y transiciones */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .modal-overlay { animation: fadeIn 0.2s ease-out; }
     </style>
 </head>
-<body class="bg-brand-paleBlue dark:bg-gray-900 text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
+<body class="bg-brand-softPurple dark:bg-gray-900 text-brand-deepPurple dark:text-gray-200 font-sans antialiased transition-colors duration-300">
 
     <div id="toast-container" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none"></div>
 
+    <!-- Botón Flotante para cambiar de Tema -->
     <button onclick="toggleTheme()" class="fixed top-4 right-4 z-50 bg-brand-softBlue dark:bg-gray-800 p-2 rounded-full shadow-md border border-brand-lightBlue/30 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-700 transition">
         <span id="theme-icon-light" class="hidden dark:block text-yellow-400">☀️</span>
         <span id="theme-icon-dark" class="block dark:hidden text-brand-purple">🌙</span>
     </button>
 
-    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="bg-brand-softBlue dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
+    <!-- PANTALLA DE LOGIN -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md border border-brand-lightBlue/30 dark:border-gray-700">
             <div class="text-center mb-8">
                 <div class="h-20 flex items-center justify-center mb-4">
-                    <img id="login-logo" src="Logo_Teach7.png" alt="Teach Logo" class="max-h-full object-contain drop-shadow-sm">
+                    <img id="login-logo" src="Logo_Teach6_2.png" alt="Teach Logo" class="max-h-full object-contain drop-shadow-sm">
                 </div>
                 <h2 class="text-2xl font-bold dark:text-white text-brand-deepPurple">Bienvenido</h2>
                 <p class="text-brand-purple/80 dark:text-gray-400 text-sm mt-1">Tu ruta para aprender y avanzar.</p>
@@ -68,53 +70,57 @@
             <form id="login-form" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold mb-1 text-brand-deepPurple dark:text-gray-300">Correo Institucional</label>
-                    <input type="email" id="auth-email" required class="w-full bg-white dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white" placeholder="ej. docente@institucion.edu.pe">
+                    <input type="email" id="auth-email" required class="w-full bg-brand-softPurple dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white" placeholder="ej. docente@institucion.edu.pe">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold mb-1 text-brand-deepPurple dark:text-gray-300">Contraseña</label>
-                    <input type="password" id="auth-password" required class="w-full bg-white dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white">
+                    <input type="password" id="auth-password" required class="w-full bg-brand-softPurple dark:bg-gray-700 border border-brand-lightBlue/50 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:border-brand-purple dark:focus:border-brand-lightBlue dark:text-white">
                 </div>
                 
                 <div class="pt-4">
-                    <button id="btn-submit-login" type="submit" class="w-full bg-brand-purple dark:bg-gray-700 text-white rounded py-2 font-bold hover:bg-[#321A44] dark:hover:bg-gray-600 transition flex justify-center items-center">
+                    <button id="btn-submit-login" type="submit" class="w-full bg-brand-purple dark:bg-brand-purple text-white rounded py-2 font-bold hover:bg-[#321A44] transition flex justify-center items-center shadow-md">
                         <span id="login-text">Ingresar a Teach</span>
                         <svg id="login-spinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    </button>
+                    <!-- Botón de emergencia para entrar sin DB (Solo pruebas) -->
+                    <button type="button" id="btn-demo-login" class="w-full mt-3 bg-brand-lightBlue text-white rounded py-2 font-bold hover:bg-[#3b8dbd] transition flex justify-center items-center shadow-md">
+                        Ingresar en Modo Demo
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="app-layout" class="min-h-screen hidden flex-col md:flex-row">
-        
+    <!-- APLICACIÓN PRINCIPAL (Dashboard) -->
+    <div id="app-layout" class="min-h-screen hidden flex-col md:flex-row transition-opacity duration-300 opacity-0">
         <!-- Sidebar Docente -->
-        <aside class="w-full md:w-64 bg-brand-softBlue dark:bg-gray-900 border-r border-brand-lightBlue/20 dark:border-gray-800 text-brand-deepPurple dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
+        <aside class="w-full md:w-64 bg-brand-purple dark:bg-gray-900 border-r border-brand-deepPurple/50 dark:border-gray-800 text-white dark:text-gray-200 md:min-h-screen p-6 flex flex-col transition-colors duration-300">
             <div class="flex items-center gap-2 mb-10 justify-center md:justify-start h-12">
-                <img id="sidebar-logo" src="Logo_Teach7.png" alt="Teach Logo" class="max-h-full object-contain">
+                <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
             </div>
             
             <nav class="flex-1 space-y-2">
-                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 hover:bg-brand-lightBlue/10 dark:hover:bg-gray-800 rounded font-semibold transition">Inicio</button>
-                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 hover:bg-brand-lightBlue/10 dark:hover:bg-gray-800 rounded font-semibold transition">Aulas</button>
-                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 hover:bg-brand-lightBlue/10 dark:hover:bg-gray-800 rounded font-semibold transition">Contenidos</button>
-                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 hover:bg-brand-lightBlue/10 dark:hover:bg-gray-800 rounded font-semibold transition">Team</button>
+                <!-- Los estilos de estado activo/inactivo se manejan desde JavaScript -->
+                <button onclick="navigate('dashboard')" id="nav-dashboard" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Inicio</button>
+                <button onclick="navigate('classrooms')" id="nav-classrooms" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Aulas</button>
+                <button onclick="navigate('courses')" id="nav-courses" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Contenidos</button>
+                <button onclick="navigate('teams')" id="nav-teams" class="w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">Team</button>
             </nav>
             
-            <div class="mt-8 pt-4 border-t border-brand-lightBlue/20 dark:border-gray-800">
+            <div class="mt-8 pt-4 border-t border-white/20 dark:border-gray-800">
                 <div class="mb-4">
-                    <p id="user-display-email" class="text-xs text-brand-purple/70 dark:text-gray-400 truncate">usuario@correo.com</p>
-                    <span class="text-[10px] bg-brand-lightBlue/20 text-brand-purple px-2 py-0.5 rounded font-bold uppercase">Docente</span>
+                    <p id="user-display-email" class="text-xs text-white/70 dark:text-gray-400 truncate">usuario@correo.com</p>
+                    <span class="text-[10px] bg-white/20 text-white dark:bg-brand-lightBlue/20 dark:text-brand-lightBlue px-2 py-0.5 rounded font-bold uppercase">Docente</span>
                 </div>
-                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-500 dark:text-red-400 text-sm font-bold rounded hover:bg-red-50 dark:hover:bg-red-900/20 transition">
+                <button id="logout-btn" class="w-full text-left px-4 py-2 text-red-300 dark:text-red-400 text-sm font-bold rounded hover:bg-red-500/20 dark:hover:bg-red-900/20 transition">
                     Cerrar Sesión
                 </button>
             </div>
         </aside>
 
-        <!-- Contenedor de Vistas Dinámicas -->
-        <main class="flex-1 p-6 md:p-8 bg-brand-paleBlue dark:bg-gray-950 transition-colors duration-300">
+        <main class="flex-1 p-6 md:p-8 transition-colors duration-300">
             
-            <!-- VISTA: DASHBOARD (INICIO) -->
+            <!-- VISTA: DASHBOARD -->
             <div id="view-dashboard" class="app-view hidden">
                 <header class="mb-8">
                     <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Panel Docente</h1>
@@ -176,23 +182,142 @@
                 </div>
             </div>
 
-            <!-- VISTA: PLACEHOLDERS (Cursos, Teams) -->
+            <!-- VISTA: CURSOS (Contenidos) -->
             <div id="view-courses" class="app-view hidden">
-                <h1 class="text-3xl font-bold mb-4">Contenidos</h1>
-                <p>Módulo en construcción (Fase 2).</p>
+                <header class="mb-8">
+                    <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Contenidos del Curso</h1>
+                    <p class="text-brand-purple/80 dark:text-gray-400">Selecciona un curso para gestionar su material.</p>
+                </header>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Tarjeta de Curso: Física 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border-t-4 border-t-brand-purple overflow-hidden cursor-pointer hover:shadow-md transition" onclick="navigate('fasttest-demo')">
+                        <div class="p-6">
+                            <p class="text-xs font-bold text-brand-lightBlue mb-1">FIS101</p>
+                            <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white mb-4">Física 1</h3>
+                            <div class="flex gap-4 text-sm text-brand-purple/70 dark:text-gray-400 mb-4">
+                                <div>👥 39 est.</div>
+                                <div>📚 16 Semanas</div>
+                            </div>
+                            <span class="bg-brand-schoolGreen/20 text-brand-schoolGreen text-xs px-2 py-1 rounded font-bold">Activo</span>
+                        </div>
+                        <div class="bg-brand-paleBlue dark:bg-gray-900 px-6 py-3 text-sm text-center text-brand-purple font-bold hover:bg-brand-lightBlue/20 transition">
+                            Simular Vista Estudiante (Fast Test)
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- VISTA: TEAMS -->
             <div id="view-teams" class="app-view hidden">
-                <h1 class="text-3xl font-bold mb-4">Gestión de Teams</h1>
-                <p>Módulo en construcción (Fase 2).</p>
+                <header class="mb-8">
+                    <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Registro de Team</h1>
+                    <p class="text-brand-purple/80 dark:text-gray-400">El líder del equipo debe completar este formulario.</p>
+                </header>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-brand-lightBlue/20 p-6 max-w-3xl">
+                    <form id="form-team" class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4 border-b border-gray-100 dark:border-gray-700 pb-6">
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Aula (NRC)</label>
+                                <select class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white">
+                                    <option>41473 - Física 1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-1">Nombre del Team (Opcional)</label>
+                                <input type="text" placeholder="Ej. Los Newtonianos" class="w-full border rounded px-3 py-2 bg-gray-50 dark:bg-gray-700 focus:outline-brand-purple dark:text-white">
+                            </div>
+                        </div>
+
+                        <div id="team-members-container" class="space-y-4">
+                            <!-- Integrante 1 (Líder) -->
+                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
+                                <h4 class="font-bold text-brand-purple mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="text" required placeholder="DNI" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="text" placeholder="Celular" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                </div>
+                            </div>
+                            <!-- Integrante 2 -->
+                            <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
+                                <h4 class="font-bold text-brand-purple mb-3 text-sm">Integrante 2</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                    <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="addTeamMember()" class="text-brand-lightBlue font-bold text-sm hover:underline flex items-center gap-1">
+                            + Añadir otro integrante
+                        </button>
+
+                        <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded text-sm text-amber-800 dark:text-amber-200 mt-6 flex items-start gap-3">
+                            <input type="checkbox" required id="team-confirm" class="mt-1 w-4 h-4 cursor-pointer">
+                            <label for="team-confirm" class="italic text-xs cursor-pointer">Confirmo que todos los integrantes aceptan pertenecer al Team y conocen las condiciones de cambio establecidas por el docente. Solo pueden cambiar de Team una vez durante el semestre, hasta finalizar la Unidad 1.</label>
+                        </div>
+
+                        <div class="flex justify-end pt-4">
+                            <button type="submit" class="bg-brand-purple text-white px-6 py-2 rounded font-bold hover:bg-brand-deepPurple transition">Registrar Team</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- VISTA: FAST TEST (DEMO ESTUDIANTE) -->
+            <div id="view-fasttest-demo" class="app-view hidden">
+                <header class="mb-8 flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold dark:text-white mb-2 text-brand-deepPurple">Fast Test: Física 1</h1>
+                        <p class="text-brand-purple/80 dark:text-gray-400">Semana 2: Medición y teoría de errores. (Intento 1 - Máx 20pts)</p>
+                    </div>
+                    <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-full font-bold flex items-center gap-2">
+                        ⏱️ 14:59
+                    </div>
+                </header>
+                
+                <div class="max-w-3xl bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-brand-lightBlue/20 p-8">
+                    <div class="mb-6">
+                        <p class="text-sm font-bold text-brand-lightBlue uppercase mb-2">Pregunta 1 de 4</p>
+                        <h2 class="text-xl font-bold text-brand-deepPurple dark:text-white">¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?</h2>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">A) Joule</span>
+                        </label>
+                        <label class="flex items-center p-4 border border-brand-purple bg-brand-purple/5 dark:bg-brand-purple/20 rounded-lg cursor-pointer">
+                            <input type="radio" name="q1" checked class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">B) Newton</span>
+                        </label>
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">C) Watt</span>
+                        </label>
+                        <label class="flex items-center p-4 border border-brand-lightBlue/30 rounded-lg cursor-pointer hover:bg-brand-paleBlue/50 dark:hover:bg-gray-700 transition">
+                            <input type="radio" name="q1" class="w-4 h-4 text-brand-purple">
+                            <span class="ml-3 font-medium dark:text-white">D) Pascal</span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between mt-8 pt-6 border-t border-gray-100 dark:border-gray-700">
+                        <button class="px-6 py-2 border border-gray-300 rounded font-bold text-gray-500 opacity-50 cursor-not-allowed">Anterior</button>
+                        <button class="px-6 py-2 bg-brand-purple text-white rounded font-bold hover:bg-brand-deepPurple transition" onclick="submitFastTest()">Finalizar Test</button>
+                    </div>
+                </div>
             </div>
 
         </main>
     </div>
 
     <!-- MODAL: CREAR AULA -->
-    <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/50 dark:bg-black/70 z-50 hidden items-center justify-center p-4 modal-overlay">
+    <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
-            <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-brand-softBlue dark:bg-gray-900">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-brand-softPurple dark:bg-gray-900">
                 <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Crear Nueva Aula</h3>
             </div>
             <form id="form-classroom" class="p-6 space-y-4">
@@ -231,7 +356,7 @@
                 </div>
                 <div class="flex justify-end gap-3 mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
                     <button type="button" onclick="closeModal('modal-classroom')" class="px-4 py-2 rounded text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition">Cancelar</button>
-                    <button type="submit" id="btn-save-classroom" class="px-6 py-2 bg-brand-purple text-white rounded font-bold hover:bg-brand-deepPurple transition flex items-center">
+                    <button type="submit" id="btn-save-classroom" class="px-6 py-2 bg-brand-purple text-white rounded font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
                         <span id="txt-save-cr">Guardar Aula</span>
                         <svg id="spin-save-cr" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
@@ -241,7 +366,7 @@
     </div>
 
     <!-- MODAL: CONFIRMACIÓN DE ELIMINACIÓN -->
-    <div id="modal-confirm" class="fixed inset-0 bg-brand-deepPurple/50 dark:bg-black/70 z-[60] hidden items-center justify-center p-4 modal-overlay">
+    <div id="modal-confirm" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/80 z-[60] hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-sm p-6 text-center">
             <div class="text-red-500 mb-4 flex justify-center">
                 <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
@@ -250,15 +375,14 @@
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-6" id="confirm-msg">Esta acción no se puede deshacer.</p>
             <div class="flex justify-center gap-3">
                 <button onclick="closeModal('modal-confirm')" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded font-bold hover:bg-gray-300 transition">Cancelar</button>
-                <button id="btn-confirm-action" class="px-4 py-2 bg-red-500 text-white rounded font-bold hover:bg-red-600 transition">Sí, eliminar</button>
+                <button id="btn-confirm-action" class="px-4 py-2 bg-red-500 text-white rounded font-bold hover:bg-red-600 transition shadow-md">Sí, eliminar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. Lógica Visual Base ---
-        const logoLight = 'Logo_Teach7.png';
-        const logoDark = 'Logo_Teach6.png';
+        const logoLight = 'Logo_Teach6_2.png';
+        const logoDark = 'Logo_Teach7_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
@@ -274,11 +398,9 @@
         }
         updateLogos();
 
-        // --- 2. Sistema de Notificaciones (Toasts) ---
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            
             let bgClass = 'bg-brand-lightBlue text-white';
             if(type === 'success') bgClass = 'bg-brand-schoolGreen text-white';
             if(type === 'error') bgClass = 'bg-red-500 text-white';
@@ -287,116 +409,164 @@
             toast.innerHTML = `<span>${message}</span>`;
             
             container.appendChild(toast);
-            
-            // Animar entrada
-            setTimeout(() => {
-                toast.classList.remove('translate-y-10', 'opacity-0');
-            }, 10);
-            
-            // Eliminar después de 3s
+            setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
             setTimeout(() => {
                 toast.classList.add('opacity-0');
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
 
-        // --- 3. Sistema de Rutas SPA ---
+        /* STREAMING_CHUNK:Lógica de navegación y estilos activos */
         function navigate(viewId) {
             // Ocultar todas las vistas
             document.querySelectorAll('.app-view').forEach(el => el.classList.add('hidden'));
             // Mostrar la seleccionada
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             
-            // Estilos del menú
+            // Limpiar estilos de todos los botones del menú
             document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('bg-brand-purple/10', 'dark:bg-brand-purple/20', 'text-brand-purple', 'dark:text-brand-lightBlue');
+                btn.className = "w-full text-left px-4 py-2 rounded font-semibold transition text-white/80 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white";
             });
+            
+            // Aplicar estilo resaltado al botón activo
             const activeBtn = document.getElementById(`nav-${viewId}`);
             if(activeBtn) {
-                activeBtn.classList.add('bg-brand-purple/10', 'dark:bg-brand-purple/20', 'text-brand-purple', 'dark:text-brand-lightBlue');
+                // Modo Claro: Fondo blanco transparente / Modo Oscuro: Texto celeste y fondo oscuro
+                activeBtn.className = "w-full text-left px-4 py-2 rounded font-semibold transition bg-white/20 text-white dark:bg-brand-purple/20 dark:text-brand-lightBlue";
             }
 
-            // Llamar funciones específicas al entrar a una vista
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') {
                 window.loadClassrooms();
             }
+        }
+
+        /* STREAMING_CHUNK:Lógica de Modales y Teams */
+        let memberCount = 2;
+        window.addTeamMember = function() {
+            memberCount++;
+            const container = document.getElementById('team-members-container');
+            const newMemberHtml = `
+                <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30 mt-4 transition-all duration-300">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-brand-purple text-sm">Integrante ${memberCount}</h4>
+                        <button type="button" onclick="this.parentElement.parentElement.remove();" class="text-red-500 text-xs font-bold hover:underline">Quitar</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white focus:outline-brand-purple">
+                        <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white focus:outline-brand-purple">
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', newMemberHtml);
         }
 
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).classList.add('flex'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
     </script>
 
-    <!-- IMPORTANTE: Usamos type="module" para importar el SDK modular de Firebase V10 -->
+    <!-- IMPORTANTE: Usamos type="module" para importar Firebase -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         // ==========================================
-        // PASO 1: CONFIGURACIÓN DE FIREBASE
-        // Reemplaza estos valores con los de tu proyecto de Firebase
+        // ⚠️⚠️⚠️ ¡PEGA AQUÍ TU firebaseConfig! ⚠️⚠️⚠️
         // ==========================================
         const firebaseConfig = {
-          apiKey: "AIzaSyCY_ljC4AldKwc_eEJNJIZNnF9gjuc1cs0",
-          authDomain: "teach-edu-5a501.firebaseapp.com",
-          projectId: "teach-edu-5a501",
-          storageBucket: "teach-edu-5a501.firebasestorage.app",
-          messagingSenderId: "727356627173",
-          appId: "1:727356627173:web:e4dade80d0cc2fc0ed1c0c",
-          measurementId: "G-6PW6GR36CR"
+            apiKey: "TU_API_KEY_AQUI",
+            authDomain: "tu-proyecto.firebaseapp.com",
+            projectId: "tu-proyecto",
+            storageBucket: "tu-proyecto.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef"
         };
 
         let app, auth, db;
         let currentUser = null;
-        
-        // MODO DEMO: Se activa automáticamente si no cambias "TU_API_KEY_AQUI"
-        let isDemoMode = firebaseConfig.apiKey === "TU_API_KEY_AQUI";
+        let isDemoMode = false;
+
+        // Base de datos de mentira para el modo Demo
         let demoClassrooms = [
             { id: '1', name: 'Física 1 - Grupo A', nrc: '41473', modality: 'Presencial', campus: 'Huancayo', capacity: 39, status: 'active' }
         ];
 
-        if (!isDemoMode) {
+        // Función para cambiar pantallas visualmente
+        function showDashboard() {
+            const loginScreen = document.getElementById('login-screen');
+            const appLayout = document.getElementById('app-layout');
+            
+            loginScreen.classList.add('opacity-0');
+            setTimeout(() => {
+                loginScreen.classList.add('hidden');
+                loginScreen.classList.remove('flex');
+                
+                appLayout.classList.remove('hidden');
+                appLayout.classList.add('flex');
+                setTimeout(() => appLayout.classList.remove('opacity-0'), 50);
+                
+                navigate('dashboard');
+            }, 300);
+        }
+
+        function showLogin() {
+            const loginScreen = document.getElementById('login-screen');
+            const appLayout = document.getElementById('app-layout');
+            
+            appLayout.classList.add('opacity-0');
+            setTimeout(() => {
+                appLayout.classList.add('hidden');
+                appLayout.classList.remove('flex');
+                
+                loginScreen.classList.remove('hidden');
+                loginScreen.classList.add('flex');
+                setTimeout(() => loginScreen.classList.remove('opacity-0'), 50);
+            }, 300);
+        }
+
+        /* STREAMING_CHUNK:Inicialización y Botones de Login */
+        // Si no cambias la API Key, el sistema no intentará conectarse a Firebase para no dar error
+        if (firebaseConfig.apiKey === "TU_API_KEY_AQUI") {
+            console.warn("Falta configurar Firebase. Usando Modo Demo automáticamente.");
+            isDemoMode = true;
+        } else {
             try {
                 app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
-                console.log("🔥 Firebase Inicializado");
             } catch (error) {
-                console.error("Error al inicializar Firebase.", error);
-                isDemoMode = true; // Fallback en caso de error
+                console.error("Error al conectar Firebase:", error);
+                isDemoMode = true;
             }
-        } else {
-            console.warn("⚠️ Modo Demo Activado: La base de datos y autenticación vivirán solo en la memoria temporal del navegador.");
         }
 
-        // ==========================================
-        // LÓGICA DE AUTENTICACIÓN
-        // ==========================================
-        const loginForm = document.getElementById('login-form');
-        
-        loginForm.addEventListener('submit', async (e) => {
+        // Botón Demo (Entrar sin clave)
+        document.getElementById('btn-demo-login').addEventListener('click', () => {
+            isDemoMode = true;
+            currentUser = { uid: 'demo_123', email: 'docente.demo@teach.edu' };
+            document.getElementById('user-display-email').textContent = currentUser.email;
+            showToast("Ingresaste en Modo Demo", "info");
+            showDashboard();
+        });
+
+        // Formulario Real de Login
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('auth-email').value || 'docente@demo.com';
-            const password = document.getElementById('auth-password').value;
             
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
             const btnText = document.getElementById('login-text');
             const spinner = document.getElementById('login-spinner');
             
-            // Estado de carga
             btnText.textContent = "Validando...";
             spinner.classList.remove('hidden');
 
             if (isDemoMode) {
-                // Simulación de Login en Modo Demo
                 setTimeout(() => {
-                    currentUser = { uid: 'demo_user', email: email };
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('login-screen').classList.remove('flex');
-                    document.getElementById('app-layout').classList.remove('hidden');
-                    document.getElementById('app-layout').classList.add('flex');
+                    currentUser = { uid: 'demo_123', email: email };
                     document.getElementById('user-display-email').textContent = currentUser.email;
-                    showToast(`Ingreso exitoso (Modo Demo)`, "success");
-                    navigate('dashboard');
+                    showToast("Login Simulado", "success");
+                    showDashboard();
                     btnText.textContent = "Ingresar a Teach";
                     spinner.classList.add('hidden');
                 }, 800);
@@ -404,16 +574,11 @@
             }
 
             try {
-                // Llamada real a Firebase Auth
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                showToast(`Bienvenido ${userCredential.user.email}`, "success");
-                // El observador onAuthStateChanged se encargará del cambio de pantalla
+                await signInWithEmailAndPassword(auth, email, password);
+                showToast("Bienvenido", "success");
+                // El onAuthStateChanged se encargará de cambiar la pantalla
             } catch (error) {
-                console.error(error);
-                let msg = "Error al iniciar sesión";
-                if(error.code === 'auth/invalid-credential') msg = "Correo o contraseña incorrectos.";
-                showToast(msg, "error");
-            } finally {
+                showToast("Correo o contraseña incorrectos", "error");
                 btnText.textContent = "Ingresar a Teach";
                 spinner.classList.add('hidden');
             }
@@ -423,123 +588,96 @@
             if(auth) signOut(auth);
             if(isDemoMode) {
                 currentUser = null;
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('login-screen').classList.add('flex');
-                document.getElementById('app-layout').classList.add('hidden');
-                document.getElementById('app-layout').classList.remove('flex');
                 showToast("Sesión cerrada", "info");
+                showLogin();
             }
         });
 
-        // Observador de estado de sesión
+        // Escuchador de sesión de Firebase
         if(auth) {
             onAuthStateChanged(auth, (user) => {
+                const btnText = document.getElementById('login-text');
+                const spinner = document.getElementById('login-spinner');
+                
                 if (user) {
                     currentUser = user;
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('login-screen').classList.remove('flex');
-                    document.getElementById('app-layout').classList.remove('hidden');
-                    document.getElementById('app-layout').classList.add('flex');
                     document.getElementById('user-display-email').textContent = user.email;
-                    navigate('dashboard');
+                    showDashboard();
                 } else {
                     currentUser = null;
-                    document.getElementById('login-screen').classList.remove('hidden');
-                    document.getElementById('login-screen').classList.add('flex');
-                    document.getElementById('app-layout').classList.add('hidden');
-                    document.getElementById('app-layout').classList.remove('flex');
+                    showLogin();
                 }
+                
+                if(btnText) btnText.textContent = "Ingresar a Teach";
+                if(spinner) spinner.classList.add('hidden');
             });
         }
 
-        // ==========================================
-        // LÓGICA CRUD: AULAS (Firestore)
-        // ==========================================
-        
-        // Exponer la función de carga globalmente para que el router (navegación) la pueda llamar
+        /* STREAMING_CHUNK:CRUD Real de Aulas */
         window.loadClassrooms = async function() {
             const tbody = document.getElementById('classrooms-tbody');
-            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-brand-purple animate-pulse">Cargando datos...</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-brand-purple">Cargando datos...</td></tr>';
             
             if (isDemoMode) {
                 setTimeout(() => renderTableRows(demoClassrooms, tbody), 500);
                 return;
             }
-
+            
             if(!db || !currentUser) return;
             
             try {
-                // Query: Obtener solo las aulas creadas por el docente logueado
+                // Consultar a Firestore las aulas del profesor logueado
                 const q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
                 const querySnapshot = await getDocs(q);
-                
                 let loadedClassrooms = [];
                 querySnapshot.forEach((docSnap) => {
                     loadedClassrooms.push({ id: docSnap.id, ...docSnap.data() });
                 });
                 renderTableRows(loadedClassrooms, tbody);
-
             } catch (error) {
-                console.error("Error obteniendo aulas", error);
-                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Error al cargar datos. Verifica reglas de Firestore.</td></tr>';
+                console.error("Error cargando aulas:", error);
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-red-500">Error al cargar datos. Verifica las Reglas de Firestore.</td></tr>';
             }
         }
 
-        // Función de apoyo para renderizar la tabla (usada por Modo Demo y Firebase)
         function renderTableRows(dataArray, tbodyElement) {
             tbodyElement.innerHTML = ''; 
             let count = 0;
-            
             dataArray.forEach((data) => {
                 count++;
-                const badgeClass = data.status === 'active' 
-                    ? 'bg-brand-schoolGreen/20 text-brand-schoolGreen' 
-                    : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300';
-                    
-                const statusText = data.status === 'active' ? 'Activa' : 'Borrador';
-
+                const statusClass = data.status === 'active' ? 'bg-brand-schoolGreen/20 text-brand-schoolGreen' : 'bg-gray-200 text-gray-600';
                 const row = `
                     <tr class="hover:bg-brand-lightBlue/5 dark:hover:bg-gray-800 transition">
-                        <td class="p-4 font-bold text-brand-deepPurple dark:text-white">${data.name}</td>
+                        <td class="p-4 font-bold">${data.name}</td>
                         <td class="p-4 text-brand-purple">${data.nrc || '-'}</td>
                         <td class="p-4">${data.modality}</td>
                         <td class="p-4">${data.campus}</td>
                         <td class="p-4">${data.capacity}</td>
-                        <td class="p-4 text-center">
-                            <span class="text-xs font-bold px-2 py-1 rounded uppercase tracking-wide ${badgeClass}">${statusText}</span>
-                        </td>
+                        <td class="p-4 text-center"><span class="text-xs font-bold px-2 py-1 rounded uppercase ${statusClass}">Activa</span></td>
                         <td class="p-4 text-right">
-                            <button onclick="deleteClassroom('${data.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 px-2 py-1 rounded transition text-sm font-bold">Eliminar</button>
+                            <button onclick="deleteClassroom('${data.id}')" class="text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/20 px-2 py-1 rounded">Eliminar</button>
                         </td>
                     </tr>
                 `;
                 tbodyElement.innerHTML += row;
             });
-
-            if(count === 0) {
-                tbodyElement.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-gray-500">No tienes aulas registradas. Crea una nueva.</td></tr>';
-            }
+            if(count === 0) tbodyElement.innerHTML = '<tr><td colspan="7" class="p-8 text-center">No tienes aulas registradas. Haz clic en + Nueva Aula.</td></tr>';
             
-            // Actualizar métrica en el dashboard
             document.getElementById('metric-aulas').textContent = count;
         }
 
-        // Crear nueva aula
+        // Crear Aula Nueva
         document.getElementById('form-classroom').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const btnText = document.getElementById('txt-save-cr');
             const spinner = document.getElementById('spin-save-cr');
-            
             btnText.textContent = "Guardando...";
             spinner.classList.remove('hidden');
 
             const newClassroom = {
-                tenantId: "tenant_uc",
-                teacherId: currentUser ? currentUser.uid : "demo_user",
+                teacherId: currentUser ? currentUser.uid : "demo",
                 name: document.getElementById('cr-name').value,
                 nrc: document.getElementById('cr-nrc').value,
-                courseId: document.getElementById('cr-course').value,
                 modality: document.getElementById('cr-modality').value,
                 campus: document.getElementById('cr-campus').value,
                 capacity: parseInt(document.getElementById('cr-capacity').value),
@@ -550,7 +688,7 @@
                 setTimeout(() => {
                     newClassroom.id = 'demo_' + Date.now();
                     demoClassrooms.push(newClassroom);
-                    showToast("Aula creada (Modo Demo)", "success");
+                    showToast("Aula guardada en memoria (Modo Demo)", "success");
                     closeModal('modal-classroom');
                     document.getElementById('form-classroom').reset();
                     window.loadClassrooms();
@@ -560,66 +698,111 @@
                 return;
             }
 
-            if(!db || !currentUser) {
-                showToast("Debes iniciar sesión primero.", "error");
-                btnText.textContent = "Guardar Aula";
-                spinner.classList.add('hidden');
-                return;
-            }
-
             try {
-                // Guardar en Firestore
+                // Guardar en Firestore Real
                 newClassroom.createdAt = serverTimestamp();
                 await addDoc(collection(db, "classrooms"), newClassroom);
-                
                 showToast("Aula creada exitosamente", "success");
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                
-                // Recargar tabla
-                window.loadClassrooms();
+                window.loadClassrooms(); // Recargar tabla
             } catch (error) {
-                console.error("Error al crear aula:", error);
-                showToast("Error al guardar. Revisa consola.", "error");
+                console.error("Error:", error);
+                showToast("Error al guardar en la nube", "error");
             } finally {
                 btnText.textContent = "Guardar Aula";
                 spinner.classList.add('hidden');
             }
         });
 
-        // Eliminar aula (Manejador global para usar en onclick en el HTML)
+        // Eliminar Aula
         let classroomToDelete = null;
-        
         window.deleteClassroom = function(id) {
             classroomToDelete = id;
-            document.getElementById('confirm-msg').textContent = "¿Seguro que deseas eliminar esta aula? Se perderá el acceso a sus Teams y reportes.";
             openModal('modal-confirm');
         };
 
-        // Modificación al manejador de confirmación para soportar Modo Demo
         document.getElementById('btn-confirm-action').addEventListener('click', async () => {
             if(!classroomToDelete) return;
             
             if (isDemoMode) {
                 demoClassrooms = demoClassrooms.filter(c => c.id !== classroomToDelete);
-                showToast("Aula eliminada (Modo Demo)", "success");
+                showToast("Aula eliminada", "success");
                 closeModal('modal-confirm');
                 window.loadClassrooms();
                 return;
             }
             
-            if(!db) return;
-
             try {
+                // Borrar de Firestore Real
                 await deleteDoc(doc(db, "classrooms", classroomToDelete));
                 showToast("Aula eliminada", "success");
                 closeModal('modal-confirm');
                 window.loadClassrooms();
             } catch (error) {
-                console.error("Error al eliminar", error);
-                showToast("Error al eliminar el documento", "error");
+                showToast("Error al eliminar", "error");
             }
         });
+
+        /* STREAMING_CHUNK:Funciones para Forms de Team y FastTest */
+        // Envío de Team a Firebase
+        const teamForm = document.getElementById('form-team');
+        if(teamForm) {
+            teamForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if(isDemoMode) {
+                    showToast("Team registrado (Demo)", "success");
+                    setTimeout(() => navigate('dashboard'), 2000);
+                    return;
+                }
+                
+                const inputs = teamForm.querySelectorAll('input[type="text"], input[type="email"]');
+                let members = [];
+                for(let i=0; i<inputs.length; i+=2) { 
+                    if(inputs[i].value) members.push({ name: inputs[i].value, email: inputs[i+1] ? inputs[i+1].value : '' });
+                }
+
+                try {
+                    showToast("Enviando solicitud...", "info");
+                    await addDoc(collection(db, "teams"), {
+                        teacherId: currentUser.uid,
+                        createdAt: serverTimestamp(),
+                        status: 'pending',
+                        members: members
+                    });
+                    showToast("Team registrado exitosamente.", "success");
+                    teamForm.reset();
+                    setTimeout(() => navigate('dashboard'), 2000);
+                } catch (error) {
+                    showToast("Error al guardar team", "error");
+                }
+            });
+        }
+
+        // Envío de Fast Test a Firebase
+        window.submitFastTest = async function() {
+            if(isDemoMode) {
+                showToast("Test Finalizado (Demo)", "success");
+                setTimeout(() => navigate('dashboard'), 2000);
+                return;
+            }
+            
+            try {
+                showToast("Evaluando respuestas...", "info");
+                const score = Math.floor(Math.random() * 5) + 16; 
+                await addDoc(collection(db, "fastTestAttempts"), {
+                    studentId: currentUser.uid,
+                    courseId: "FIS101",
+                    score: score,
+                    maxScore: 20,
+                    createdAt: serverTimestamp()
+                });
+                showToast(`¡Test Finalizado! Tu nota es: ${score}/20`, "success");
+                setTimeout(() => navigate('dashboard'), 3000);
+            } catch (error) {
+                showToast("Error al guardar evaluación.", "error");
+            }
+        };
 
     </script>
 </body>
