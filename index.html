@@ -233,7 +233,7 @@
                         <div id="team-members-container" class="space-y-4">
                             <!-- Integrante 1 (Líder) -->
                             <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
-                                <h4 class="font-bold text-brand-purple mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
+                                <h4 class="font-bold text-brand-lightBlue mb-3 text-sm flex items-center gap-2">⭐ Integrante 1 (Líder)</h4>
                                 <div class="grid grid-cols-2 gap-3">
                                     <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
                                     <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
@@ -243,7 +243,7 @@
                             </div>
                             <!-- Integrante 2 -->
                             <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30">
-                                <h4 class="font-bold text-brand-purple mb-3 text-sm">Integrante 2</h4>
+                                <h4 class="font-bold text-brand-lightBlue mb-3 text-sm">Integrante 2</h4>
                                 <div class="grid grid-cols-2 gap-3">
                                     <input type="text" required placeholder="Nombres y Apellidos" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
                                     <input type="email" required placeholder="Correo Institucional" class="border rounded px-3 py-2 text-sm bg-white dark:bg-gray-800 dark:text-white">
@@ -381,8 +381,8 @@
     </div>
 
     <script>
-        const logoLight = 'Logo_Teach6_2.png';
-        const logoDark = 'Logo_Teach7_2.png';
+        const logoLight = 'Logo_Teach7_2.png';
+        const logoDark = 'Logo_Teach6_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
@@ -448,7 +448,7 @@
             const newMemberHtml = `
                 <div class="p-4 bg-brand-paleBlue/30 dark:bg-gray-900 rounded border border-brand-lightBlue/30 mt-4 transition-all duration-300">
                     <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-bold text-brand-purple text-sm">Integrante ${memberCount}</h4>
+                        <h4 class="font-bold text-brand-lightBlue text-sm">Integrante ${memberCount}</h4>
                         <button type="button" onclick="this.parentElement.parentElement.remove();" class="text-red-500 text-xs font-bold hover:underline">Quitar</button>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
