@@ -124,39 +124,26 @@
             
             <nav class="flex-1 space-y-1.5 no-scrollbar overflow-y-auto">
                 <div id="menu-superadmin" class="space-y-1.5 hidden">
-                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Global</p>
-                    <button onclick="navigate('dashboard-super')" id="nav-dashboard-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🌍</span> Panel Maestro</button>
-                    <button onclick="navigate('classrooms')" id="nav-classrooms-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Aulas Globales</button>
-                    <button onclick="navigate('teams-admin')" id="nav-teams-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Supervisión Teams</button>
-                    <button onclick="openActiveCourses()" id="nav-courses-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos Globales</button>
-                    <button onclick="openArchivedCourses()" id="nav-courses-archived-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
-                </div>
-
-                <div id="menu-admin" class="space-y-1.5 hidden">
-                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Institución</p>
-                    <button onclick="navigate('dashboard-admin')" id="nav-dashboard-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🏢</span> Sede Central</button>
-                    <button onclick="navigate('classrooms')" id="nav-classrooms-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Gestión Aulas</button>
-                    <button onclick="navigate('teams-admin')" id="nav-teams-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Auditar Teams</button>
-                    <button onclick="openActiveCourses()" id="nav-courses-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
-                    <button onclick="openArchivedCourses()" id="nav-courses-archived-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
+                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Supervisión</p>
+                    <button onclick="navigate('dashboard-super')" id="nav-dashboard-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🌍</span> Panel maestro</button>
+                    <button onclick="navigate('classrooms')" id="nav-classrooms-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Todas las clases</button>
+                    <button onclick="openArchivedCourses()" id="nav-courses-archived-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Clases archivadas</button>
                 </div>
 
                 <div id="menu-teacher" class="space-y-1.5 hidden">
-                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Académico</p>
+                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Teach</p>
                     <button onclick="navigate('dashboard')" id="nav-dashboard" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
-                    <button onclick="navigate('classrooms')" id="nav-classrooms-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Aulas</button>
-                    <button onclick="navigate('teams-teacher')" id="nav-teams-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Team</button>
-                    <button onclick="openActiveCourses()" id="nav-courses" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
-                    <button onclick="openArchivedCourses()" id="nav-courses-archived" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
+                    <button onclick="navigate('classrooms')" id="nav-classrooms-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis clases</button>
+                    <button onclick="navigate('dashboard')" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⏳</span> Pendientes</button>
+                    <button onclick="openArchivedCourses()" id="nav-courses-archived" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Clases archivadas</button>
                 </div>
 
                 <div id="menu-student" class="space-y-1.5 hidden">
-                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Mi Ruta</p>
+                    <p class="text-[10px] text-brand-lightBlue font-bold uppercase tracking-widest px-4 mb-2 mt-4">Teach</p>
                     <button onclick="navigate('student-home')" id="nav-student-home" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
-                    <button onclick="navigate('classrooms')" id="nav-classrooms-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Cursos</button>
-                    <button onclick="navigate('fasttest-demo')" id="nav-fasttest-demo" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">✓</span> Fast Tests</button>
-                    <button onclick="openActiveCourses()" id="nav-courses-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
-                    <button onclick="navigate('teams-student')" id="nav-teams-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Mi Team</button>
+                    <button onclick="navigate('classrooms')" id="nav-classrooms-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis clases</button>
+                    <button onclick="navigate('student-home')" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⏳</span> Pendientes</button>
+                    <button onclick="openArchivedCourses()" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Clases archivadas</button>
                 </div>
             </nav>
             
@@ -172,10 +159,8 @@
                 <div class="px-4 mb-4">
                     <p id="user-display-email" class="text-xs text-white/60 dark:text-gray-400 truncate mb-1">usuario@correo.com</p>
                     
-                    <!-- SELECTOR MAGICO INTEGRADO AL BADGE -->
-                    <select id="role-switcher" onchange="switchRoleManually(this.value)" class="hidden bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider focus:outline-none cursor-pointer border border-transparent hover:border-brand-lightBlue transition role-badge-select w-auto">
-                    </select>
-                    <!-- BADGE ESTATICO (Para usuarios sin selector) -->
+                    <select id="role-switcher" class="hidden"></select>
+                    <!-- Tipo principal de cuenta -->
                     <span id="user-role-badge" class="inline-block bg-brand-lightBlue/20 text-brand-lightBlue text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Perfil</span>
                 </div>
                 
@@ -187,6 +172,13 @@
 
         <!-- CONTENIDO PRINCIPAL -->
         <main class="flex-1 p-6 md:p-8 overflow-y-auto relative z-10 bg-brand-softPurple dark:bg-[#090D14] transition-colors duration-300">
+            <div class="fixed top-5 right-6 z-40">
+                <button id="global-create-button" onclick="toggleGlobalCreateMenu(event)" class="w-12 h-12 rounded-full bg-brand-purple text-white text-2xl font-light shadow-xl hover:bg-brand-deepPurple transition">+</button>
+                <div id="global-create-menu" class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
+                    <button id="action-create-class" onclick="startCreateClass()" class="w-full text-left px-5 py-3.5 font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">➕ Crear clase</button>
+                    <button onclick="openJoinClassModal()" class="w-full text-left px-5 py-3.5 font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">🔗 Unirse a una clase</button>
+                </div>
+            </div>
             
             <!-- VISTA: DASHBOARD DOCENTE (OPERATIVO Y COMPLETO) -->
             <div id="view-dashboard" class="app-view hidden fade-in max-w-6xl mx-auto">
@@ -263,7 +255,7 @@
                     <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
                         <div class="p-6 border-b border-gray-100 dark:border-gray-800">
                             <h3 class="text-xl font-bold text-brand-deepPurple dark:text-white">Pendientes por atender</h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Acciones prioritarias de tus aulas.</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Acciones prioritarias de tus clases.</p>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-sm">
@@ -314,10 +306,10 @@
             <div id="view-classrooms" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
                     <div>
-                        <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Aulas</h1>
+                        <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Clases</h1>
                         <p class="text-brand-purple/80 dark:text-gray-400 font-medium" id="classrooms-subtitle">Administra los espacios académicos del periodo.</p>
                     </div>
-                    <button id="btn-add-classroom" onclick="openModal('modal-classroom')" class="hidden bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2">
+                    <button id="btn-add-classroom" onclick="openNewClassroomModal()" class="hidden bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md flex items-center gap-2">
                         <span>+ Nueva Aula</span>
                     </button>
                 </header>
@@ -328,7 +320,7 @@
             <!-- VISTA: DETALLE DE AULA / PERSONAS -->
             <div id="view-classroom-detail" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <header class="mb-6">
-                    <button onclick="navigate('classrooms')" class="text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:underline mb-4">← Volver a Aulas</button>
+                    <button onclick="navigate('classrooms')" class="text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:underline mb-4">← Volver a Clases</button>
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
                             <p id="classroom-detail-meta" class="text-sm font-bold text-brand-lightBlue uppercase tracking-wider">Aula</p>
@@ -349,8 +341,8 @@
                 </div>
 
                 <div id="classroom-tab-summary" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
-                    <h2 class="text-xl font-black dark:text-white">Resumen del aula</h2>
-                    <p class="text-gray-500 mt-2">Aquí se mostrará el avance, próximos vencimientos y alertas del aula.</p>
+                    <h2 class="text-xl font-black dark:text-white">Resumen del clase</h2>
+                    <p class="text-gray-500 mt-2">Aquí se mostrará el avance, próximos vencimientos y alertas del clase.</p>
                 </div>
                 <div id="classroom-tab-content" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
                     <h2 class="text-xl font-black dark:text-white">Contenidos vinculados</h2>
@@ -367,7 +359,7 @@
 
                     <section class="bg-white dark:bg-[#1C2333] rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
                         <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800">
-                            <div><h2 class="text-2xl font-black text-brand-deepPurple dark:text-white">Estudiantes</h2><p id="students-count-label" class="text-sm text-gray-500">Matrículas e invitaciones del aula.</p></div>
+                            <div><h2 class="text-2xl font-black text-brand-deepPurple dark:text-white">Estudiantes</h2><p id="students-count-label" class="text-sm text-gray-500">Matrículas e invitaciones del clase.</p></div>
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openPeopleModal('student','email')" class="bg-brand-purple text-white px-4 py-2 rounded-xl font-bold text-sm">Invitar por correo</button>
                                 <button onclick="openPeopleModal('student','link')" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-4 py-2 rounded-xl font-bold text-sm dark:text-white">Enlace y QR</button>
@@ -382,9 +374,9 @@
                         <div id="students-list" class="divide-y divide-gray-100 dark:divide-gray-800"><div class="p-8 text-center text-gray-500">Cargando...</div></div>
                     </section>
                 </div>
-                <div id="classroom-tab-team" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Teams del aula</h2></div>
+                <div id="classroom-tab-team" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Teams del clase</h2></div>
                 <div id="classroom-tab-grades" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Calificaciones</h2></div>
-                <div id="classroom-tab-analytics" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Analítica del aula</h2></div>
+                <div id="classroom-tab-analytics" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Analítica del clase</h2></div>
             </div>
 
             <!-- VISTA: MÓDULO TEAM (PROFESOR) -->
@@ -666,7 +658,7 @@
     <div id="modal-people" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-3xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden max-h-[92vh] flex flex-col">
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
-                <div><h3 id="people-modal-title" class="text-2xl font-black text-brand-deepPurple dark:text-white">Invitar estudiantes</h3><p id="people-modal-subtitle" class="text-sm text-gray-500 mt-1">Elige cómo incorporar personas al aula.</p></div>
+                <div><h3 id="people-modal-title" class="text-2xl font-black text-brand-deepPurple dark:text-white">Invitar estudiantes</h3><p id="people-modal-subtitle" class="text-sm text-gray-500 mt-1">Elige cómo incorporar personas al clase.</p></div>
                 <button onclick="closeModal('modal-people')" class="text-2xl text-gray-400 hover:text-gray-700">×</button>
             </div>
             <div class="flex border-b border-gray-100 dark:border-gray-800 px-6 overflow-x-auto">
@@ -682,7 +674,7 @@
                         <p class="text-xs text-gray-500 mt-2">Teach validará duplicados, capacidad y correos ya matriculados.</p>
                     </div>
                     <div id="teacher-role-field" class="hidden">
-                        <label class="block text-sm font-bold mb-2 dark:text-gray-300">Función en el aula</label>
+                        <label class="block text-sm font-bold mb-2 dark:text-gray-300">Función en el clase</label>
                         <select id="invite-classroom-role" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white">
                             <option value="assistant_teacher">Profesor asistente</option><option value="coordinator">Coordinador</option><option value="reviewer">Revisor</option><option value="observer">Observador</option>
                         </select>
@@ -691,15 +683,15 @@
                         <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Vencimiento</label><input id="invite-expiry" type="date" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
                         <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Aprobación</label><select id="invite-approval" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="manual">Manual</option><option value="automatic">Automática</option></select></div>
                     </div>
-                    <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Mensaje opcional</label><textarea id="invite-message" rows="3" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Te invito a participar en esta aula de Teach."></textarea></div>
+                    <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Mensaje opcional</label><textarea id="invite-message" rows="3" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Te invito a participar en esta clase de Teach."></textarea></div>
                     <button onclick="sendEmailInvitations()" class="w-full bg-brand-purple text-white py-3 rounded-xl font-bold hover:bg-brand-deepPurple">Enviar invitaciones</button>
                 </div>
                 <div id="people-panel-link" class="people-modal-panel hidden space-y-5">
                     <div class="bg-brand-softPurple dark:bg-[#121824] rounded-2xl p-5 border border-brand-lightBlue/20">
-                        <label class="text-sm font-bold dark:text-white">Enlace de invitación del aula</label>
+                        <label class="text-sm font-bold dark:text-white">Enlace de invitación del clase</label>
                         <div class="flex gap-2 mt-2"><input id="classroom-invite-link" readonly class="flex-1 border rounded-xl px-4 py-3 bg-white dark:bg-[#1C2333] dark:border-gray-700 dark:text-white"><button onclick="copyInviteLink()" class="bg-brand-purple text-white px-4 rounded-xl font-bold">Copiar</button></div>
                         <div class="grid md:grid-cols-2 gap-5 mt-5 items-center">
-                            <div><p class="text-sm font-bold dark:text-white">Código del aula</p><p id="classroom-join-code" class="text-3xl font-black text-brand-purple dark:text-brand-lightBlue mt-2">—</p><p class="text-xs text-gray-500 mt-2">Puede compartirse por WhatsApp, correo o proyectarse en clase.</p></div>
+                            <div><p class="text-sm font-bold dark:text-white">Código del clase</p><p id="classroom-join-code" class="text-3xl font-black text-brand-purple dark:text-brand-lightBlue mt-2">—</p><p class="text-xs text-gray-500 mt-2">Puede compartirse por WhatsApp, correo o proyectarse en clase.</p></div>
                             <div class="flex justify-center"><canvas id="classroom-qr" class="bg-white p-3 rounded-xl"></canvas></div>
                         </div>
                     </div>
@@ -723,14 +715,39 @@
         </div>
     </div>
 
+    <!-- MODAL: ELEGIR TIPO DE CUENTA -->
+    <div id="modal-account-type" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-[70] hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-3xl shadow-2xl w-full max-w-3xl p-8 border border-brand-lightBlue/20">
+            <div class="text-center mb-8"><h2 class="text-3xl font-black text-brand-deepPurple dark:text-white">Elige cómo usarás Teach</h2><p class="text-gray-500 mt-2">Podrás participar en cada clase con la función que corresponda.</p></div>
+            <div class="grid md:grid-cols-2 gap-5">
+                <button onclick="chooseAccountType('student')" class="p-7 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-gray-800 text-left transition"><div class="text-5xl mb-4">🎓</div><h3 class="text-xl font-black text-brand-deepPurple dark:text-white">Soy estudiante</h3><p class="text-sm text-gray-500 mt-2">Quiero unirme a clases, aprender, resolver actividades y entregar trabajos.</p></button>
+                <button onclick="chooseAccountType('teacher')" class="p-7 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-brand-purple hover:bg-brand-softPurple dark:hover:bg-gray-800 text-left transition"><div class="text-5xl mb-4">👨‍🏫</div><h3 class="text-xl font-black text-brand-deepPurple dark:text-white">Soy profesor</h3><p class="text-sm text-gray-500 mt-2">Quiero crear clases, compartir recursos, evaluar y acompañar el progreso.</p></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: UNIRSE A UNA CLASE -->
+    <div id="modal-join-class" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-[60] hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-lg border border-brand-lightBlue/20 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]"><h3 class="text-xl font-black text-brand-deepPurple dark:text-white">Unirse a una clase</h3><p class="text-sm text-gray-500 mt-1">Ingresa el código compartido por el profesor.</p></div>
+            <form id="form-join-class" class="p-6 space-y-5">
+                <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Código de la clase</label><input id="join-class-code" required maxlength="12" autocomplete="off" class="w-full uppercase tracking-[.25em] text-center text-xl font-black border rounded-xl px-4 py-4 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="ABC123"></div>
+                <div id="join-role-wrap" class="hidden"><label class="block text-sm font-bold mb-2 dark:text-gray-300">Quiero participar como</label><select id="join-class-role" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="student">Estudiante</option><option value="teacher">Profesor colaborador (requiere aprobación)</option></select></div>
+                <p class="text-xs text-gray-500">Teach verificará el código, la capacidad y la política de ingreso de la clase.</p>
+                <div class="flex justify-end gap-3"><button type="button" onclick="closeModal('modal-join-class')" class="px-5 py-2.5 font-bold text-gray-500">Cancelar</button><button type="submit" class="px-6 py-2.5 bg-brand-purple text-white rounded-xl font-bold">Continuar</button></div>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL: CREAR AULA -->
     <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]">
-                <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">Configuración de Aula</h3>
+                <h3 id="classroom-modal-title" class="text-xl font-black text-brand-deepPurple dark:text-white">Nueva clase</h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Define los parámetros operativos para este periodo.</p>
             </div>
             <form id="form-classroom" class="p-6 space-y-5">
+                <input type="hidden" id="cr-doc-id">
                 <div class="grid grid-cols-2 gap-5">
                     <div class="col-span-2 md:col-span-1">
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Curso Base</label>
@@ -745,7 +762,7 @@
                     </div>
                     
                     <div class="col-span-2">
-                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Nombre de la Sección o Aula</label>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Nombre de la clase</label>
                         <input type="text" id="cr-name" required placeholder="Ej. Física 1 - Grupo A" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
 
@@ -779,12 +796,22 @@
                         <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Capacidad Max. Estudiantes</label>
                         <input type="number" id="cr-capacity" value="40" required min="1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
                     </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Estado de la clase</label>
+                        <select id="cr-status" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                            <option value="Activa">Activa</option>
+                            <option value="Borrador">Borrador</option>
+                            <option value="Pausada">Pausada</option>
+                            <option value="Cerrada">Cerrada</option>
+                            <option value="Archivada">Archivada</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="flex justify-end gap-3 mt-8 pt-6 border-t border-gray-100 dark:border-gray-800">
                     <button type="button" onclick="closeModal('modal-classroom')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800 transition">Cancelar</button>
                     <button type="submit" id="btn-save-classroom" class="px-8 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple transition flex items-center shadow-md">
-                        <span id="txt-save-cr">Activar Aula</span>
+                        <span id="txt-save-cr">Crear clase</span>
                         <svg id="spin-save-cr" class="hidden animate-spin ml-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
                 </div>
@@ -850,7 +877,7 @@
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B] flex items-start justify-between gap-4">
                 <div>
                     <h3 id="course-modal-title" class="text-xl font-black text-brand-deepPurple dark:text-white">Nuevo curso</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Configura un curso reutilizable y luego vincúlalo con una o más aulas.</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Configura un curso reutilizable y luego vincúlalo con una o más clases.</p>
                 </div>
                 <button type="button" onclick="closeModal('modal-course')" class="w-9 h-9 rounded-lg hover:bg-white dark:hover:bg-gray-800 text-gray-500 text-xl">×</button>
             </div>
@@ -989,39 +1016,18 @@
             console.error("Firebase no disponible.");
         }
 
-        window.applyRoleUI = function(role, isManualSwitch = false) {
+        window.applyRoleUI = function(role) {
+            if (role === 'admin') role = 'teacher';
             window.currentUser.role = role;
-            
-            const badgeNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst.', teacher: 'Profesor', student: 'Estudiante' };
+            const badgeNames = { superadmin: 'Superadmin', teacher: 'Profesor', student: 'Estudiante' };
             const badgeElement = document.getElementById('user-role-badge');
-            if(badgeElement) badgeElement.textContent = badgeNames[role] || 'Estudiante';
-
-            ['superadmin', 'admin', 'teacher', 'student'].forEach(r => {
-                const el = document.getElementById(`menu-${r}`);
-                if(el) el.classList.add('hidden');
-            });
-            document.getElementById(`menu-${role}`).classList.remove('hidden');
-
+            if (badgeElement) badgeElement.textContent = badgeNames[role] || 'Estudiante';
+            ['superadmin','admin','teacher','student'].forEach(r => document.getElementById(`menu-${r}`)?.classList.add('hidden'));
+            document.getElementById(`menu-${role}`)?.classList.remove('hidden');
+            document.getElementById('action-create-class')?.classList.toggle('hidden', role === 'student');
             const btnAddClassroom = document.getElementById('btn-add-classroom');
-            if(btnAddClassroom) {
-                if(role === 'admin' || role === 'teacher') btnAddClassroom.classList.remove('hidden');
-                else btnAddClassroom.classList.add('hidden');
-            }
-
-            let initialView = 'teams-student';
-            if (role === 'superadmin') initialView = 'dashboard-super';
-            else if (role === 'admin') initialView = 'dashboard-admin';
-            else if (role === 'teacher') initialView = 'dashboard';
-
-            if (isManualSwitch) {
-                navigate(initialView);
-                showToast(`Simulando vista como: ${badgeNames[role]}`, "info");
-            }
-            return initialView;
-        };
-
-        window.switchRoleManually = function(newRole) {
-            applyRoleUI(newRole, true);
+            if (btnAddClassroom) btnAddClassroom.classList.toggle('hidden', role === 'student');
+            return role === 'superadmin' ? 'dashboard-super' : role === 'teacher' ? 'dashboard' : 'student-home';
         };
 
         function transitionToApp(initialView) {
@@ -1045,46 +1051,21 @@
                         const userRef = doc(db, "users", user.uid);
                         const userSnap = await getDoc(userRef);
                         
-                        let role = "student"; 
-                        let allowedRoles = ["student"];
-
-                        if (userSnap.exists()) {
-                            const data = userSnap.data();
-                            role = data.role || "student";
-                            allowedRoles = data.allowedRoles || [role]; 
-                        } else {
-                            await setDoc(userRef, { email: user.email, role: role, allowedRoles: [role], createdAt: serverTimestamp() });
+                        let data = userSnap.exists() ? userSnap.data() : {};
+                        let isSuperadmin = data.isSuperadmin === true || data.role === 'superadmin';
+                        let accountType = data.accountType || (data.role === 'teacher' || data.role === 'admin' || isSuperadmin ? 'teacher' : data.role === 'student' ? 'student' : null);
+                        if (!userSnap.exists()) {
+                            await setDoc(userRef, { email: user.email, displayName: user.displayName || '', accountType: null, isSuperadmin: false, status: 'active', createdAt: serverTimestamp() });
+                        } else if (!data.accountType && accountType) {
+                            await setDoc(userRef, { accountType, updatedAt: serverTimestamp() }, { merge: true });
                         }
-
-                        // REGLA DE FUNDADOR: Forzamos el array si eres superadmin
-                        if (role === 'superadmin') {
-                            allowedRoles = ['superadmin', 'admin', 'teacher', 'student'];
-                        }
-
-                        window.currentUser = { uid: user.uid, email: user.email, role: role, allowedRoles: allowedRoles };
+                        const role = isSuperadmin ? 'superadmin' : (accountType || 'student');
+                        window.currentUser = { uid: user.uid, email: user.email, role, accountType, isSuperadmin };
                         document.getElementById('user-display-email').textContent = user.email;
-                        
-                        // INTEGRACIÓN DEL SELECTOR CAMUFLADO
-                        const roleBadge = document.getElementById('user-role-badge');
-                        const switcherSelect = document.getElementById('role-switcher');
-                        
-                        if(allowedRoles.length > 1) {
-                            roleBadge.classList.add('hidden');
-                            switcherSelect.classList.remove('hidden');
-                            switcherSelect.innerHTML = '';
-                            const roleNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst', teacher: 'Profesor', student: 'Estudiante' };
-                            allowedRoles.forEach(r => {
-                                switcherSelect.innerHTML += `<option value="${r}" ${r===role ? 'selected' : ''} class="bg-[#321A44] text-white">${roleNames[r]}</option>`;
-                            });
-                        } else {
-                            roleBadge.classList.remove('hidden');
-                            switcherSelect.classList.add('hidden');
-                            const badgeNames = { superadmin: 'SuperAdmin', admin: 'Admin. Inst.', teacher: 'Profesor', student: 'Estudiante' };
-                            roleBadge.textContent = badgeNames[role] || 'Estudiante';
-                        }
-
-                        const initialView = applyRoleUI(role, false);
-                        transitionToApp(initialView); 
+                        document.getElementById('role-switcher')?.classList.add('hidden');
+                        const initialView = applyRoleUI(role);
+                        transitionToApp(initialView);
+                        if (!isSuperadmin && !accountType) setTimeout(() => openModal('modal-account-type'), 450); 
 
                     } catch(e) {
                         showToast("Error conectando con la base de datos", "error");
@@ -1116,40 +1097,82 @@
 
         document.getElementById('logout-btn').addEventListener('click', () => { if(auth) signOut(auth); });
 
+        window.openNewClassroomModal = function() {
+            const form = document.getElementById('form-classroom');
+            form.reset();
+            document.getElementById('cr-doc-id').value = '';
+            document.getElementById('cr-campus').value = 'Huancayo';
+            document.getElementById('cr-capacity').value = '39';
+            document.getElementById('cr-status').value = 'Activa';
+            document.getElementById('classroom-modal-title').textContent = 'Nueva clase';
+            document.getElementById('txt-save-cr').textContent = 'Crear clase';
+            openModal('modal-classroom');
+        };
+
+        window.editClassroom = async function(classroomId) {
+            try {
+                const snap = await getDoc(doc(db, 'classrooms', classroomId));
+                if (!snap.exists()) return showToast('El clase no existe.', 'error');
+                const data = snap.data();
+                document.getElementById('cr-doc-id').value = classroomId;
+                document.getElementById('cr-course').value = data.course || data.courseName || data.name || 'Física 1';
+                document.getElementById('cr-period').value = data.period || data.academicPeriod || '';
+                document.getElementById('cr-name').value = data.name || data.sectionName || data.course || '';
+                document.getElementById('cr-nrc').value = data.nrc || data.code || '';
+                document.getElementById('cr-modality').value = data.modality || 'Presencial';
+                document.getElementById('cr-start').value = data.startDate || '';
+                document.getElementById('cr-end').value = data.endDate || '';
+                document.getElementById('cr-campus').value = data.campus || data.site || 'Huancayo';
+                document.getElementById('cr-capacity').value = data.capacity || 39;
+                document.getElementById('cr-status').value = data.status || 'Activa';
+                document.getElementById('classroom-modal-title').textContent = 'Editar clase';
+                document.getElementById('txt-save-cr').textContent = 'Guardar cambios';
+                openModal('modal-classroom');
+            } catch (error) {
+                console.error(error);
+                showToast('No se pudo cargar el clase.', 'error');
+            }
+        };
+
+        function classroomField(data, ...keys) {
+            for (const key of keys) {
+                const value = data?.[key];
+                if (value !== undefined && value !== null && String(value).trim() !== '') return value;
+            }
+            return '';
+        }
+
         window.loadClassrooms = async function() {
             const container = document.getElementById('classrooms-container');
-            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando espacios académicos...</div>';
-            
+            container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando clases...</div>';
             if(!db || !currentUser) return;
-            
             try {
-                let loadedClassrooms = [];
-                if (currentUser.role === 'student') {
-                    const enrollSnap = await getDocs(query(collection(db, "enrollments"), where("userId", "==", currentUser.uid), where("status", "==", "active")));
-                    for (const enrollmentDoc of enrollSnap.docs) {
-                        const classroomSnap = await getDoc(doc(db, "classrooms", enrollmentDoc.data().classroomId));
-                        if (classroomSnap.exists()) loadedClassrooms.push({ id: classroomSnap.id, ...classroomSnap.data() });
-                    }
+                const byId = new Map();
+                if (currentUser.role === 'superadmin') {
+                    const snap = await getDocs(collection(db,'classrooms'));
+                    snap.forEach(d => byId.set(d.id,{id:d.id,...d.data()}));
                 } else {
-                    let q;
-                    if (currentUser.role === 'superadmin' || currentUser.role === 'admin') q = collection(db, "classrooms");
-                    else q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
-                    const querySnapshot = await getDocs(q);
-                    querySnapshot.forEach((doc) => loadedClassrooms.push({ id: doc.id, ...doc.data() }));
+                    const memberSnap = await getDocs(query(collection(db,'classroomMembers'), where('userId','==',currentUser.uid), where('status','==','active')));
+                    for (const member of memberSnap.docs) {
+                        const cs = await getDoc(doc(db,'classrooms',member.data().classroomId));
+                        if (cs.exists()) byId.set(cs.id,{id:cs.id,...cs.data(),myClassRole:member.data().classRole});
+                    }
+                    if (currentUser.role === 'teacher') {
+                        const legacy = await getDocs(query(collection(db,'classrooms'), where('teacherId','==',currentUser.uid)));
+                        legacy.forEach(d => byId.set(d.id,{id:d.id,...d.data(),myClassRole:'teacher'}));
+                    }
                 }
-                
-                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') renderAdminTable(loadedClassrooms, container);
-                else renderTeacherCards(loadedClassrooms, container);
-                
-            } catch (error) {
-                container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">Error de lectura de base de datos.</div>';
+                const loadedClassrooms=[...byId.values()].filter(c => String(c.status||'').toLowerCase() !== 'archivada' && String(c.status||'').toLowerCase() !== 'archived');
+                if (currentUser.role === 'superadmin') renderAdminTable(loadedClassrooms,container); else renderTeacherCards(loadedClassrooms,container);
+            } catch(error) {
+                console.error(error); container.innerHTML='<div class="p-10 text-center text-red-500 font-bold">No se pudieron cargar las clases.</div>';
             }
         }
 
         function renderTeacherCards(dataArray, container) {
             container.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-grid"></div>';
             const grid = document.getElementById('cards-grid');
-            if(dataArray.length === 0) { container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes aulas asignadas en este periodo.</p></div>'; return; }
+            if(dataArray.length === 0) { container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] p-10 rounded-2xl text-center border border-gray-200 dark:border-gray-800"><p class="text-gray-500">No tienes clases asignadas en este periodo.</p></div>'; return; }
 
             dataArray.forEach((data) => {
                 grid.innerHTML += `
@@ -1157,19 +1180,19 @@
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${data.course}</h3>
-                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${data.nrc} · ${data.modality}</p>
+                                    <h3 class="text-xl font-black text-brand-deepPurple dark:text-white">${classroomField(data,'course','courseName','name') || 'Aula sin curso'}</h3>
+                                    <p class="text-sm font-medium text-brand-purple dark:text-brand-lightBlue mt-1">NRC ${classroomField(data,'nrc','code') || '—'} · ${classroomField(data,'modality') || 'Sin modalidad'}</p>
                                 </div>
                             </div>
                             <div class="space-y-2 mb-6">
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${data.period}</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${data.campus}</p>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 ${data.enrolled || 0} de ${data.capacity} Estudiantes</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📅 Periodo ${classroomField(data,'period','academicPeriod') || 'Sin definir'}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">📍 Sede ${classroomField(data,'campus','site') || 'Sin definir'}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">👥 ${data.enrolled || 0} de ${data.capacity || 0} Estudiantes</p>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 border-t border-gray-100 dark:border-gray-800">
-                            <button class="py-3 text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition border-r border-gray-100 dark:border-gray-800">Configurar</button>
-                            <button onclick="openClassroom('${data.id}')" class="py-3 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">Entrar al Aula</button>
+                            <button onclick="editClassroom('${data.id}')" class="py-3 text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition border-r border-gray-100 dark:border-gray-800">Editar</button>
+                            <button onclick="openClassroom('${data.id}')" class="py-3 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">Abrir clase</button>
                         </div>
                     </div>
                 `;
@@ -1177,18 +1200,33 @@
         }
 
         function renderAdminTable(dataArray, container) {
-            let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th><th class="p-4 text-right">Acción</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
-            
+            let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th><th class="p-4 text-right">Acciones</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
             if(dataArray.length === 0) {
-                html += '<tr><td colspan="5" class="p-8 text-center text-gray-500">No hay aulas registradas en la base de datos.</td></tr>';
+                html += '<tr><td colspan="6" class="p-8 text-center text-gray-500">No hay clases registradas en la base de datos.</td></tr>';
             } else {
                 dataArray.forEach(data => {
-                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td><td class="p-4 text-right"><button onclick="openClassroom('${data.id}')" class="text-brand-purple dark:text-brand-lightBlue font-bold">Abrir</button></td></tr>`;
+                    const course = classroomField(data,'course','courseName','name') || 'Aula sin curso';
+                    const section = classroomField(data,'name','sectionName');
+                    const period = classroomField(data,'period','academicPeriod') || 'Sin definir';
+                    const campus = classroomField(data,'campus','site') || 'Sin sede';
+                    const modality = classroomField(data,'modality') || 'Sin modalidad';
+                    const nrc = classroomField(data,'nrc','code') || '—';
+                    const status = classroomField(data,'status') || 'Activa';
+                    const statusClass = status.toLowerCase().includes('act') ? 'bg-brand-schoolGreen/20 text-brand-schoolGreen' : status.toLowerCase().includes('borr') ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300';
+                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                        <td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${course}</p>${section && section !== course ? `<p class="text-xs text-gray-500">${section}</p>` : ''}<p class="text-xs text-brand-lightBlue font-medium">NRC: ${nrc}</p></td>
+                        <td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${period}</td>
+                        <td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${campus}</span><span class="text-xs">${modality}</span></td>
+                        <td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity || 0}</td>
+                        <td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase ${statusClass}">${status}</span></td>
+                        <td class="p-4"><div class="flex items-center justify-end gap-2"><button onclick="editClassroom('${data.id}')" class="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-bold text-xs hover:bg-gray-200 dark:hover:bg-gray-700">Editar</button><button onclick="openClassroom('${data.id}')" class="px-3 py-1.5 rounded-lg bg-brand-purple text-white font-bold text-xs hover:bg-brand-deepPurple">Abrir</button></div></td>
+                    </tr>`;
                 });
             }
             html += `</tbody></table></div></div>`;
             container.innerHTML = html;
         }
+
 
 
         // ==============================
@@ -1205,7 +1243,7 @@
 
         window.openClassroom = async function(classroomId) {
             const snap = await getDoc(doc(db, 'classrooms', classroomId));
-            if (!snap.exists()) return showToast('El aula no existe', 'error');
+            if (!snap.exists()) return showToast('El clase no existe', 'error');
             window.selectedClassroomId = classroomId;
             window.selectedClassroomData = { id: snap.id, ...snap.data() };
             document.getElementById('classroom-detail-title').textContent = selectedClassroomData.name || selectedClassroomData.course;
@@ -1244,7 +1282,7 @@
                 const filtered = peopleStatusFilter === 'pending' ? pendingInvites : enrollments.filter(e => e.status === peopleStatusFilter);
                 document.getElementById('students-count-label').textContent = `${enrollments.filter(e=>e.status==='active').length} activos · ${pendingInvites.length} invitaciones pendientes · Capacidad ${selectedClassroomData.capacity || '—'}`;
                 studentsList.innerHTML = filtered.length ? filtered.map(p => studentRow(p, peopleStatusFilter === 'pending')).join('') : `<div class="p-10 text-center text-gray-500">No hay ${peopleStatusFilter === 'pending' ? 'invitaciones pendientes' : 'estudiantes en este estado'}.</div>`;
-            } catch (e) { console.error(e); showToast('No se pudieron cargar las personas del aula','error'); }
+            } catch (e) { console.error(e); showToast('No se pudieron cargar las personas del clase','error'); }
         };
 
         function initials(name='U') { return name.split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase(); }
@@ -1298,7 +1336,7 @@
                 const joinUrl=`${location.origin}${location.pathname}?join=${token}`;
                 const invRef = await addDoc(collection(db,'invitations'), {tenantId:selectedClassroomData.tenantId||null,classroomId:selectedClassroomId,courseId:selectedClassroomData.courseId||null,email,inviteeRole:role,status:'pending',approvalMode:document.getElementById('invite-approval').value,token,joinUrl,expiresAt:document.getElementById('invite-expiry').value||defaultExpiry(),message:document.getElementById('invite-message').value||'',createdBy:currentUser.uid,createdAt:serverTimestamp()});
                 // Compatible con la extensión oficial Firebase Trigger Email si se instala sobre la colección "mail".
-                await addDoc(collection(db,'mail'), {to:[email],message:{subject:`Invitación a ${selectedClassroomData.course || selectedClassroomData.name} en Teach`,html:`<h2>Has sido invitado a Teach</h2><p>${currentUser.email} te invitó al aula <strong>${selectedClassroomData.name || selectedClassroomData.course}</strong>.</p><p>NRC: ${selectedClassroomData.nrc || '—'} · Periodo: ${selectedClassroomData.period || '—'}</p><p><a href="${joinUrl}">Aceptar invitación</a></p><p>La invitación vence el ${document.getElementById('invite-expiry').value||defaultExpiry()}.</p>`},invitationId:invRef.id,createdAt:serverTimestamp()});
+                await addDoc(collection(db,'mail'), {to:[email],message:{subject:`Invitación a ${selectedClassroomData.course || selectedClassroomData.name} en Teach`,html:`<h2>Has sido invitado a Teach</h2><p>${currentUser.email} te invitó al clase <strong>${selectedClassroomData.name || selectedClassroomData.course}</strong>.</p><p>NRC: ${selectedClassroomData.nrc || '—'} · Periodo: ${selectedClassroomData.period || '—'}</p><p><a href="${joinUrl}">Aceptar invitación</a></p><p>La invitación vence el ${document.getElementById('invite-expiry').value||defaultExpiry()}.</p>`},invitationId:invRef.id,createdAt:serverTimestamp()});
                 sent++;
             }
             showToast(`${sent} invitaciones preparadas${skipped?` · ${skipped} omitidas`:''}`,'success');
@@ -1451,7 +1489,7 @@
                             </div>
                         </div>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">${c.unitsCount || 4} unidades · ${c.weeksCount || 17} semanas</p>
-                        <div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Aulas</p><p class="font-black dark:text-white">${c.classroomsCount || 0}</p></div><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Estudiantes</p><p class="font-black dark:text-white">${c.studentsCount || 0}</p></div></div>
+                        <div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Clases</p><p class="font-black dark:text-white">${c.classroomsCount || 0}</p></div><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Estudiantes</p><p class="font-black dark:text-white">${c.studentsCount || 0}</p></div></div>
                     </div>
                     <button onclick="openCourse('${c.id}')" class="w-full border-t border-gray-100 dark:border-gray-800 py-3.5 font-bold ${archivedMode?'text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800':'text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20'} transition">${archivedMode?'Ver curso archivado':currentUser.role==='student'?'Continuar aprendiendo':'Abrir curso'}</button>
                 </article>`).join('')+'</div>';
@@ -1558,7 +1596,7 @@
 
         window.archiveCourse = async function(courseId) {
             const course=(window.cachedCourses || []).find(c=>c.id===courseId);
-            if (!course || !confirm(`¿Archivar “${course.name}”? Desaparecerá de Contenidos, pero conservará aulas, semanas, recursos, entregas y todo su historial.`)) return;
+            if (!course || !confirm(`¿Archivar “${course.name}”? Desaparecerá de Contenidos, pero conservará clases, semanas, recursos, entregas y todo su historial.`)) return;
             try {
                 await updateDoc(doc(db,'courses',courseId),{status:'archived',previousStatus:course.status || 'active',archivedAt:serverTimestamp(),archivedBy:currentUser.uid,updatedAt:serverTimestamp()});
                 showToast('Curso archivado y retirado de Contenidos.','success');
@@ -1588,7 +1626,7 @@
         window.deleteCourseSafe = async function(courseId) {
             const course=(window.cachedCourses || []).find(c=>c.id===courseId);
             if (!course) return;
-            if ((course.classroomsCount || 0) > 0 || (course.studentsCount || 0) > 0) return showToast('Este curso tiene aulas o estudiantes. Debes archivarlo, no eliminarlo.','error');
+            if ((course.classroomsCount || 0) > 0 || (course.studentsCount || 0) > 0) return showToast('Este curso tiene clases o estudiantes. Debes archivarlo, no eliminarlo.','error');
             const weekSnap=await getDocs(query(collection(db,'weeks'), where('courseId','==',courseId)));
             if (!weekSnap.empty) return showToast('Este curso ya tiene semanas. Para proteger el historial, archívalo.','error');
             if (!confirm(`Eliminar definitivamente “${course.name}”? Esta acción no se puede deshacer.`)) return;
@@ -1817,49 +1855,104 @@
         });
 
 
+
+        function generateJoinCode() {
+            const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let code=''; for(let i=0;i<7;i++) code+=chars[Math.floor(Math.random()*chars.length)];
+            return code;
+        }
+        window.toggleGlobalCreateMenu = function(event) { event?.stopPropagation(); document.getElementById('global-create-menu')?.classList.toggle('hidden'); };
+        document.addEventListener('click', e => { if(!e.target.closest('#global-create-menu') && !e.target.closest('#global-create-button')) document.getElementById('global-create-menu')?.classList.add('hidden'); });
+        window.startCreateClass = function() {
+            document.getElementById('global-create-menu')?.classList.add('hidden');
+            if(!['teacher','superadmin'].includes(currentUser?.role)) return showToast('Tu cuenta no puede crear clases.','error');
+            document.getElementById('form-classroom').reset(); document.getElementById('cr-doc-id').value='';
+            document.getElementById('classroom-modal-title').textContent='Nueva clase'; document.getElementById('txt-save-cr').textContent='Crear clase'; openModal('modal-classroom');
+        };
+        window.openJoinClassModal = function() {
+            document.getElementById('global-create-menu')?.classList.add('hidden');
+            document.getElementById('form-join-class').reset();
+            document.getElementById('join-role-wrap').classList.toggle('hidden', currentUser?.role !== 'teacher');
+            openModal('modal-join-class'); setTimeout(()=>document.getElementById('join-class-code')?.focus(),100);
+        };
+        window.chooseAccountType = async function(type) {
+            if(!['teacher','student'].includes(type)) return;
+            await setDoc(doc(db,'users',currentUser.uid), { accountType:type, updatedAt:serverTimestamp() }, {merge:true});
+            currentUser.accountType=type; currentUser.role=type; closeModal('modal-account-type'); applyRoleUI(type); navigate(type==='teacher'?'dashboard':'student-home'); showToast(type==='teacher'?'Perfil de profesor activado.':'Perfil de estudiante activado.','success');
+        };
+        document.getElementById('form-join-class').addEventListener('submit', async e => {
+            e.preventDefault();
+            const code=document.getElementById('join-class-code').value.trim().toUpperCase().replace(/\s+/g,'');
+            const snap=await getDocs(query(collection(db,'classrooms'),where('joinCode','==',code)));
+            if(snap.empty) return showToast('No encontramos una clase con ese código.','error');
+            const classDoc=snap.docs[0], classroom=classDoc.data();
+            if(classroom.joinEnabled===false) return showToast('El ingreso por código está desactivado.','error');
+            const classRole=currentUser.role==='teacher' ? document.getElementById('join-class-role').value : 'student';
+            const requiresApproval=classRole==='teacher' || classroom.joinApproval!=='auto';
+            const status=requiresApproval?'pending':'active';
+            await setDoc(doc(db,'classroomMembers',`${classDoc.id}_${currentUser.uid}`), { classroomId:classDoc.id,userId:currentUser.uid,classRole,teacherRole:classRole==='teacher'?'collaborator':null,status,requestedAt:serverTimestamp(),joinedAt:status==='active'?serverTimestamp():null }, {merge:true});
+            closeModal('modal-join-class');
+            showToast(status==='active'?'Te uniste a la clase.':'Solicitud enviada al profesor.','success');
+            loadClassrooms();
+        });
+
         document.getElementById('form-classroom').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btnText = document.getElementById('txt-save-cr');
             const spinner = document.getElementById('spin-save-cr');
-            btnText.textContent = "Activando...";
+            const classroomId = document.getElementById('cr-doc-id').value;
+            btnText.textContent = classroomId ? 'Guardando...' : 'Creando...';
             spinner.classList.remove('hidden');
 
-            if (!window.currentUser || window.currentUser.role === 'student') {
-                showToast("No tienes permisos suficientes para crear aulas.", "error");
-                btnText.textContent = "Activar Aula";
+            if (!window.currentUser || !['teacher','superadmin'].includes(window.currentUser.role)) {
+                showToast('Solo un profesor puede crear o editar clases.', 'error');
                 spinner.classList.add('hidden');
                 return;
             }
 
             try {
-                const newClassroom = {
+                const payload = {
                     teacherId: currentUser.uid,
                     course: document.getElementById('cr-course').value,
-                    period: document.getElementById('cr-period').value,
-                    name: document.getElementById('cr-name').value,
-                    nrc: document.getElementById('cr-nrc').value,
+                    period: document.getElementById('cr-period').value.trim(),
+                    name: document.getElementById('cr-name').value.trim(),
+                    nrc: document.getElementById('cr-nrc').value.trim(),
                     modality: document.getElementById('cr-modality').value,
                     startDate: document.getElementById('cr-start').value,
                     endDate: document.getElementById('cr-end').value,
-                    campus: document.getElementById('cr-campus').value,
-                    capacity: parseInt(document.getElementById('cr-capacity').value),
-                    enrolled: 0, 
-                    status: 'Activa', 
-                    createdAt: serverTimestamp()
+                    campus: document.getElementById('cr-campus').value.trim(),
+                    capacity: parseInt(document.getElementById('cr-capacity').value, 10),
+                    status: document.getElementById('cr-status').value,
+                    accountOwnerId: currentUser.uid,
+                    joinEnabled: true,
+                    joinApproval: 'manual',
+                    updatedAt: serverTimestamp()
                 };
-                
-                await addDoc(collection(db, "classrooms"), newClassroom);
-                showToast("El aula se ha creado correctamente", "success");
+
+                if (classroomId) {
+                    await setDoc(doc(db, 'classrooms', classroomId), payload, { merge: true });
+                    showToast('Los cambios del clase se guardaron correctamente.', 'success');
+                } else {
+                    const joinCode = generateJoinCode();
+                    const created = await addDoc(collection(db, 'classrooms'), { ...payload, joinCode, enrolled: 0, createdAt: serverTimestamp() });
+                    await setDoc(doc(db,'classroomMembers',`${created.id}_${currentUser.uid}`), {
+                        classroomId: created.id, userId: currentUser.uid, classRole: 'teacher', teacherRole: 'owner', status: 'active', joinedAt: serverTimestamp()
+                    });
+                    showToast(`Clase creada. Código: ${joinCode}`, 'success');
+                }
                 closeModal('modal-classroom');
                 document.getElementById('form-classroom').reset();
-                window.loadClassrooms(); // Recarga la tabla o tarjetas
+                document.getElementById('cr-doc-id').value = '';
+                window.loadClassrooms();
             } catch (error) {
-                showToast("Error al guardar en el servidor", "error");
+                console.error(error);
+                showToast('No se pudieron guardar los cambios.', 'error');
             } finally {
-                btnText.textContent = "Activar Aula";
+                btnText.textContent = classroomId ? 'Guardar cambios' : 'Crear clase';
                 spinner.classList.add('hidden');
             }
         });
+
 
     </script>
 </body>
