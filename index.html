@@ -85,7 +85,7 @@
             
             <div class="text-center mb-8">
                 <div class="h-16 flex items-center justify-center mb-6">
-                    <img id="login-logo" src="Logo_Teach6_2.png" alt="Teach Logo" class="max-h-full object-contain">
+                    <img id="login-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="max-h-full object-contain">
                 </div>
                 <h2 class="text-2xl font-black dark:text-white text-brand-deepPurple">Iniciar Sesión</h2>
                 <p class="text-brand-purple/70 dark:text-gray-400 text-sm mt-1 font-medium">Tu ruta para aprender y avanzar.</p>
@@ -118,7 +118,7 @@
         <aside class="bg-brand-purple dark:bg-[#151b2b] text-white flex flex-col p-5 border-r border-black/10 dark:border-gray-800 relative z-20 transition-colors duration-300">
             <!-- LOGO: Siempre blanco, más grande (w-40) y fijo -->
             <div class="flex items-center justify-center mb-8 mt-2 h-16">
-                <img id="sidebar-logo" src="Logo_Teach7_2.png" alt="Teach Logo" class="w-40 max-h-full object-contain drop-shadow-md">
+                <img id="sidebar-logo" src="Logo_Teach6_2.png" alt="Teach Logo" class="w-40 max-h-full object-contain drop-shadow-md">
             </div>
             
             <nav class="flex-1 space-y-1.5 no-scrollbar overflow-y-auto">
@@ -503,7 +503,7 @@
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <h2 class="text-xl font-black text-brand-deepPurple dark:text-white">Semanas del curso</h2>
-                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Ruta: Aprende → Explora → Demuestra → Desbloquea → Aplica → Entrega → Mejora.</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Metodología T.E.A.C.H.: Train → Evaluate → Apply → Complete → Hone.</p>
                             </div>
                             <div class="flex gap-2">
                                 <select id="week-unit-filter" onchange="filterWeeks()" class="border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#121824] dark:text-white rounded-xl px-3 py-2 text-sm font-bold">
@@ -525,7 +525,7 @@
                             <div>
                                 <p id="week-detail-kicker" class="text-brand-lightBlue text-xs font-black uppercase tracking-[0.18em]">Semana 06 · Unidad 2</p>
                                 <h1 id="week-detail-title" class="text-3xl font-black mt-2">Fuerzas en equilibrio</h1>
-                                <p id="week-detail-outcome" class="text-white/75 mt-2 max-w-2xl">Ruta de aprendizaje organizada por recursos, Fast Test y entregable.</p>
+                                <p id="week-detail-outcome" class="text-white/75 mt-2 max-w-2xl">Metodología T.E.A.C.H. organizada en cinco etapas de aprendizaje y mejora.</p>
                             </div>
                             <div id="week-detail-actions" class="hidden flex flex-wrap gap-2">
                                 <button onclick="openResourceModal()" class="bg-white text-brand-deepPurple px-5 py-2.5 rounded-xl font-bold hover:bg-gray-100 transition">+ Añadir contenido</button>
@@ -538,7 +538,7 @@
                         <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Recursos</p><p id="week-resource-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
                         <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Obligatorios</p><p id="week-required-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
                         <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Publicados</p><p id="week-published-count" class="text-3xl font-black dark:text-white mt-2">0</p></div>
-                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Ruta</p><p class="text-3xl font-black dark:text-white mt-2">7</p></div>
+                        <div class="bg-white dark:bg-[#1C2333] rounded-2xl p-5 border border-gray-100 dark:border-gray-800"><p class="text-xs uppercase font-bold text-gray-500">Ruta</p><p class="text-3xl font-black dark:text-white mt-2">5</p></div>
                     </div>
 
                     <div id="week-route-container" class="space-y-4"></div>
@@ -690,13 +690,13 @@
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden max-h-[92vh] overflow-y-auto">
             <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B]">
                 <h3 id="resource-modal-title" class="text-xl font-black text-brand-deepPurple dark:text-white">Añadir contenido</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Ubica el recurso dentro de la ruta de aprendizaje de la semana.</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Clasifica el recurso dentro de la metodología T.E.A.C.H. de la semana.</p>
             </div>
             <form id="form-resource" class="p-6 space-y-5">
                 <input type="hidden" id="resource-doc-id">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Título del recurso</label><input id="resource-title" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Ej. Guía de laboratorio: Fuerzas en equilibrio"></div>
-                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Bloque de la ruta</label><select id="resource-block" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="learn">Aprende</option><option value="explore">Explora</option><option value="demonstrate">Demuestra</option><option value="unlock">Desbloquea</option><option value="apply">Aplica</option><option value="deliver">Entrega</option><option value="improve">Mejora</option></select></div>
+                    <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Bloque de la ruta</label><select id="resource-block" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="train">📘 Train · Entrénate</option><option value="evaluate">🧠 Evaluate · Evalúa tu nivel</option><option value="apply">🛠️ Apply · Aplica lo aprendido</option><option value="complete">📤 Complete · Completa y entrega</option><option value="hone">✨ Hone · Perfecciona</option></select></div>
                     <div><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Tipo</label><select id="resource-type" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="pdf">PDF</option><option value="presentation">Presentación</option><option value="video">Video</option><option value="audio">Podcast / audio</option><option value="image">Imagen / infografía</option><option value="link">Enlace</option><option value="fasttest">Fast Test</option><option value="activity">Actividad / laboratorio</option><option value="submission">Entregable</option><option value="feedback">Retroalimentación</option></select></div>
                     <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Descripción breve</label><textarea id="resource-description" rows="2" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Indica para qué sirve este recurso."></textarea></div>
                     <div class="md:col-span-2"><label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Enlace de Drive o URL</label><input id="resource-url" type="url" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="https://drive.google.com/..."></div>
@@ -714,8 +714,8 @@
     <!-- UI Scripts Generales -->
     <script>
         // Logo fijo, grande y siempre claro para el panel lateral
-        const logoWhite = 'Logo_Teach7_2.png';
-        const logoColor = 'Logo_Teach6_2.png';
+        const logoWhite = 'Logo_Teach6_2.png';
+        const logoColor = 'Logo_Teach7_2.png';
 
         function updateLogos() {
             const isDark = document.documentElement.classList.contains('dark');
@@ -1131,20 +1131,20 @@
             container.innerHTML=weeks.map(w=>{
                 const [label,cls]=statusBadge(w.status);
                 const route = currentUser.role==='student' ? `
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4 text-xs font-bold"><span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen rounded-lg px-3 py-2">✓ Aprende</span><span class="bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue rounded-lg px-3 py-2">○ Explora</span><span class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue rounded-lg px-3 py-2">🔒 Demuestra</span><span class="bg-gray-100 dark:bg-gray-800 text-gray-500 rounded-lg px-3 py-2">🔒 Entrega</span></div>` : '';
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mt-4 text-xs font-bold"><span class="bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue rounded-lg px-3 py-2">📘 Train</span><span class="bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue rounded-lg px-3 py-2">🧠 Evaluate</span><span class="bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen rounded-lg px-3 py-2">🛠️ Apply</span><span class="bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 rounded-lg px-3 py-2">📤 Complete</span><span class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-lg px-3 py-2">✨ Hone</span></div>` : '';
                 const actions = roleCanEditContent() ? `<div class="flex flex-wrap gap-2"><button onclick="openWeekDetail('${w.id}')" class="px-4 py-2 rounded-lg bg-brand-purple text-white font-bold text-xs">Abrir semana</button><button onclick="openWeekModal('${w.id}')" class="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 font-bold text-xs dark:text-white">Editar</button>${w.status!=='published'?`<button onclick="setWeekStatus('${w.id}','published')" class="px-3 py-2 rounded-lg bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen font-bold text-xs">Publicar</button>`:`<button onclick="setWeekStatus('${w.id}','closed')" class="px-3 py-2 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs">Cerrar</button>`}</div>` : `<button onclick="openWeekDetail('${w.id}')" class="px-4 py-2 rounded-xl bg-brand-purple text-white font-bold text-sm">${w.status==='published'?'Continuar':'Ver estado'}</button>`;
-                return `<article class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm ${currentUser.role==='student'&&w.status!=='published'?'opacity-70':''}"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4"><div class="flex items-start gap-4"><div class="w-12 h-12 shrink-0 rounded-xl bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue flex items-center justify-center font-black">${String(w.number).padStart(2,'0')}</div><div><div class="flex flex-wrap items-center gap-2"><p class="text-xs font-bold uppercase tracking-wider text-brand-lightBlue">${w.unit===0?'Inducción':'Unidad '+w.unit}</p><span class="${cls} px-2 py-0.5 rounded text-[10px] font-bold uppercase">${label}</span></div><h3 class="text-xl font-black text-brand-deepPurple dark:text-white mt-1">${w.title}</h3><p class="text-sm text-gray-500 mt-1">${w.outcome || 'Ruta de aprendizaje organizada por recursos, Fast Test y entregable.'}</p>${route}</div></div>${actions}</div></article>`;
+                return `<article class="bg-white dark:bg-[#1C2333] border border-gray-100 dark:border-gray-800 rounded-2xl p-5 shadow-sm ${currentUser.role==='student'&&w.status!=='published'?'opacity-70':''}"><div class="flex flex-col md:flex-row md:items-center justify-between gap-4"><div class="flex items-start gap-4"><div class="w-12 h-12 shrink-0 rounded-xl bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue flex items-center justify-center font-black">${String(w.number).padStart(2,'0')}</div><div><div class="flex flex-wrap items-center gap-2"><p class="text-xs font-bold uppercase tracking-wider text-brand-lightBlue">${w.unit===0?'Inducción':'Unidad '+w.unit}</p><span class="${cls} px-2 py-0.5 rounded text-[10px] font-bold uppercase">${label}</span></div><h3 class="text-xl font-black text-brand-deepPurple dark:text-white mt-1">${w.title}</h3><p class="text-sm text-gray-500 mt-1">${w.outcome || 'Metodología T.E.A.C.H. organizada en cinco etapas de aprendizaje y mejora.'}</p>${route}</div></div>${actions}</div></article>`;
             }).join('');
         }
 
+        // Framework pedagógico oficial de Teach.
+        // aliases conserva compatibilidad con recursos creados bajo la ruta anterior.
         const routeBlocks = [
-            {key:'learn',label:'Aprende',icon:'📘',description:'Recursos obligatorios para comprender el tema.',accent:'border-brand-lightBlue'},
-            {key:'explore',label:'Explora',icon:'🎥',description:'Videos, podcast, infografías y material complementario.',accent:'border-cyan-400'},
-            {key:'demonstrate',label:'Demuestra',icon:'✅',description:'Fast Test individual para comprobar el aprendizaje.',accent:'border-brand-purple'},
-            {key:'unlock',label:'Desbloquea',icon:'🔓',description:'Referencias y plantillas habilitadas al cumplir requisitos.',accent:'border-amber-400'},
-            {key:'apply',label:'Aplica',icon:'🧪',description:'Actividad práctica, laboratorio o simulación.',accent:'border-brand-supportGreen'},
-            {key:'deliver',label:'Entrega',icon:'📤',description:'Informe o producto presentado por el responsable del Team.',accent:'border-red-300'},
-            {key:'improve',label:'Mejora',icon:'💬',description:'Retroalimentación, rúbrica y reentrega.',accent:'border-brand-schoolGreen'}
+            {key:'train',aliases:['train','learn','explore'],label:'Train',subtitle:'Entrénate',icon:'📘',description:'Aprende los conceptos con recursos obligatorios y complementarios.',accent:'border-brand-lightBlue'},
+            {key:'evaluate',aliases:['evaluate','demonstrate'],label:'Evaluate',subtitle:'Evalúa tu nivel',icon:'🧠',description:'Comprueba tu comprensión mediante el Fast Test.',accent:'border-brand-purple'},
+            {key:'apply',aliases:['apply','unlock'],label:'Apply',subtitle:'Aplica lo aprendido',icon:'🛠️',description:'Usa la teoría en el laboratorio, actividad o caso práctico.',accent:'border-brand-supportGreen'},
+            {key:'complete',aliases:['complete','deliver'],label:'Complete',subtitle:'Completa y entrega',icon:'📤',description:'Presenta el informe o evidencia asignada al Team.',accent:'border-amber-400'},
+            {key:'hone',aliases:['hone','improve'],label:'Hone',subtitle:'Perfecciona',icon:'✨',description:'Revisa la rúbrica, recibe feedback y mejora tu trabajo.',accent:'border-brand-schoolGreen'}
         ];
 
         window.openWeekDetail = async function(weekId) {
@@ -1155,7 +1155,7 @@
             document.getElementById('week-detail-panel').classList.remove('hidden');
             document.getElementById('week-detail-kicker').textContent = `Semana ${String(selectedWeekData.number).padStart(2,'0')} · ${selectedWeekData.unit===0?'Inducción':'Unidad '+selectedWeekData.unit}`;
             document.getElementById('week-detail-title').textContent = selectedWeekData.title;
-            document.getElementById('week-detail-outcome').textContent = selectedWeekData.outcome || 'Ruta de aprendizaje organizada por recursos, Fast Test y entregable.';
+            document.getElementById('week-detail-outcome').textContent = selectedWeekData.outcome || 'Metodología T.E.A.C.H. organizada en cinco etapas de aprendizaje y mejora.';
             const actions=document.getElementById('week-detail-actions');
             if(roleCanEditContent()) actions.classList.remove('hidden'); else actions.classList.add('hidden');
             await loadWeekResources();
@@ -1197,7 +1197,7 @@
         function renderWeekRoute(){
             const container=document.getElementById('week-route-container');
             container.innerHTML=routeBlocks.map(block=>{
-                const items=loadedResources.filter(r=>(r.block||'learn')===block.key && (currentUser.role!=='student'||r.status==='published'));
+                const items=loadedResources.filter(r=>block.aliases.includes(r.block||'train') && (currentUser.role!=='student'||r.status==='published'));
                 const rows=items.length?items.map(r=>{
                     const locked=currentUser.role==='student' && r.unlockRule && r.unlockRule!=='none';
                     const state=r.status==='published'?'Publicado':r.status==='hidden'?'Oculto':'Borrador';
@@ -1206,11 +1206,20 @@
                     return `<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 px-5 py-4 border-t border-gray-100 dark:border-gray-800 first:border-t-0"><div class="flex items-start gap-4 min-w-0"><div class="w-11 h-11 shrink-0 rounded-xl bg-brand-softPurple dark:bg-brand-purple/20 flex items-center justify-center text-xl">${resourceIcon(r.type)}</div><div class="min-w-0"><h4 class="font-black text-brand-deepPurple dark:text-white truncate">${r.title}</h4><p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${r.description||'Recurso de la semana.'}</p><div class="flex flex-wrap gap-2 mt-2 text-[11px] font-bold"><span class="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">${classification}</span><span class="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/20 text-brand-lightBlue">${r.duration||0} min</span><span class="px-2 py-1 rounded ${r.status==='published'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400'}">${state}</span>${r.unlockRule&&r.unlockRule!=='none'?`<span class="px-2 py-1 rounded bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue">🔒 ${unlockText(r.unlockRule)}</span>`:''}</div></div></div>${teacherMenu}</div>`;
                 }).join(''):`<div class="px-5 py-6 text-sm text-gray-500 dark:text-gray-400">Todavía no hay contenido en este bloque.</div>`;
                 const add=roleCanEditContent()?`<button onclick="openResourceModal('', '${block.key}')" class="m-4 mt-0 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:underline">+ Añadir a ${block.label}</button>`:'';
-                return `<section class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border-l-4 ${block.accent} border-y border-r border-gray-100 dark:border-gray-800 overflow-hidden"><button onclick="toggleRouteBlock('route-${block.key}')" class="w-full px-5 py-4 flex items-center justify-between text-left"><div class="flex items-center gap-3"><span class="text-2xl">${block.icon}</span><div><h3 class="text-lg font-black text-brand-deepPurple dark:text-white uppercase tracking-wide">${block.label}</h3><p class="text-sm text-gray-500 dark:text-gray-400">${block.description}</p></div></div><div class="flex items-center gap-3"><span class="text-xs font-bold px-2 py-1 rounded bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue">${items.length} recurso${items.length===1?'':'s'}</span><span id="route-${block.key}-arrow" class="text-gray-400">⌃</span></div></button><div id="route-${block.key}" class="border-t border-gray-100 dark:border-gray-800">${rows}${add}</div></section>`;
+                return `<section class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border-l-4 ${block.accent} border-y border-r border-gray-100 dark:border-gray-800 overflow-hidden"><button onclick="toggleRouteBlock('route-${block.key}')" class="w-full px-5 py-4 flex items-center justify-between text-left"><div class="flex items-center gap-3"><span class="text-2xl">${block.icon}</span><div><div class="flex flex-wrap items-baseline gap-x-2"><h3 class="text-lg font-black text-brand-deepPurple dark:text-white uppercase tracking-wide">${block.label}</h3><span class="text-sm font-bold text-brand-purple dark:text-brand-lightBlue">${block.subtitle}</span></div><p class="text-sm text-gray-500 dark:text-gray-400">${block.description}</p></div></div><div class="flex items-center gap-3"><span class="text-xs font-bold px-2 py-1 rounded bg-brand-softPurple dark:bg-brand-purple/20 text-brand-purple dark:text-brand-lightBlue">${items.length} recurso${items.length===1?'':'s'}</span><span id="route-${block.key}-arrow" class="text-gray-400">⌃</span></div></button><div id="route-${block.key}" class="border-t border-gray-100 dark:border-gray-800">${rows}${add}</div></section>`;
             }).join('');
         }
 
         window.toggleRouteBlock=function(id){ const el=document.getElementById(id); if(el) el.classList.toggle('hidden'); };
+
+        function normalizeTeachBlock(block){
+            if(['learn','explore'].includes(block)) return 'train';
+            if(block==='demonstrate') return 'evaluate';
+            if(block==='unlock') return 'apply';
+            if(block==='deliver') return 'complete';
+            if(block==='improve') return 'hone';
+            return ['train','evaluate','apply','complete','hone'].includes(block) ? block : 'train';
+        }
 
         window.openResourceModal=function(resourceId='',forcedBlock=''){
             if(!roleCanEditContent()||!selectedWeekId) return;
@@ -1219,7 +1228,7 @@
             document.getElementById('resource-doc-id').value=r?.id||'';
             document.getElementById('resource-modal-title').textContent=r?'Editar recurso':'Añadir contenido';
             document.getElementById('resource-title').value=r?.title||'';
-            document.getElementById('resource-block').value=r?.block||forcedBlock||'learn';
+            document.getElementById('resource-block').value=normalizeTeachBlock(r?.block||forcedBlock||'train');
             document.getElementById('resource-type').value=r?.type||'pdf';
             document.getElementById('resource-description').value=r?.description||'';
             document.getElementById('resource-url').value=r?.url||'';
