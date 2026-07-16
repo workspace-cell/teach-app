@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com/3.4.5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -324,6 +325,68 @@
                 <div id="classrooms-container"><div class="p-10 text-center text-gray-500">Cargando módulo...</div></div>
             </div>
 
+            <!-- VISTA: DETALLE DE AULA / PERSONAS -->
+            <div id="view-classroom-detail" class="app-view hidden fade-in max-w-6xl mx-auto">
+                <header class="mb-6">
+                    <button onclick="navigate('classrooms')" class="text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:underline mb-4">← Volver a Aulas</button>
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <p id="classroom-detail-meta" class="text-sm font-bold text-brand-lightBlue uppercase tracking-wider">Aula</p>
+                            <h1 id="classroom-detail-title" class="text-3xl font-black text-brand-deepPurple dark:text-white mt-1">Cargando...</h1>
+                            <p id="classroom-detail-subtitle" class="text-gray-500 dark:text-gray-400 mt-1"></p>
+                        </div>
+                        <button id="btn-invite-people" onclick="openPeopleModal('student')" class="hidden bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md">+ Invitar o matricular</button>
+                    </div>
+                </header>
+
+                <div class="flex gap-2 overflow-x-auto border-b border-gray-200 dark:border-gray-800 mb-6">
+                    <button class="classroom-tab px-4 py-3 font-bold text-gray-500" onclick="switchClassroomTab('summary', this)">Resumen</button>
+                    <button class="classroom-tab px-4 py-3 font-bold text-gray-500" onclick="switchClassroomTab('content', this)">Contenidos</button>
+                    <button class="classroom-tab px-4 py-3 font-bold text-brand-purple border-b-2 border-brand-purple" onclick="switchClassroomTab('people', this)">Personas</button>
+                    <button class="classroom-tab px-4 py-3 font-bold text-gray-500" onclick="switchClassroomTab('team', this)">Team</button>
+                    <button class="classroom-tab px-4 py-3 font-bold text-gray-500" onclick="switchClassroomTab('grades', this)">Calificaciones</button>
+                    <button class="classroom-tab px-4 py-3 font-bold text-gray-500" onclick="switchClassroomTab('analytics', this)">Analítica</button>
+                </div>
+
+                <div id="classroom-tab-summary" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+                    <h2 class="text-xl font-black dark:text-white">Resumen del aula</h2>
+                    <p class="text-gray-500 mt-2">Aquí se mostrará el avance, próximos vencimientos y alertas del aula.</p>
+                </div>
+                <div id="classroom-tab-content" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800">
+                    <h2 class="text-xl font-black dark:text-white">Contenidos vinculados</h2>
+                    <p class="text-gray-500 mt-2">La estructura del curso y las semanas publicadas se administran desde Contenidos.</p>
+                </div>
+                <div id="classroom-tab-people" class="classroom-tab-panel space-y-6">
+                    <section class="bg-white dark:bg-[#1C2333] rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+                        <div class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                            <div><h2 class="text-2xl font-black text-brand-deepPurple dark:text-white">Profesores</h2><p class="text-sm text-gray-500">Titular, asistentes, revisores y observadores.</p></div>
+                            <button id="btn-invite-teacher" onclick="openPeopleModal('teacher')" class="hidden w-11 h-11 rounded-full border-2 border-brand-lightBlue text-brand-purple dark:text-brand-lightBlue font-black hover:bg-brand-softBlue dark:hover:bg-gray-800">＋</button>
+                        </div>
+                        <div id="teachers-list" class="divide-y divide-gray-100 dark:divide-gray-800"><div class="p-6 text-gray-500">Cargando...</div></div>
+                    </section>
+
+                    <section class="bg-white dark:bg-[#1C2333] rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+                        <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800">
+                            <div><h2 class="text-2xl font-black text-brand-deepPurple dark:text-white">Estudiantes</h2><p id="students-count-label" class="text-sm text-gray-500">Matrículas e invitaciones del aula.</p></div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="openPeopleModal('student','email')" class="bg-brand-purple text-white px-4 py-2 rounded-xl font-bold text-sm">Invitar por correo</button>
+                                <button onclick="openPeopleModal('student','link')" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-4 py-2 rounded-xl font-bold text-sm dark:text-white">Enlace y QR</button>
+                                <button onclick="openPeopleModal('student','import')" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-4 py-2 rounded-xl font-bold text-sm dark:text-white">Importar lista</button>
+                            </div>
+                        </div>
+                        <div class="px-6 pt-4 flex gap-2">
+                            <button onclick="filterPeople('active')" class="people-filter bg-brand-lightBlue/15 text-brand-purple dark:text-brand-lightBlue px-4 py-2 rounded-full font-bold text-sm">Activos</button>
+                            <button onclick="filterPeople('pending')" class="people-filter bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-bold text-sm">Pendientes</button>
+                            <button onclick="filterPeople('withdrawn')" class="people-filter bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-bold text-sm">Retirados</button>
+                        </div>
+                        <div id="students-list" class="divide-y divide-gray-100 dark:divide-gray-800"><div class="p-8 text-center text-gray-500">Cargando...</div></div>
+                    </section>
+                </div>
+                <div id="classroom-tab-team" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Teams del aula</h2></div>
+                <div id="classroom-tab-grades" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Calificaciones</h2></div>
+                <div id="classroom-tab-analytics" class="classroom-tab-panel hidden bg-white dark:bg-[#1C2333] rounded-2xl p-8 border border-gray-100 dark:border-gray-800"><h2 class="text-xl font-black dark:text-white">Analítica del aula</h2></div>
+            </div>
+
             <!-- VISTA: MÓDULO TEAM (PROFESOR) -->
             <div id="view-teams-teacher" class="app-view hidden fade-in max-w-6xl mx-auto">
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
@@ -599,6 +662,67 @@
         </main>
     </div>
 
+    <!-- MODAL: INVITAR / MATRICULAR PERSONAS -->
+    <div id="modal-people" class="fixed inset-0 bg-brand-deepPurple/80 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-3xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden max-h-[92vh] flex flex-col">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start">
+                <div><h3 id="people-modal-title" class="text-2xl font-black text-brand-deepPurple dark:text-white">Invitar estudiantes</h3><p id="people-modal-subtitle" class="text-sm text-gray-500 mt-1">Elige cómo incorporar personas al aula.</p></div>
+                <button onclick="closeModal('modal-people')" class="text-2xl text-gray-400 hover:text-gray-700">×</button>
+            </div>
+            <div class="flex border-b border-gray-100 dark:border-gray-800 px-6 overflow-x-auto">
+                <button id="people-tab-email" onclick="switchPeopleTab('email')" class="px-4 py-3 font-bold text-brand-purple border-b-2 border-brand-purple">Por correo</button>
+                <button id="people-tab-link" onclick="switchPeopleTab('link')" class="px-4 py-3 font-bold text-gray-500">Enlace y QR</button>
+                <button id="people-tab-import" onclick="switchPeopleTab('import')" class="px-4 py-3 font-bold text-gray-500">Importar lista</button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div id="people-panel-email" class="people-modal-panel space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold mb-2 dark:text-gray-300">Correos institucionales</label>
+                        <textarea id="invite-emails" rows="6" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Un correo por línea o separados por coma"></textarea>
+                        <p class="text-xs text-gray-500 mt-2">Teach validará duplicados, capacidad y correos ya matriculados.</p>
+                    </div>
+                    <div id="teacher-role-field" class="hidden">
+                        <label class="block text-sm font-bold mb-2 dark:text-gray-300">Función en el aula</label>
+                        <select id="invite-classroom-role" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white">
+                            <option value="assistant_teacher">Profesor asistente</option><option value="coordinator">Coordinador</option><option value="reviewer">Revisor</option><option value="observer">Observador</option>
+                        </select>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Vencimiento</label><input id="invite-expiry" type="date" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
+                        <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Aprobación</label><select id="invite-approval" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"><option value="manual">Manual</option><option value="automatic">Automática</option></select></div>
+                    </div>
+                    <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Mensaje opcional</label><textarea id="invite-message" rows="3" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white" placeholder="Te invito a participar en esta aula de Teach."></textarea></div>
+                    <button onclick="sendEmailInvitations()" class="w-full bg-brand-purple text-white py-3 rounded-xl font-bold hover:bg-brand-deepPurple">Enviar invitaciones</button>
+                </div>
+                <div id="people-panel-link" class="people-modal-panel hidden space-y-5">
+                    <div class="bg-brand-softPurple dark:bg-[#121824] rounded-2xl p-5 border border-brand-lightBlue/20">
+                        <label class="text-sm font-bold dark:text-white">Enlace de invitación del aula</label>
+                        <div class="flex gap-2 mt-2"><input id="classroom-invite-link" readonly class="flex-1 border rounded-xl px-4 py-3 bg-white dark:bg-[#1C2333] dark:border-gray-700 dark:text-white"><button onclick="copyInviteLink()" class="bg-brand-purple text-white px-4 rounded-xl font-bold">Copiar</button></div>
+                        <div class="grid md:grid-cols-2 gap-5 mt-5 items-center">
+                            <div><p class="text-sm font-bold dark:text-white">Código del aula</p><p id="classroom-join-code" class="text-3xl font-black text-brand-purple dark:text-brand-lightBlue mt-2">—</p><p class="text-xs text-gray-500 mt-2">Puede compartirse por WhatsApp, correo o proyectarse en clase.</p></div>
+                            <div class="flex justify-center"><canvas id="classroom-qr" class="bg-white p-3 rounded-xl"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="flex items-center gap-3 p-4 border rounded-xl dark:border-gray-700 dark:text-white"><input id="join-require-domain" type="checkbox" checked> Exigir dominio institucional</label>
+                        <label class="flex items-center gap-3 p-4 border rounded-xl dark:border-gray-700 dark:text-white"><input id="join-manual-approval" type="checkbox" checked> Aprobación manual</label>
+                    </div>
+                    <div><label class="block text-sm font-bold mb-2 dark:text-gray-300">Dominio permitido</label><input id="join-domain" value="continental.edu.pe" class="w-full border rounded-xl px-4 py-3 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white"></div>
+                    <button onclick="saveJoinSettings()" class="w-full bg-brand-purple text-white py-3 rounded-xl font-bold">Guardar configuración del enlace</button>
+                </div>
+                <div id="people-panel-import" class="people-modal-panel hidden space-y-5">
+                    <div class="border-2 border-dashed border-brand-lightBlue/40 rounded-2xl p-8 text-center">
+                        <p class="text-lg font-black text-brand-deepPurple dark:text-white">Importar estudiantes por CSV</p>
+                        <p class="text-sm text-gray-500 mt-2">Columnas: DNI, nombres, apellidos, correo, carrera, celular.</p>
+                        <input id="students-csv" type="file" accept=".csv,text/csv" class="mt-5 text-sm dark:text-white">
+                    </div>
+                    <button onclick="importStudentsCsv()" class="w-full bg-brand-purple text-white py-3 rounded-xl font-bold">Validar e importar</button>
+                    <div id="csv-preview" class="text-sm"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL: CREAR AULA -->
     <div id="modal-classroom" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
         <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
@@ -829,6 +953,7 @@
             }
 
             if(viewId === 'classrooms' && typeof window.loadClassrooms === 'function') window.loadClassrooms();
+            if(viewId === 'classroom-detail' && typeof window.loadClassroomPeople === 'function') window.loadClassroomPeople();
             if(viewId === 'courses' && typeof window.loadCourses === 'function') window.loadCourses();
         }
 
@@ -998,13 +1123,20 @@
             if(!db || !currentUser) return;
             
             try {
-                let q;
-                if (currentUser.role === 'superadmin' || currentUser.role === 'admin') q = collection(db, "classrooms");
-                else q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
-                
-                const querySnapshot = await getDocs(q);
                 let loadedClassrooms = [];
-                querySnapshot.forEach((doc) => loadedClassrooms.push({ id: doc.id, ...doc.data() }));
+                if (currentUser.role === 'student') {
+                    const enrollSnap = await getDocs(query(collection(db, "enrollments"), where("userId", "==", currentUser.uid), where("status", "==", "active")));
+                    for (const enrollmentDoc of enrollSnap.docs) {
+                        const classroomSnap = await getDoc(doc(db, "classrooms", enrollmentDoc.data().classroomId));
+                        if (classroomSnap.exists()) loadedClassrooms.push({ id: classroomSnap.id, ...classroomSnap.data() });
+                    }
+                } else {
+                    let q;
+                    if (currentUser.role === 'superadmin' || currentUser.role === 'admin') q = collection(db, "classrooms");
+                    else q = query(collection(db, "classrooms"), where("teacherId", "==", currentUser.uid));
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach((doc) => loadedClassrooms.push({ id: doc.id, ...doc.data() }));
+                }
                 
                 if (currentUser.role === 'superadmin' || currentUser.role === 'admin') renderAdminTable(loadedClassrooms, container);
                 else renderTeacherCards(loadedClassrooms, container);
@@ -1037,7 +1169,7 @@
                         </div>
                         <div class="grid grid-cols-2 border-t border-gray-100 dark:border-gray-800">
                             <button class="py-3 text-sm font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition border-r border-gray-100 dark:border-gray-800">Configurar</button>
-                            <button class="py-3 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">Entrar al Aula</button>
+                            <button onclick="openClassroom('${data.id}')" class="py-3 text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">Entrar al Aula</button>
                         </div>
                     </div>
                 `;
@@ -1045,19 +1177,157 @@
         }
 
         function renderAdminTable(dataArray, container) {
-            let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
+            let html = `<div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-sm border border-brand-lightBlue/20 overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="bg-brand-softBlue dark:bg-[#161D2B] border-b border-brand-lightBlue/20 dark:border-gray-700 text-brand-purple dark:text-brand-lightBlue font-bold uppercase"><tr><th class="p-4">Curso / Aula</th><th class="p-4">Periodo</th><th class="p-4">Sede/Mod</th><th class="p-4">Capacidad</th><th class="p-4 text-center">Estado</th><th class="p-4 text-right">Acción</th></tr></thead><tbody class="divide-y divide-brand-lightBlue/10 dark:divide-gray-800">`;
             
             if(dataArray.length === 0) {
                 html += '<tr><td colspan="5" class="p-8 text-center text-gray-500">No hay aulas registradas en la base de datos.</td></tr>';
             } else {
                 dataArray.forEach(data => {
-                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td></tr>`;
+                    html += `<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition"><td class="p-4"><p class="font-bold text-brand-deepPurple dark:text-white">${data.course}</p><p class="text-xs text-brand-lightBlue font-medium">NRC: ${data.nrc}</p></td><td class="p-4 text-gray-600 dark:text-gray-300 font-medium">${data.period}</td><td class="p-4 text-gray-600 dark:text-gray-300"><span class="block">${data.campus}</span><span class="text-xs">${data.modality}</span></td><td class="p-4 text-gray-600 dark:text-gray-300">${data.enrolled || 0}/${data.capacity}</td><td class="p-4 text-center"><span class="text-[10px] font-bold px-2 py-1 rounded uppercase bg-brand-schoolGreen/20 text-brand-schoolGreen">${data.status || 'Activa'}</span></td><td class="p-4 text-right"><button onclick="openClassroom('${data.id}')" class="text-brand-purple dark:text-brand-lightBlue font-bold">Abrir</button></td></tr>`;
                 });
             }
             html += `</tbody></table></div></div>`;
             container.innerHTML = html;
         }
 
+
+        // ==============================
+        // MÓDULO PERSONAS / MATRÍCULAS
+        // ==============================
+        window.selectedClassroomId = null;
+        window.selectedClassroomData = null;
+        window.peopleInviteType = 'student';
+        window.peopleStatusFilter = 'active';
+
+        function canManagePeople() {
+            return currentUser && ['teacher','admin','superadmin'].includes(currentUser.role);
+        }
+
+        window.openClassroom = async function(classroomId) {
+            const snap = await getDoc(doc(db, 'classrooms', classroomId));
+            if (!snap.exists()) return showToast('El aula no existe', 'error');
+            window.selectedClassroomId = classroomId;
+            window.selectedClassroomData = { id: snap.id, ...snap.data() };
+            document.getElementById('classroom-detail-title').textContent = selectedClassroomData.name || selectedClassroomData.course;
+            document.getElementById('classroom-detail-meta').textContent = `${selectedClassroomData.course || 'Curso'} · NRC ${selectedClassroomData.nrc || '—'}`;
+            document.getElementById('classroom-detail-subtitle').textContent = `${selectedClassroomData.period || ''} · ${selectedClassroomData.modality || ''} · ${selectedClassroomData.campus || ''}`;
+            ['btn-invite-people','btn-invite-teacher'].forEach(id => document.getElementById(id)?.classList.toggle('hidden', !canManagePeople()));
+            navigate('classroom-detail');
+        };
+
+        window.switchClassroomTab = function(tab, button) {
+            document.querySelectorAll('.classroom-tab-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`classroom-tab-${tab}`)?.classList.remove('hidden');
+            document.querySelectorAll('.classroom-tab').forEach(b => { b.classList.remove('text-brand-purple','border-b-2','border-brand-purple'); b.classList.add('text-gray-500'); });
+            button.classList.add('text-brand-purple','border-b-2','border-brand-purple'); button.classList.remove('text-gray-500');
+        };
+
+        window.loadClassroomPeople = async function() {
+            if (!selectedClassroomId) return;
+            const teachersList = document.getElementById('teachers-list');
+            const studentsList = document.getElementById('students-list');
+            teachersList.innerHTML = '<div class="p-6 text-gray-500 animate-pulse">Cargando profesores...</div>';
+            studentsList.innerHTML = '<div class="p-8 text-center text-gray-500 animate-pulse">Cargando estudiantes...</div>';
+            try {
+                const memberships = await getDocs(query(collection(db,'classroomMembers'), where('classroomId','==',selectedClassroomId)));
+                const members = memberships.docs.map(d => ({id:d.id,...d.data()}));
+                const teachers = members.filter(m => ['teacher','assistant_teacher','coordinator','reviewer','observer'].includes(m.role) && m.status !== 'withdrawn');
+                if (!teachers.some(t => t.userId === selectedClassroomData.teacherId)) {
+                    teachers.unshift({ userId:selectedClassroomData.teacherId, displayName:'Profesor titular', email:'', role:'teacher', status:'active' });
+                }
+                teachersList.innerHTML = teachers.length ? teachers.map(t => personRow(t,true)).join('') : '<div class="p-6 text-gray-500">No hay profesores registrados.</div>';
+
+                const enrollmentsSnap = await getDocs(query(collection(db,'enrollments'), where('classroomId','==',selectedClassroomId)));
+                const invitationsSnap = await getDocs(query(collection(db,'invitations'), where('classroomId','==',selectedClassroomId), where('inviteeRole','==','student')));
+                const enrollments = enrollmentsSnap.docs.map(d=>({id:d.id,...d.data()}));
+                const pendingInvites = invitationsSnap.docs.map(d=>({id:d.id,...d.data()})).filter(i=>['pending','sent','opened'].includes(i.status));
+                const filtered = peopleStatusFilter === 'pending' ? pendingInvites : enrollments.filter(e => e.status === peopleStatusFilter);
+                document.getElementById('students-count-label').textContent = `${enrollments.filter(e=>e.status==='active').length} activos · ${pendingInvites.length} invitaciones pendientes · Capacidad ${selectedClassroomData.capacity || '—'}`;
+                studentsList.innerHTML = filtered.length ? filtered.map(p => studentRow(p, peopleStatusFilter === 'pending')).join('') : `<div class="p-10 text-center text-gray-500">No hay ${peopleStatusFilter === 'pending' ? 'invitaciones pendientes' : 'estudiantes en este estado'}.</div>`;
+            } catch (e) { console.error(e); showToast('No se pudieron cargar las personas del aula','error'); }
+        };
+
+        function initials(name='U') { return name.split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase(); }
+        function roleLabel(role) { return ({teacher:'Profesor titular',assistant_teacher:'Profesor asistente',coordinator:'Coordinador',reviewer:'Revisor',observer:'Observador'})[role] || role; }
+        function personRow(p,isTeacher=false) {
+            const name = p.displayName || p.email || 'Usuario';
+            return `<div class="p-5 flex items-center justify-between gap-4"><div class="flex items-center gap-4 min-w-0"><div class="w-10 h-10 rounded-full bg-brand-purple text-white flex items-center justify-center font-black shrink-0">${initials(name)}</div><div class="min-w-0"><p class="font-bold text-brand-deepPurple dark:text-white truncate">${name}</p><p class="text-xs text-gray-500 truncate">${p.email || ''} · ${roleLabel(p.role)} · ${p.status || 'active'}</p></div></div>${canManagePeople()?'<button class="text-gray-400 text-xl">⋮</button>':''}</div>`;
+        }
+        function studentRow(p,isInvite=false) {
+            const name = p.displayName || p.email || 'Estudiante';
+            const status = isInvite ? 'Invitación pendiente' : (p.status || 'active');
+            return `<div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4"><div class="flex items-center gap-4 min-w-0"><div class="w-10 h-10 rounded-full bg-brand-lightBlue text-white flex items-center justify-center font-black shrink-0">${initials(name)}</div><div class="min-w-0"><p class="font-bold text-brand-deepPurple dark:text-white truncate">${name}</p><p class="text-xs text-gray-500 truncate">${p.email || ''}${p.career ? ' · '+p.career : ''}</p></div></div><div class="flex items-center gap-3"><span class="text-[10px] uppercase font-bold px-2.5 py-1 rounded ${isInvite?'bg-amber-100 text-amber-700':'bg-green-100 text-green-700'}">${status}</span>${canManagePeople()?`<button onclick="${isInvite?`resendInvitation('${p.id}')`:`showToast('Gestión del estudiante disponible desde su perfil','info')`}" class="text-brand-purple dark:text-brand-lightBlue font-bold text-sm">${isInvite?'Reenviar':'Ver perfil'}</button>`:''}</div></div>`;
+        }
+
+        window.filterPeople = function(status) { peopleStatusFilter = status; loadClassroomPeople(); };
+
+        window.openPeopleModal = function(type='student', tab='email') {
+            peopleInviteType = type;
+            document.getElementById('people-modal-title').textContent = type === 'teacher' ? 'Invitar profesores' : 'Matricular estudiantes';
+            document.getElementById('people-modal-subtitle').textContent = type === 'teacher' ? 'Asigna una función y envía una invitación segura.' : 'Invita por correo, comparte enlace/QR o importa una lista.';
+            document.getElementById('teacher-role-field').classList.toggle('hidden', type !== 'teacher');
+            document.getElementById('people-tab-link').classList.toggle('hidden', type === 'teacher');
+            document.getElementById('people-tab-import').classList.toggle('hidden', type === 'teacher');
+            switchPeopleTab(type === 'teacher' ? 'email' : tab);
+            prepareJoinLink();
+            openModal('modal-people');
+        };
+
+        window.switchPeopleTab = function(tab) {
+            document.querySelectorAll('.people-modal-panel').forEach(p=>p.classList.add('hidden'));
+            document.getElementById(`people-panel-${tab}`)?.classList.remove('hidden');
+            ['email','link','import'].forEach(t=>{ const b=document.getElementById(`people-tab-${t}`); if(!b)return; b.classList.remove('text-brand-purple','border-b-2','border-brand-purple'); b.classList.add('text-gray-500'); });
+            const active=document.getElementById(`people-tab-${tab}`); active?.classList.add('text-brand-purple','border-b-2','border-brand-purple'); active?.classList.remove('text-gray-500');
+        };
+
+        function randomToken(len=32) { const chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789'; return Array.from({length:len},()=>chars[Math.floor(Math.random()*chars.length)]).join(''); }
+        function defaultExpiry() { const d=new Date(); d.setDate(d.getDate()+14); return d.toISOString().slice(0,10); }
+
+        window.sendEmailInvitations = async function() {
+            if (!selectedClassroomId) return;
+            const emails = document.getElementById('invite-emails').value.split(/[\n,;]+/).map(x=>x.trim().toLowerCase()).filter(Boolean);
+            if (!emails.length) return showToast('Ingresa al menos un correo','error');
+            const unique=[...new Set(emails)];
+            const role = peopleInviteType === 'teacher' ? document.getElementById('invite-classroom-role').value : 'student';
+            let sent=0, skipped=0;
+            for (const email of unique) {
+                if (!/^\S+@\S+\.\S+$/.test(email)) { skipped++; continue; }
+                const duplicate = await getDocs(query(collection(db,'invitations'), where('classroomId','==',selectedClassroomId), where('email','==',email), where('status','==','pending')));
+                if (!duplicate.empty) { skipped++; continue; }
+                const token=randomToken();
+                const joinUrl=`${location.origin}${location.pathname}?join=${token}`;
+                const invRef = await addDoc(collection(db,'invitations'), {tenantId:selectedClassroomData.tenantId||null,classroomId:selectedClassroomId,courseId:selectedClassroomData.courseId||null,email,inviteeRole:role,status:'pending',approvalMode:document.getElementById('invite-approval').value,token,joinUrl,expiresAt:document.getElementById('invite-expiry').value||defaultExpiry(),message:document.getElementById('invite-message').value||'',createdBy:currentUser.uid,createdAt:serverTimestamp()});
+                // Compatible con la extensión oficial Firebase Trigger Email si se instala sobre la colección "mail".
+                await addDoc(collection(db,'mail'), {to:[email],message:{subject:`Invitación a ${selectedClassroomData.course || selectedClassroomData.name} en Teach`,html:`<h2>Has sido invitado a Teach</h2><p>${currentUser.email} te invitó al aula <strong>${selectedClassroomData.name || selectedClassroomData.course}</strong>.</p><p>NRC: ${selectedClassroomData.nrc || '—'} · Periodo: ${selectedClassroomData.period || '—'}</p><p><a href="${joinUrl}">Aceptar invitación</a></p><p>La invitación vence el ${document.getElementById('invite-expiry').value||defaultExpiry()}.</p>`},invitationId:invRef.id,createdAt:serverTimestamp()});
+                sent++;
+            }
+            showToast(`${sent} invitaciones preparadas${skipped?` · ${skipped} omitidas`:''}`,'success');
+            document.getElementById('invite-emails').value=''; closeModal('modal-people'); loadClassroomPeople();
+        };
+
+        window.prepareJoinLink = async function() {
+            if(!selectedClassroomId) return;
+            let code=selectedClassroomData.joinCode;
+            if(!code){ code=`${(selectedClassroomData.course||'TEACH').replace(/[^A-Za-z0-9]/g,'').slice(0,4).toUpperCase()}-${String(selectedClassroomData.nrc||randomToken(5)).slice(-5)}`; await updateDoc(doc(db,'classrooms',selectedClassroomId),{joinCode:code}); selectedClassroomData.joinCode=code; }
+            const link=`${location.origin}${location.pathname}?classroom=${selectedClassroomId}&code=${encodeURIComponent(code)}`;
+            document.getElementById('classroom-invite-link').value=link;
+            document.getElementById('classroom-join-code').textContent=code;
+            if(window.QRCode) QRCode.toCanvas(document.getElementById('classroom-qr'),link,{width:180,margin:1});
+        };
+        window.copyInviteLink = async function(){ await navigator.clipboard.writeText(document.getElementById('classroom-invite-link').value); showToast('Enlace copiado','success'); };
+        window.saveJoinSettings = async function(){ await updateDoc(doc(db,'classrooms',selectedClassroomId),{joinEnabled:true,joinRequireDomain:document.getElementById('join-require-domain').checked,joinDomain:document.getElementById('join-domain').value.trim().toLowerCase(),joinApprovalMode:document.getElementById('join-manual-approval').checked?'manual':'automatic',updatedAt:serverTimestamp()}); showToast('Configuración de acceso guardada','success'); };
+
+        window.importStudentsCsv = async function() {
+            const file=document.getElementById('students-csv').files[0]; if(!file) return showToast('Selecciona un archivo CSV','error');
+            const text=await file.text(); const lines=text.split(/\r?\n/).filter(Boolean); if(lines.length<2) return showToast('El CSV no contiene registros','error');
+            const sep=lines[0].includes(';')?';':','; const headers=lines[0].split(sep).map(h=>h.trim().toLowerCase());
+            const idx=(...names)=>headers.findIndex(h=>names.includes(h));
+            const rows=lines.slice(1).map(line=>{const c=line.split(sep).map(x=>x.trim()); return {dni:c[idx('dni')]||'',firstName:c[idx('nombres','nombre')]||'',lastName:c[idx('apellidos','apellido')]||'',email:(c[idx('correo','email','correo institucional')]||'').toLowerCase(),career:c[idx('carrera')]||'',phone:c[idx('celular','telefono','teléfono')]||''};}).filter(r=>r.email);
+            let imported=0, errors=0;
+            for(const r of rows){ if(!/^\S+@\S+\.\S+$/.test(r.email)){errors++;continue;} const dup=await getDocs(query(collection(db,'enrollments'),where('classroomId','==',selectedClassroomId),where('email','==',r.email))); if(!dup.empty){errors++;continue;} await addDoc(collection(db,'enrollments'),{tenantId:selectedClassroomData.tenantId||null,classroomId:selectedClassroomId,courseId:selectedClassroomData.courseId||null,userId:null,email:r.email,displayName:`${r.firstName} ${r.lastName}`.trim(),dni:r.dni,career:r.career,phone:r.phone,role:'student',status:'pending',enrollmentMethod:'csv',createdBy:currentUser.uid,createdAt:serverTimestamp()}); imported++; }
+            document.getElementById('csv-preview').innerHTML=`<div class="p-4 rounded-xl bg-green-50 text-green-700 font-bold">${imported} registros importados · ${errors} observados</div>`; showToast('Importación procesada','success'); loadClassroomPeople();
+        };
+        window.resendInvitation = async function(id){ const snap=await getDoc(doc(db,'invitations',id)); if(!snap.exists())return; const i=snap.data(); await addDoc(collection(db,'mail'),{to:[i.email],message:{subject:'Recordatorio de invitación a Teach',html:`<p>Tienes una invitación pendiente.</p><p><a href="${i.joinUrl}">Aceptar invitación</a></p>`},invitationId:id,createdAt:serverTimestamp()}); showToast('Recordatorio preparado','success'); };
 
         // ==============================
         // MÓDULO CONTENIDOS Y SEMANAS
