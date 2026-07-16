@@ -470,7 +470,7 @@
                             <p id="courses-subtitle" class="text-brand-purple/80 dark:text-gray-400 font-medium">Organiza cursos, unidades, semanas y recursos de aprendizaje.</p>
                         </div>
                         <div id="courses-teacher-actions" class="hidden flex-wrap gap-2">
-                            <button onclick="initializePhysicsCourse()" class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">Crear estructura Física 1</button>
+                            <button onclick="openCourseModal()" class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">+ Nuevo curso</button>
                             <button onclick="showToast('La importación directa de Drive se habilitará en la siguiente fase.', 'info')" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md text-sm">Importar desde Drive</button>
                         </div>
                     </header>
@@ -711,6 +711,66 @@
         </div>
     </div>
 
+
+    <!-- MODAL: CREAR / EDITAR CURSO -->
+    <div id="modal-course" class="fixed inset-0 bg-brand-deepPurple/90 dark:bg-black/90 z-50 hidden items-center justify-center p-4 modal-overlay">
+        <div class="bg-white dark:bg-[#1C2333] rounded-2xl shadow-2xl w-full max-w-2xl border border-brand-lightBlue/20 dark:border-gray-700 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-brand-softPurple dark:bg-[#161D2B] flex items-start justify-between gap-4">
+                <div>
+                    <h3 id="course-modal-title" class="text-xl font-black text-brand-deepPurple dark:text-white">Nuevo curso</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Configura un curso reutilizable y luego vincúlalo con una o más aulas.</p>
+                </div>
+                <button type="button" onclick="closeModal('modal-course')" class="w-9 h-9 rounded-lg hover:bg-white dark:hover:bg-gray-800 text-gray-500 text-xl">×</button>
+            </div>
+            <form id="form-course" class="p-6 space-y-5">
+                <input type="hidden" id="course-edit-id">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Nombre del curso</label>
+                        <input id="course-name" type="text" required placeholder="Ej. Física 1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Código</label>
+                        <input id="course-code" type="text" required placeholder="Ej. FIS1" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple uppercase">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Descripción</label>
+                        <textarea id="course-description" rows="3" placeholder="Propósito y alcance del curso" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Área académica</label>
+                        <input id="course-area" type="text" placeholder="Ej. Ciencias e Ingeniería" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Estado</label>
+                        <select id="course-status" class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                            <option value="active">Activo</option>
+                            <option value="draft">Borrador</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Unidades</label>
+                        <input id="course-units" type="number" min="1" value="4" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 dark:text-gray-300">Semanas</label>
+                        <input id="course-weeks" type="number" min="1" value="16" required class="w-full border rounded-lg px-3 py-2.5 bg-gray-50 dark:bg-[#121824] dark:border-gray-700 dark:text-white focus:outline-brand-purple">
+                    </div>
+                    <div class="md:col-span-2" id="physics-template-option">
+                        <label class="flex items-start gap-3 p-4 rounded-xl bg-brand-softPurple dark:bg-[#121824] cursor-pointer">
+                            <input id="course-use-physics-template" type="checkbox" class="mt-1 accent-[#593079]">
+                            <span><strong class="block text-brand-deepPurple dark:text-white">Usar plantilla de Física 1</strong><small class="text-gray-500">Crea automáticamente la Semana 0 y las semanas 1 a 16 con los temas ya definidos.</small></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3 pt-5 border-t border-gray-100 dark:border-gray-800">
+                    <button type="button" onclick="closeModal('modal-course')" class="px-5 py-2.5 rounded-xl text-gray-600 dark:text-gray-300 font-bold hover:bg-gray-100 dark:hover:bg-gray-800">Cancelar</button>
+                    <button type="submit" class="px-7 py-2.5 bg-brand-purple text-white rounded-xl font-bold hover:bg-brand-deepPurple shadow-md"><span id="course-save-label">Crear curso</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- UI Scripts Generales -->
     <script>
         // Logo fijo, grande y siempre claro para el panel lateral
@@ -772,7 +832,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, setDoc, updateDoc, deleteDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         // KEY DE FIREBASE (FIJA)
         const firebaseConfig = {
@@ -1050,7 +1110,20 @@
                     <div class="p-6">
                         <div class="flex justify-between items-start gap-4">
                             <div><p class="text-xs font-bold uppercase tracking-wider text-brand-lightBlue">${c.code || 'CURSO'}</p><h3 class="text-2xl font-black text-brand-deepPurple dark:text-white mt-1">${c.name}</h3></div>
-                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded ${c.status==='active'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':'bg-amber-50 text-amber-700'}">${c.status==='active'?'Activo':'Borrador'}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] uppercase font-bold px-2 py-1 rounded ${c.status==='active'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':c.status==='archived'?'bg-gray-100 dark:bg-gray-800 text-gray-500':'bg-amber-50 text-amber-700'}">${c.status==='active'?'Activo':c.status==='archived'?'Archivado':'Borrador'}</span>
+                                ${roleCanEditContent() ? `
+                                <div class="relative course-card-menu">
+                                    <button type="button" onclick="event.stopPropagation(); toggleCourseMenu('course-menu-${c.id}')" aria-label="Opciones del curso ${c.name}" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-brand-purple hover:bg-brand-softPurple dark:hover:bg-gray-800 transition text-xl leading-none">⋮</button>
+                                    <div id="course-menu-${c.id}" class="hidden absolute right-0 top-9 z-40 w-56 bg-white dark:bg-[#1C2333] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                                        <button onclick="editCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">✏️ Editar información</button>
+                                        <button onclick="openCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📚 Administrar contenidos</button>
+                                        <button onclick="duplicateCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📄 Duplicar curso</button>
+                                        <button onclick="archiveCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800">📦 Archivar curso</button>
+                                        <button onclick="deleteCourseSafe('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">🗑 Eliminar curso</button>
+                                    </div>
+                                </div>` : ''}
+                            </div>
                         </div>
                         <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">${c.unitsCount || 4} unidades · ${c.weeksCount || 17} semanas</p>
                         <div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Aulas</p><p class="font-black dark:text-white">${c.classroomsCount || 0}</p></div><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Estudiantes</p><p class="font-black dark:text-white">${c.studentsCount || 0}</p></div></div>
@@ -1060,20 +1133,129 @@
             window.cachedCourses = courses;
         }
 
-        window.initializePhysicsCourse = async function() {
-            if (!roleCanEditContent()) return showToast('No tienes permisos para crear cursos.','error');
+        window.toggleCourseMenu = function(menuId) {
+            document.querySelectorAll('[id^="course-menu-"]').forEach(menu => {
+                if (menu.id !== menuId) menu.classList.add('hidden');
+            });
+            document.getElementById(menuId)?.classList.toggle('hidden');
+        };
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.course-card-menu')) {
+                document.querySelectorAll('[id^="course-menu-"]').forEach(menu => menu.classList.add('hidden'));
+            }
+        });
+
+        window.openCourseModal = function(course = null) {
+            if (!roleCanEditContent()) return showToast('No tienes permisos para administrar cursos.','error');
+            document.getElementById('form-course').reset();
+            document.getElementById('course-edit-id').value = course?.id || '';
+            document.getElementById('course-modal-title').textContent = course ? 'Editar curso' : 'Nuevo curso';
+            document.getElementById('course-save-label').textContent = course ? 'Guardar cambios' : 'Crear curso';
+            document.getElementById('physics-template-option').classList.toggle('hidden', !!course);
+            document.getElementById('course-name').value = course?.name || '';
+            document.getElementById('course-code').value = course?.code || '';
+            document.getElementById('course-description').value = course?.description || '';
+            document.getElementById('course-area').value = course?.area || '';
+            document.getElementById('course-status').value = course?.status === 'draft' ? 'draft' : 'active';
+            document.getElementById('course-units').value = course?.unitsCount || 4;
+            document.getElementById('course-weeks').value = course?.weeksCount || 16;
+            openModal('modal-course');
+        };
+
+        window.editCourse = function(courseId) {
+            const course = (window.cachedCourses || []).find(c => c.id === courseId);
+            if (!course) return showToast('No se encontró el curso.','error');
+            document.querySelectorAll('[id^="course-menu-"]').forEach(menu => menu.classList.add('hidden'));
+            openCourseModal(course);
+        };
+
+        document.getElementById('form-course').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!roleCanEditContent()) return;
+            const editId = document.getElementById('course-edit-id').value;
+            const name = document.getElementById('course-name').value.trim();
+            const code = document.getElementById('course-code').value.trim().toUpperCase();
+            const payload = {
+                name, code,
+                description: document.getElementById('course-description').value.trim(),
+                area: document.getElementById('course-area').value.trim(),
+                status: document.getElementById('course-status').value,
+                unitsCount: Number(document.getElementById('course-units').value),
+                weeksCount: Number(document.getElementById('course-weeks').value),
+                updatedAt: serverTimestamp()
+            };
             try {
-                const courseRef = await addDoc(collection(db,'courses'), {
-                    name:'Física 1', code:'FIS1', teacherId:currentUser.uid, institutionId:'uc-huancayo', tenantId:'uc-huancayo',
-                    status:'active', unitsCount:4, weeksCount:17, classroomsCount:0, studentsCount:0,
-                    createdAt:serverTimestamp(), updatedAt:serverTimestamp()
-                });
-                for (const [number,title,unit] of defaultPhysicsWeeks) {
-                    await addDoc(collection(db,'weeks'), {courseId:courseRef.id, number, title, unit, status:number===0?'published':'draft', progress:0, resourceCounts:{required:0,optional:0}, createdBy:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+                if (editId) {
+                    await updateDoc(doc(db,'courses',editId), payload);
+                    showToast('Curso actualizado correctamente.','success');
+                } else {
+                    const duplicateQuery = query(collection(db,'courses'), where('teacherId','==',currentUser.uid), where('code','==',code));
+                    const duplicateSnap = await getDocs(duplicateQuery);
+                    if (!duplicateSnap.empty) return showToast('Ya tienes un curso con ese código. Edítalo o duplícalo desde su menú.','error');
+                    const usePhysicsTemplate = document.getElementById('course-use-physics-template').checked;
+                    const courseRef = await addDoc(collection(db,'courses'), {
+                        ...payload, teacherId:currentUser.uid, institutionId:currentUser.institutionId || 'uc-huancayo', tenantId:currentUser.tenantId || 'uc-huancayo',
+                        classroomsCount:0, studentsCount:0, createdAt:serverTimestamp()
+                    });
+                    if (usePhysicsTemplate) {
+                        await updateDoc(courseRef,{name:'Física 1',code:'FIS1',unitsCount:4,weeksCount:17});
+                        for (const [number,title,unit] of defaultPhysicsWeeks) {
+                            await addDoc(collection(db,'weeks'), {courseId:courseRef.id, number, title, unit, status:number===0?'published':'draft', progress:0, resourceCounts:{required:0,optional:0}, createdBy:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+                        }
+                    }
+                    showToast('Curso creado correctamente.','success');
                 }
-                showToast('Física 1 y sus 17 semanas fueron creadas.','success');
+                closeModal('modal-course');
                 loadCourses();
-            } catch(e) { console.error(e); showToast('No se pudo crear la estructura.','error'); }
+            } catch(error) {
+                console.error(error);
+                showToast('No se pudo guardar el curso.','error');
+            }
+        });
+
+        window.duplicateCourse = async function(courseId) {
+            const source = (window.cachedCourses || []).find(c=>c.id===courseId);
+            if (!source || !confirm(`¿Duplicar “${source.name}”? Se copiarán su estructura y semanas, pero no estudiantes, notas ni progreso.`)) return;
+            try {
+                const newRef = await addDoc(collection(db,'courses'), {
+                    ...source, name:`${source.name} - Copia`, code:`${source.code || 'CURSO'}-COPIA-${Date.now().toString().slice(-4)}`, classroomsCount:0, studentsCount:0, status:'draft', teacherId:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()
+                });
+                const weekSnap = await getDocs(query(collection(db,'weeks'), where('courseId','==',courseId)));
+                for (const w of weekSnap.docs) {
+                    const wd=w.data();
+                    await addDoc(collection(db,'weeks'), {...wd, courseId:newRef.id, status:'draft', progress:0, createdBy:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+                }
+                showToast('Curso duplicado como borrador.','success');
+                loadCourses();
+            } catch(error) { console.error(error); showToast('No se pudo duplicar el curso.','error'); }
+        };
+
+        window.archiveCourse = async function(courseId) {
+            const course=(window.cachedCourses || []).find(c=>c.id===courseId);
+            if (!course || !confirm(`¿Archivar “${course.name}”? Podrás conservar todo su historial.`)) return;
+            try { await updateDoc(doc(db,'courses',courseId),{status:'archived',archivedAt:serverTimestamp(),updatedAt:serverTimestamp()}); showToast('Curso archivado.','success'); loadCourses(); }
+            catch(error){ console.error(error); showToast('No se pudo archivar.','error'); }
+        };
+
+        window.deleteCourseSafe = async function(courseId) {
+            const course=(window.cachedCourses || []).find(c=>c.id===courseId);
+            if (!course) return;
+            if ((course.classroomsCount || 0) > 0 || (course.studentsCount || 0) > 0) return showToast('Este curso tiene aulas o estudiantes. Debes archivarlo, no eliminarlo.','error');
+            const weekSnap=await getDocs(query(collection(db,'weeks'), where('courseId','==',courseId)));
+            if (!weekSnap.empty) return showToast('Este curso ya tiene semanas. Para proteger el historial, archívalo.','error');
+            if (!confirm(`Eliminar definitivamente “${course.name}”? Esta acción no se puede deshacer.`)) return;
+            try { await deleteDoc(doc(db,'courses',courseId)); showToast('Curso eliminado.','success'); loadCourses(); }
+            catch(error){ console.error(error); showToast('No se pudo eliminar.','error'); }
+        };
+
+        window.initializePhysicsCourse = function() {
+            openCourseModal();
+            document.getElementById('course-name').value = 'Física 1';
+            document.getElementById('course-code').value = 'FIS1';
+            document.getElementById('course-units').value = 4;
+            document.getElementById('course-weeks').value = 17;
+            document.getElementById('course-use-physics-template').checked = true;
         };
 
         window.openCourse = async function(courseId) {
