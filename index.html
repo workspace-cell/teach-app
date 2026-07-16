@@ -127,7 +127,8 @@
                     <button onclick="navigate('dashboard-super')" id="nav-dashboard-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🌍</span> Panel Maestro</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Aulas Globales</button>
                     <button onclick="navigate('teams-admin')" id="nav-teams-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Supervisión Teams</button>
-                    <button onclick="navigate('courses')" id="nav-courses-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos Globales</button>
+                    <button onclick="openActiveCourses()" id="nav-courses-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos Globales</button>
+                    <button onclick="openArchivedCourses()" id="nav-courses-archived-super" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
                 </div>
 
                 <div id="menu-admin" class="space-y-1.5 hidden">
@@ -135,7 +136,8 @@
                     <button onclick="navigate('dashboard-admin')" id="nav-dashboard-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">🏢</span> Sede Central</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Gestión Aulas</button>
                     <button onclick="navigate('teams-admin')" id="nav-teams-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Auditar Teams</button>
-                    <button onclick="navigate('courses')" id="nav-courses-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
+                    <button onclick="openActiveCourses()" id="nav-courses-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
+                    <button onclick="openArchivedCourses()" id="nav-courses-archived-admin" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
                 </div>
 
                 <div id="menu-teacher" class="space-y-1.5 hidden">
@@ -143,7 +145,8 @@
                     <button onclick="navigate('dashboard')" id="nav-dashboard" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Aulas</button>
                     <button onclick="navigate('teams-teacher')" id="nav-teams-teacher" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Team</button>
-                    <button onclick="navigate('courses')" id="nav-courses" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
+                    <button onclick="openActiveCourses()" id="nav-courses" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
+                    <button onclick="openArchivedCourses()" id="nav-courses-archived" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">📦</span> Cursos archivados</button>
                 </div>
 
                 <div id="menu-student" class="space-y-1.5 hidden">
@@ -151,7 +154,7 @@
                     <button onclick="navigate('student-home')" id="nav-student-home" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">⌂</span> Inicio</button>
                     <button onclick="navigate('classrooms')" id="nav-classrooms-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▣</span> Mis Cursos</button>
                     <button onclick="navigate('fasttest-demo')" id="nav-fasttest-demo" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">✓</span> Fast Tests</button>
-                    <button onclick="navigate('courses')" id="nav-courses-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
+                    <button onclick="openActiveCourses()" id="nav-courses-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">▤</span> Contenidos</button>
                     <button onclick="navigate('teams-student')" id="nav-teams-student" class="menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition text-white/70 hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"><span class="w-5 text-center text-lg">👥</span> Mi Team</button>
                 </div>
             </nav>
@@ -466,12 +469,17 @@
                 <div id="courses-list-panel">
                     <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
                         <div>
-                            <h1 class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Contenidos</h1>
+                            <h1 id="courses-page-title" class="text-3xl font-black dark:text-white mb-2 text-brand-deepPurple">Contenidos</h1>
                             <p id="courses-subtitle" class="text-brand-purple/80 dark:text-gray-400 font-medium">Organiza cursos, unidades, semanas y recursos de aprendizaje.</p>
                         </div>
                         <div id="courses-teacher-actions" class="hidden flex-wrap gap-2">
-                            <button onclick="openCourseModal()" class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">+ Nuevo curso</button>
-                            <button onclick="showToast('La importación directa de Drive se habilitará en la siguiente fase.', 'info')" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md text-sm">Importar desde Drive</button>
+                            <div id="active-course-actions" class="flex flex-wrap gap-2">
+                                <button onclick="openCourseModal()" class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">+ Nuevo curso</button>
+                                <button onclick="showToast('La importación directa de Drive se habilitará en la siguiente fase.', 'info')" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold hover:bg-brand-deepPurple transition shadow-md text-sm">Importar desde Drive</button>
+                            </div>
+                            <div id="archived-course-actions" class="hidden flex-wrap gap-2">
+                                <button onclick="openActiveCourses()" class="bg-white dark:bg-[#1C2333] text-brand-deepPurple dark:text-white px-4 py-2.5 rounded-xl font-bold border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition shadow-sm text-sm">← Volver a contenidos</button>
+                            </div>
                         </div>
                     </header>
                     <div id="courses-container"><div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando cursos...</div></div>
@@ -1067,16 +1075,51 @@
         window.selectedWeekData = null;
         window.loadedResources = [];
 
+        window.courseListMode = 'active';
+
         function roleCanEditContent() {
-            return currentUser && ['teacher','admin','superadmin'].includes(currentUser.role);
+            return currentUser && ['teacher','admin','superadmin'].includes(currentUser.role)
+                && (!window.selectedCourseData || window.selectedCourseData.status !== 'archived');
         }
+
+        window.openActiveCourses = function() {
+            window.courseListMode = 'active';
+            window.selectedCourseData = null;
+            navigate('courses');
+        };
+
+        window.openArchivedCourses = function() {
+            if (!currentUser || currentUser.role === 'student') return;
+            window.courseListMode = 'archived';
+            window.selectedCourseData = null;
+            navigate('courses');
+            const ids = ['nav-courses-archived','nav-courses-archived-admin','nav-courses-archived-super'];
+            ids.forEach(id => {
+                const btn=document.getElementById(id);
+                if(btn) btn.className = "menu-btn w-full flex items-center gap-3 px-4 py-2.5 rounded-xl font-bold transition bg-white/20 text-white dark:bg-gray-800 dark:text-brand-lightBlue dark:border dark:border-brand-lightBlue/30 shadow-inner";
+            });
+        };
 
         window.loadCourses = async function() {
             const container = document.getElementById('courses-container');
             const teacherActions = document.getElementById('courses-teacher-actions');
+            const activeActions = document.getElementById('active-course-actions');
+            const archivedActions = document.getElementById('archived-course-actions');
             const subtitle = document.getElementById('courses-subtitle');
+            const title = document.getElementById('courses-page-title');
+            const archivedMode = window.courseListMode === 'archived';
+
+            window.selectedCourseData = null;
             if (roleCanEditContent()) teacherActions.classList.remove('hidden'); else teacherActions.classList.add('hidden');
-            subtitle.textContent = currentUser?.role === 'student' ? 'Continúa tu ruta de aprendizaje desde la semana actual.' : 'Organiza cursos, unidades, semanas y recursos de aprendizaje.';
+            activeActions?.classList.toggle('hidden', archivedMode);
+            archivedActions?.classList.toggle('hidden', !archivedMode);
+            archivedActions?.classList.toggle('flex', archivedMode);
+            title.textContent = archivedMode ? 'Cursos archivados' : 'Contenidos';
+            subtitle.textContent = archivedMode
+                ? 'Consulta cursos retirados del periodo activo y restáuralos cuando sea necesario.'
+                : currentUser?.role === 'student'
+                    ? 'Continúa tu ruta de aprendizaje desde la semana actual.'
+                    : 'Organiza cursos, unidades, semanas y recursos de aprendizaje.';
             document.getElementById('courses-list-panel').classList.remove('hidden');
             document.getElementById('course-detail-panel').classList.add('hidden');
             container.innerHTML = '<div class="p-10 text-center text-brand-lightBlue font-bold animate-pulse">Cargando cursos...</div>';
@@ -1087,40 +1130,52 @@
                 else if (currentUser.role === 'student') qCourses = query(collection(db,'courses'), where('status','==','active'));
                 else qCourses = collection(db,'courses');
                 const snap = await getDocs(qCourses);
-                const courses = [];
+                let courses = [];
                 snap.forEach(d => courses.push({id:d.id,...d.data()}));
-                renderCourses(courses);
+                courses = courses.filter(c => archivedMode ? c.status === 'archived' : c.status !== 'archived');
+                renderCourses(courses, archivedMode);
             } catch (e) {
                 console.error(e);
                 container.innerHTML = '<div class="p-10 text-center text-red-500 font-bold">No se pudieron cargar los cursos. Revisa las reglas de Firestore.</div>';
             }
         };
 
-        function renderCourses(courses) {
+        function renderCourses(courses, archivedMode = false) {
             const container = document.getElementById('courses-container');
             if (!courses.length) {
-                container.innerHTML = roleCanEditContent()
-                    ? '<div class="bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-800 rounded-2xl p-10 text-center"><h3 class="text-xl font-black dark:text-white">Aún no hay cursos configurados</h3><p class="text-gray-500 mt-2 mb-5">Crea la estructura inicial de Física 1 con sus 17 semanas.</p><button onclick="initializePhysicsCourse()" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold">Crear Física 1</button></div>'
-                    : '<div class="bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-800 rounded-2xl p-10 text-center"><h3 class="text-xl font-black dark:text-white">No tienes contenidos disponibles</h3><p class="text-gray-500 mt-2">Los cursos aparecerán cuando el profesor los publique.</p></div>';
+                if (archivedMode) {
+                    container.innerHTML = '<div class="bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-800 rounded-2xl p-10 text-center"><div class="text-4xl mb-3">📦</div><h3 class="text-xl font-black dark:text-white">No hay cursos archivados</h3><p class="text-gray-500 mt-2 mb-5">Cuando archives un curso, desaparecerá de Contenidos y se conservará aquí con todo su historial.</p><button onclick="openActiveCourses()" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold">Volver a contenidos</button></div>';
+                } else {
+                    container.innerHTML = roleCanEditContent()
+                        ? '<div class="bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-800 rounded-2xl p-10 text-center"><h3 class="text-xl font-black dark:text-white">Aún no hay cursos configurados</h3><p class="text-gray-500 mt-2 mb-5">Crea un nuevo curso o utiliza la plantilla de Física 1.</p><button onclick="openCourseModal()" class="bg-brand-purple text-white px-5 py-2.5 rounded-xl font-bold">+ Nuevo curso</button></div>'
+                        : '<div class="bg-white dark:bg-[#1C2333] border border-gray-200 dark:border-gray-800 rounded-2xl p-10 text-center"><h3 class="text-xl font-black dark:text-white">No tienes contenidos disponibles</h3><p class="text-gray-500 mt-2">Los cursos aparecerán cuando el profesor los publique.</p></div>';
+                }
+                window.cachedCourses = [];
                 return;
             }
             container.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">'+courses.map(c=>`
-                <article class="bg-white dark:bg-[#1C2333] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden hover:shadow-md transition">
-                    <div class="h-2 bg-gradient-to-r from-brand-lightBlue to-brand-purple"></div>
+                <article class="bg-white dark:bg-[#1C2333] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden hover:shadow-md transition ${archivedMode?'opacity-90':''}">
+                    <div class="h-2 ${archivedMode?'bg-gradient-to-r from-gray-300 to-gray-500':'bg-gradient-to-r from-brand-lightBlue to-brand-purple'}"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start gap-4">
-                            <div><p class="text-xs font-bold uppercase tracking-wider text-brand-lightBlue">${c.code || 'CURSO'}</p><h3 class="text-2xl font-black text-brand-deepPurple dark:text-white mt-1">${c.name}</h3></div>
+                            <div><p class="text-xs font-bold uppercase tracking-wider ${archivedMode?'text-gray-400':'text-brand-lightBlue'}">${c.code || 'CURSO'}</p><h3 class="text-2xl font-black text-brand-deepPurple dark:text-white mt-1">${c.name}</h3></div>
                             <div class="flex items-center gap-2">
-                                <span class="text-[10px] uppercase font-bold px-2 py-1 rounded ${c.status==='active'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':c.status==='archived'?'bg-gray-100 dark:bg-gray-800 text-gray-500':'bg-amber-50 text-amber-700'}">${c.status==='active'?'Activo':c.status==='archived'?'Archivado':'Borrador'}</span>
+                                <span class="text-[10px] uppercase font-bold px-2 py-1 rounded ${archivedMode?'bg-gray-100 dark:bg-gray-800 text-gray-500':c.status==='active'?'bg-green-50 dark:bg-green-900/20 text-brand-schoolGreen':'bg-amber-50 text-amber-700'}">${archivedMode?'Archivado':c.status==='active'?'Activo':'Borrador'}</span>
                                 ${roleCanEditContent() ? `
                                 <div class="relative course-card-menu">
                                     <button type="button" onclick="event.stopPropagation(); toggleCourseMenu('course-menu-${c.id}')" aria-label="Opciones del curso ${c.name}" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-brand-purple hover:bg-brand-softPurple dark:hover:bg-gray-800 transition text-xl leading-none">⋮</button>
                                     <div id="course-menu-${c.id}" class="hidden absolute right-0 top-9 z-40 w-56 bg-white dark:bg-[#1C2333] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                                        <button onclick="editCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">✏️ Editar información</button>
-                                        <button onclick="openCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📚 Administrar contenidos</button>
-                                        <button onclick="duplicateCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📄 Duplicar curso</button>
-                                        <button onclick="archiveCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800">📦 Archivar curso</button>
-                                        <button onclick="deleteCourseSafe('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">🗑 Eliminar curso</button>
+                                        ${archivedMode ? `
+                                            <button onclick="openCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">👁️ Ver contenido</button>
+                                            <button onclick="restoreCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-gray-800">↩️ Desarchivar curso</button>
+                                            <button onclick="duplicateCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800">📄 Duplicar como borrador</button>
+                                        ` : `
+                                            <button onclick="editCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">✏️ Editar información</button>
+                                            <button onclick="openCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📚 Administrar contenidos</button>
+                                            <button onclick="duplicateCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800">📄 Duplicar curso</button>
+                                            <button onclick="archiveCourse('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-brand-deepPurple dark:text-white hover:bg-brand-softPurple dark:hover:bg-gray-800 border-t border-gray-100 dark:border-gray-800">📦 Archivar curso</button>
+                                            <button onclick="deleteCourseSafe('${c.id}')" class="w-full px-4 py-3 flex items-center gap-3 text-left text-sm font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">🗑 Eliminar curso</button>
+                                        `}
                                     </div>
                                 </div>` : ''}
                             </div>
@@ -1128,7 +1183,7 @@
                         <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">${c.unitsCount || 4} unidades · ${c.weeksCount || 17} semanas</p>
                         <div class="grid grid-cols-2 gap-3 mt-5"><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Aulas</p><p class="font-black dark:text-white">${c.classroomsCount || 0}</p></div><div class="bg-brand-softPurple dark:bg-[#121824] rounded-xl p-3"><p class="text-xs text-gray-500">Estudiantes</p><p class="font-black dark:text-white">${c.studentsCount || 0}</p></div></div>
                     </div>
-                    <button onclick="openCourse('${c.id}')" class="w-full border-t border-gray-100 dark:border-gray-800 py-3.5 font-bold text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20 transition">${currentUser.role==='student'?'Continuar aprendiendo':'Abrir curso'}</button>
+                    <button onclick="openCourse('${c.id}')" class="w-full border-t border-gray-100 dark:border-gray-800 py-3.5 font-bold ${archivedMode?'text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800':'text-brand-purple dark:text-brand-lightBlue hover:bg-brand-softPurple dark:hover:bg-brand-purple/20'} transition">${archivedMode?'Ver curso archivado':currentUser.role==='student'?'Continuar aprendiendo':'Abrir curso'}</button>
                 </article>`).join('')+'</div>';
             window.cachedCourses = courses;
         }
@@ -1233,9 +1288,31 @@
 
         window.archiveCourse = async function(courseId) {
             const course=(window.cachedCourses || []).find(c=>c.id===courseId);
-            if (!course || !confirm(`¿Archivar “${course.name}”? Podrás conservar todo su historial.`)) return;
-            try { await updateDoc(doc(db,'courses',courseId),{status:'archived',archivedAt:serverTimestamp(),updatedAt:serverTimestamp()}); showToast('Curso archivado.','success'); loadCourses(); }
-            catch(error){ console.error(error); showToast('No se pudo archivar.','error'); }
+            if (!course || !confirm(`¿Archivar “${course.name}”? Desaparecerá de Contenidos, pero conservará aulas, semanas, recursos, entregas y todo su historial.`)) return;
+            try {
+                await updateDoc(doc(db,'courses',courseId),{status:'archived',previousStatus:course.status || 'active',archivedAt:serverTimestamp(),archivedBy:currentUser.uid,updatedAt:serverTimestamp()});
+                showToast('Curso archivado y retirado de Contenidos.','success');
+                window.courseListMode='active';
+                loadCourses();
+            } catch(error){ console.error(error); showToast('No se pudo archivar.','error'); }
+        };
+
+        window.restoreCourse = async function(courseId) {
+            const course=(window.cachedCourses || []).find(c=>c.id===courseId);
+            if (!course || !confirm(`¿Desarchivar “${course.name}”? Volverá a aparecer en Contenidos.`)) return;
+            const restoredStatus = course.previousStatus && course.previousStatus !== 'archived' ? course.previousStatus : 'active';
+            try {
+                await updateDoc(doc(db,'courses',courseId),{
+                    status:restoredStatus,
+                    restoredAt:serverTimestamp(),
+                    restoredBy:currentUser.uid,
+                    archivedAt:null,
+                    archivedBy:null,
+                    updatedAt:serverTimestamp()
+                });
+                showToast('Curso desarchivado correctamente.','success');
+                loadCourses();
+            } catch(error){ console.error(error); showToast('No se pudo desarchivar el curso.','error'); }
         };
 
         window.deleteCourseSafe = async function(courseId) {
@@ -1266,7 +1343,7 @@
             document.getElementById('detail-course-title').textContent = selectedCourseData.name;
             document.getElementById('detail-course-meta').textContent = `${selectedCourseData.unitsCount || 4} unidades · ${selectedCourseData.weeksCount || 17} semanas · ${selectedCourseData.status==='active'?'Curso activo':'Borrador'}`;
             const actions = document.getElementById('detail-teacher-actions');
-            if (roleCanEditContent()) actions.classList.remove('hidden'); else actions.classList.add('hidden');
+            if (roleCanEditContent() && selectedCourseData?.status !== 'archived') actions.classList.remove('hidden'); else actions.classList.add('hidden');
             await loadWeeks(courseId);
         };
 
